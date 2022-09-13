@@ -1,3 +1,113 @@
+.log_container_header {
+  display: flex;
+  flex-direction: column;
+}
+.log_container_header_logo {
+  min-width: 60%;
+  max-width: 50%;
+  margin: 50px auto 50px auto;
+}
+.log_container_section {
+  margin: auto;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 0.5rem;
+  padding: 2rem 2rem 2rem 2rem;
+  width: 50%;
+}
+.log_container_section_header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
+.form {
+  margin-top: 10px;
+}
+.form_input {
+  width: 99%;
+  height: 35px;
+  margin-top: 5px;
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 0.3rem;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.form_input:focus {
+  outline: solid #167899;
+  border-color: #167899;
+}
+
+.btn {
+  height: 3.5rem;
+  width: 50%;
+  font-weight: bold;
+  background: #167899;
+  color: white;
+}
+.btn_form {
+  width: 100%;
+  transition: transform 300ms ease-in-out;
+}
+.btn_form:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+.btn_signup {
+  margin-right: 5px;
+}
+.btn_signin {
+  margin-left: 5px;
+}
+.btn.inactive {
+  background-color: #82bacd;
+  color: black;
+  transition: background-color 300ms ease-in-out;
+}
+.btn.inactive:hover {
+  background-color: #167899;
+  color: white;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("fonts/Lato-Light.ttf");
+}
+@font-face {
+  font-family: "Lato-Bold";
+  src: url("fonts/Lato-Regular.ttf");
+}
+html {
+  font-family: "Lato";
+  font-size: 16px;
+  background: url("img/groupomania-bg.jpg");
+  background-attachment: fixed;
+}
+
+button {
+  border-style: none;
+  border-radius: 0.3rem;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #414141;
+}
+
+.bold {
+  font-family: "Lato-Bold";
+}
+
+a {
+  color: #414141;
+  text-decoration: none;
+}
+
+.success {
+  color: green;
+  text-align: center;
+}
+
+.error {
+  color: rgb(187, 2, 2);
+}
 
 /*# sourceMappingURL=main.css.map */

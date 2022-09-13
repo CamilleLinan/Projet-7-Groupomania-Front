@@ -1,0 +1,82 @@
+@import '../../styles/sass/variables';
+
+.log_container {
+    &_header {
+        display: flex;
+        flex-direction: column;
+
+        &_logo {
+            min-width: 60%;
+            max-width: 50%;
+            margin: 50px auto 50px auto;
+        }
+    }
+    
+    &_section {
+        margin: auto;
+        background: $bg-section;
+        backdrop-filter: blur(15px);
+        border-radius: 0.5rem;
+        padding: 2rem 2rem 2rem 2rem;
+        width: 50%;
+    
+        &_header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
+}
+
+.form {
+    margin-top: 10px;
+
+    &_input {
+        width: 99%;
+        height: 35px;
+        margin-top: 5px;
+        border: 1px solid rgb(80, 79, 79);
+        border-radius: 0.3rem;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.5);
+        &:focus {
+            outline: solid $primary-clr;
+            border-color: $primary-clr;
+        }
+    }
+}
+
+.btn {
+    height: 3.5rem;
+    width: 50%;
+    font-weight: bold;
+    background: $primary-clr;
+    color: $text-btn-logindex-clr;
+    
+    &_form {
+        width: 100%;
+        transition: transform 300ms ease-in-out;
+        &:hover {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+    }
+
+    &_signup {
+        margin-right: 5px;
+    }
+
+    &_signin {
+        margin-left: 5px;
+    }
+
+    &.inactive {
+        background-color: $secondary-clr;
+        color: black;
+        transition: background-color 300ms ease-in-out;
+        &:hover {
+            background-color: $primary-clr;
+            color: $text-btn-logindex-clr;
+        }
+    }
+}
