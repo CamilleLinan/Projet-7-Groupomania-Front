@@ -1,0 +1,45 @@
+@import 'variables';
+@import 'Log';
+
+@font-face {
+    font-family: 'Lato';
+    src: url('fonts/Lato-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('fonts/Lato-Regular.ttf');
+}
+
+html {
+    font-family: 'Lato';
+    font-size: 16px;
+    background: url('img/groupomania-bg.jpg');
+    background-attachment: fixed;
+}
+
+button {
+    border-style: none;
+    border-radius: 0.3rem;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid $tertiary-clr;
+}
+
+.bold {
+    font-family: 'Lato-Bold';
+}
+
+a {
+    color: $tertiary-clr;
+    text-decoration: none;
+}
+
+.success {
+    color: green;
+    text-align: center;
+}
+
+.error {
+    color: rgb(187, 2, 2)
+} 
