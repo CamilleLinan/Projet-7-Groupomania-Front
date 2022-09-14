@@ -3,18 +3,13 @@ import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import logo from "../../styles/img/groupomania-logo.png";
 
-const LogIndex = ( props ) => {
-    const [signUpModal, setSignUpModal] = useState(props.signup);
-    const [signInModal, setSignInModal] = useState(props.signin);
+const LogIndex = () => {
+    const [signUpModal, setSignUpModal] = useState(true);
+    const [signInModal, setSignInModal] = useState('');
 
     const handleModals = (e) => {
-        if (e.target.id === "register") {
-            setSignInModal(false);
-            setSignUpModal(true);
-        } else if (e.target.id === "login") {
-            setSignUpModal(false);
-            setSignInModal(true);
-        }
+        setSignUpModal(e.target.id === 'register');
+        setSignInModal(e.target.id === 'login');
     }
 
     return (

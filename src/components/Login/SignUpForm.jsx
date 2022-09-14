@@ -1,6 +1,7 @@
 import React, { useState }  from "react";
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import SignInForm from "./SignInForm";
 
 const SignUpForm = () => {
     const [ formSubmit, setFormSubmit ] = useState(false);
@@ -10,6 +11,10 @@ const SignUpForm = () => {
     const [ password, setPassword ] = useState('');
     const [ errorEmail, setErrorEmail ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
+
+    const regexNames = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/i;
+    const regexEmail = /^[A-Z0-9._-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = () => 
@@ -42,6 +47,7 @@ const SignUpForm = () => {
         {formSubmit ? (
             <>
                 <h4 className="success bold">Inscription réussie ! Veuillez vous connecter.</h4>
+                <SignInForm />
             </>
         ) : (
             <>
@@ -53,7 +59,7 @@ const SignUpForm = () => {
                         name="firstname"
                         id="firstname"
                         className="form_input"
-                        {...register('firstname', { required: true, minLength: 2, maxLength: 20, pattern: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/i })}
+                        {...register('firstname', { required: true, minLength: 2, maxLength: 20, pattern: regexNames })}
                         onChange={(e) => setFirstname(e.target.value)}
                         value={firstname}
                     />
@@ -66,7 +72,7 @@ const SignUpForm = () => {
                         name="lastname"
                         id="lastname"
                         className="form_input"
-                        {...register('lastname', { required: true, minLength: 2, maxLength: 20, pattern: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/i })}
+                        {...register('lastname', { required: true, minLength: 2, maxLength: 20, pattern: regexNames })}
                         onChange={(e) => setLastname(e.target.value)}
                         value={lastname}
                     />
@@ -79,7 +85,7 @@ const SignUpForm = () => {
                         name="email"
                         id="email"
                         className="form_input"
-                        {...register('email', { required: true, pattern: /^[A-Z0-9._-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })}
+                        {...register('email', { required: true, pattern: regexEmail })}
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                     />
@@ -92,7 +98,7 @@ const SignUpForm = () => {
                         name="password"
                         id="password"
                         className="form_input"
-                        {...register('password', { required: true, minLength: 4, maxLength: 30, pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/ })}
+                        {...register('password', { required: true, minLength: 4, maxLength: 30, pattern: regexPassword })}
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                     />

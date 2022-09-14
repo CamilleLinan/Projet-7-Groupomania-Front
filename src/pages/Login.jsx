@@ -1,11 +1,11 @@
 import React from "react";
-import Log from '../components/Log/index.log';
+import Log from '../components/Login/index.login';
 
 const Login = () => {
     return (
         <div>
             <div>
-                <Log signin={false} signup={true} />
+                <Log />
             </div>
         </div>
     );
