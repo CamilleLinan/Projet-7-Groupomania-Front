@@ -29,8 +29,8 @@ const SignUpForm = () => {
                 setFormSubmit(true);
             })
             .catch((error) => {
+                console.log(error.response);
                 if (error.response.status === 400) {
-                    console.log(error.response);
                     setErrorEmail({ ...errorEmail, message: 'Cette adresse email est déjà utilisée' });
                 } else {
                     setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })
@@ -83,7 +83,7 @@ const SignUpForm = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
             />
-            <div className="error bold">{errors.email && `Email incorrecte`}{errorEmail.message}</div>
+            <div className="error bold">{errors.email && `Veuillez renseigner une adresse mail valide type : exemple@mail.com`}{errorEmail.message}</div>
             <br/>
             <label htmlFor="password" className="form_label">Mot de passe</label>
             <br/>
@@ -97,8 +97,8 @@ const SignUpForm = () => {
                 value={password}
             />
             <div className="error bold">{errors.password && `Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre`}</div>
+            <div className="error error_center bold">{errorServer.message}</div>
             <br/>
-            <span className="error bold">{errorServer.message}</span>
             <button type="submit" className="btn btn_form">Créer un compte</button>
         </form>
         </>
