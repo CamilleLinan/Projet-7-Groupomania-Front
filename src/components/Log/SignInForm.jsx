@@ -49,34 +49,34 @@ const SignInForm = () => {
                 <Trending />
             </>
         ) : (
-        <>
-        <form onSubmit={handleSubmit} id="sign-up-form">
-            <label htmlFor="email" className="form_label">Email</label>
-            <input 
-                type="email" 
-                name="email" 
-                id="email" 
-                className="form_input"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-            />
-            <div className="error bold"></div>
-            <br/>
-            <label htmlFor="password" className="form_label">Mot de passe</label>
-            <input 
-                type="password" 
-                name="password" 
-                id="password"
-                className="form_input" 
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-            />
-            <div className="error bold"></div>
-            <div className="error error_center bold">{errorSignIn.message}{errorServer.message}</div>
-            <br/>
-            <button type="submit" className="btn btn_form">Se connecter</button>
-        </form>
-        </>
+            <>
+                <form onSubmit={handleSubmit} id="sign-up-form">
+                    <label htmlFor="email" className="form_label">Email</label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        id="email" 
+                        className="form_input"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                    />
+                    <div className="error bold"></div>
+                    <br/>
+                    <label htmlFor="password" className="form_label">Mot de passe</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password"
+                        className="form_input" 
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                    />
+                    <div className="error bold"></div>
+                    <div className="error error_center bold">{errorSignIn.message}{errorServer.message}</div>
+                    <br/>
+                    <button type="submit" className="btn btn_form">Se connecter</button>
+                </form>
+            </>
         )}
     </>
     );
