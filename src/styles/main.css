@@ -29,7 +29,7 @@
   height: 35px;
   margin-top: 5px;
   border: 1px solid rgb(80, 79, 79);
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   font-size: 16px;
   background: rgba(255, 255, 255, 0.5);
 }
@@ -71,11 +71,11 @@
 
 @font-face {
   font-family: "Lato";
-  src: url("fonts/Lato-Light.ttf");
+  src: url("fonts/Lato-Regular.ttf");
 }
 @font-face {
   font-family: "Lato-Bold";
-  src: url("fonts/Lato-Regular.ttf");
+  src: url("fonts/Lato-Bold.ttf");
 }
 html {
   font-family: "Lato";
@@ -86,7 +86,7 @@ html {
 
 button {
   border-style: none;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   font-size: 16px;
   cursor: pointer;
   border: 1px solid #414141;
@@ -108,8 +108,12 @@ a {
 }
 
 .error {
-  color: rgb(222, 0, 0);
+  color: rgb(219, 19, 19);
   margin-top: 5px;
+}
+.error_center {
+  text-align: center;
+  margin-top: 10px;
 }
 
 /*# sourceMappingURL=main.css.map */

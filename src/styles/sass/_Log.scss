@@ -30,13 +30,12 @@
 
 .form {
     margin-top: 10px;
-
     &_input {
         width: 99%;
         height: 35px;
         margin-top: 5px;
         border: 1px solid rgb(80, 79, 79);
-        border-radius: 0.3rem;
+        border-radius: 0.5rem;
         font-size: 16px;
         background: rgba(255, 255, 255, 0.5);
         &:focus {
