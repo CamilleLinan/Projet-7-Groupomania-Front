@@ -3,8 +3,7 @@
   flex-direction: column;
 }
 .log_container_header_logo {
-  min-width: 60%;
-  max-width: 50%;
+  width: 300px;
   margin: 50px auto 50px auto;
 }
 .log_container_section {
@@ -14,6 +13,8 @@
   border-radius: 0.5rem;
   padding: 2rem 2rem 2rem 2rem;
   width: 50%;
+  min-width: 250px;
+  max-width: 600px;
 }
 .log_container_section_header {
   display: flex;
@@ -80,8 +81,7 @@
 html {
   font-family: "Lato";
   font-size: 16px;
-  background: url("img/groupomania-bg.jpg");
-  background-attachment: fixed;
+  background: url("img/groupomania-bg.jpg") fixed no-repeat;
 }
 
 button {
