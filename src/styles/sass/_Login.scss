@@ -1,0 +1,76 @@
+@import '../../styles/sass/variables';
+
+.log_container {
+    &_header {
+        display: flex;
+        flex-direction: column;
+
+        &_logo {
+            min-width: 320px;
+            width: 50%;
+            max-width: 600px;
+            margin: 50px auto;
+        }
+    }
+    
+    &_section {
+        margin: auto;
+        background: $bg-section;
+        backdrop-filter: blur(5px);
+        border-radius: 0.5rem;
+        padding: 2rem 2rem 2rem 2rem;
+        width: 50%;
+        min-width: 250px;
+        max-width: 600px;
+    
+        &_header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
+}
+
+.form {
+    margin-top: 10px;
+    &_input {
+        width: 99%;
+        height: 35px;
+        margin-top: 5px;
+        border: 1px solid rgb(80, 79, 79);
+        border-radius: 0.5rem;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.65);
+        &:focus {
+            outline: solid $primary-clr;
+            border-color: $primary-clr;
+        }
+    }
+}
+
+.btn_form {
+    background-color: $primary-clr;
+    width: 100%;
+    transition: transform 300ms ease-in-out;
+    &:hover {
+         transform: scale(1.02);
+    }
+}
+
+button {
+    &#signup {
+        margin-right: 5px;
+    }
+
+    &#signin {
+        margin-left: 5px;
+    }
+
+    &.inactive {
+        background-color: $secondary-clr;
+        transition: background-color 300ms ease-in-out;
+        &:hover {
+            background-color: $primary-clr;
+        }
+    }
+}

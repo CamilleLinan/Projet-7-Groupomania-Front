@@ -1,0 +1,53 @@
+@import 'variables';
+@import 'Login';
+
+@font-face {
+    font-family: 'Lato';
+    src: url('fonts/Lato-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('fonts/Lato-Bold.ttf');
+}
+
+html {
+    font-family: 'Lato';
+    font-size: 16px;
+    background: url('img/groupomania-bg.jpg') fixed no-repeat;
+}
+
+button {
+    cursor: pointer;
+    height: 3.5rem;
+    width: 50%;
+    font-size: 16px;
+    color: $text-btn-clr;
+    background: $primary-clr;
+    border: 1px solid $tertiary-clr;
+    border-radius: 0.5rem;
+}
+
+.bold {
+    font-family: 'Lato-Bold';
+}
+
+a {
+    color: $tertiary-clr;
+    text-decoration: none;
+}
+
+.success {
+    color: $success-clr;
+    text-align: center;
+    font-size: 22px;
+}
+
+.error {
+    color: $error-clr;
+    margin-top: 5px;
+    &_center {
+        text-align: center;
+        margin-top: 10px;
+    }
+} 

@@ -1,3 +1,116 @@
+.log_container_header {
+  display: flex;
+  flex-direction: column;
+}
+.log_container_header_logo {
+  min-width: 320px;
+  width: 50%;
+  max-width: 600px;
+  margin: 50px auto;
+}
+.log_container_section {
+  margin: auto;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(5px);
+  border-radius: 0.5rem;
+  padding: 2rem 2rem 2rem 2rem;
+  width: 50%;
+  min-width: 250px;
+  max-width: 600px;
+}
+.log_container_section_header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
+.form {
+  margin-top: 10px;
+}
+.form_input {
+  width: 99%;
+  height: 35px;
+  margin-top: 5px;
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 0.5rem;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.65);
+}
+.form_input:focus {
+  outline: solid #005d6d;
+  border-color: #005d6d;
+}
+
+.btn_form {
+  background-color: #005d6d;
+  width: 100%;
+  transition: transform 300ms ease-in-out;
+}
+.btn_form:hover {
+  transform: scale(1.02);
+}
+
+button#signup {
+  margin-right: 5px;
+}
+button#signin {
+  margin-left: 5px;
+}
+button.inactive {
+  background-color: rgba(0, 141, 173, 0.7411764706);
+  transition: background-color 300ms ease-in-out;
+}
+button.inactive:hover {
+  background-color: #005d6d;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("fonts/Lato-Regular.ttf");
+}
+@font-face {
+  font-family: "Lato-Bold";
+  src: url("fonts/Lato-Bold.ttf");
+}
+html {
+  font-family: "Lato";
+  font-size: 16px;
+  background: url("img/groupomania-bg.jpg") fixed no-repeat;
+}
+
+button {
+  cursor: pointer;
+  height: 3.5rem;
+  width: 50%;
+  font-size: 16px;
+  color: white;
+  background: #005d6d;
+  border: 1px solid #414141;
+  border-radius: 0.5rem;
+}
+
+.bold {
+  font-family: "Lato-Bold";
+}
+
+a {
+  color: #414141;
+  text-decoration: none;
+}
+
+.success {
+  color: rgb(0, 155, 0);
+  text-align: center;
+  font-size: 22px;
+}
+
+.error {
+  color: rgb(155, 0, 0);
+  margin-top: 5px;
+}
+.error_center {
+  text-align: center;
+  margin-top: 10px;
+}
 
 /*# sourceMappingURL=main.css.map */
