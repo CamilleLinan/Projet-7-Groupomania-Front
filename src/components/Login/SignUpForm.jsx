@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import SignInForm from "./SignInForm";
 
+
+// Fonction : S'Enregistrer
 const SignUpForm = () => {
     const [ formSubmit, setFormSubmit ] = useState(false);
     const [ firstname, setFirstname ] = useState('');
@@ -12,14 +14,17 @@ const SignUpForm = () => {
     const [ errorEmail, setErrorEmail ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
+    // RegExp pour valider le formulaire
     const regexNames = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/i;
     const regexEmail = /^[A-Z0-9._-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = () => 
+    
+    // Fonction de soumission du formulaire
+    const onSubmit = async () => {
         
-        axios({
+        await axios({
             method: "post",
             url: `http://localhost:3001/api/users/signup`,
             data: {
@@ -41,6 +46,7 @@ const SignUpForm = () => {
                     setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })
                 }
             });
+    }
 
     return (
     <>
@@ -105,7 +111,7 @@ const SignUpForm = () => {
                     <div className="error bold">{errors.password && `Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre`}</div>
                     <div className="error error_center bold">{errorServer.message}</div>
                     <br/>
-                    <button type="submit" className="btn btn_form">Créer un compte</button>
+                    <button type="submit" className="btn_form">Créer un compte</button>
                 </form>
             </>
         )}

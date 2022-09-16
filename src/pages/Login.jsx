@@ -1,12 +1,10 @@
 import React from "react";
-import Log from '../components/Login/index.login';
+import LoginIndex from '../components/Login/index.login';
 
 const Login = () => {
     return (
         <div>
-            <div>
-                <Log />
-            </div>
+            <LoginIndex />
         </div>
     );
 };
