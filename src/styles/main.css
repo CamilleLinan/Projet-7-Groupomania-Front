@@ -10,7 +10,7 @@
 }
 .log_container_section {
   margin: auto;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(5px);
   border-radius: 0.5rem;
   padding: 2rem 2rem 2rem 2rem;
@@ -34,19 +34,19 @@
   border: 1px solid rgb(80, 79, 79);
   border-radius: 0.5rem;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.65);
 }
 .form_input:focus {
-  outline: solid #167899;
-  border-color: #167899;
+  outline: solid #005d6d;
+  border-color: #005d6d;
 }
 
 .btn_form {
+  background-color: #005d6d;
   width: 100%;
   transition: transform 300ms ease-in-out;
 }
 .btn_form:hover {
-  filter: brightness(1.1);
   transform: scale(1.02);
 }
 
@@ -57,13 +57,15 @@ button#signin {
   margin-left: 5px;
 }
 button.inactive {
-  background-color: rgba(130, 186, 205, 0.8);
-  color: black;
+  background-color: rgba(0, 141, 173, 0.7411764706);
   transition: background-color 300ms ease-in-out;
 }
 button.inactive:hover {
-  background-color: #167899;
-  color: white;
+  background-color: #005d6d;
+}
+
+.success {
+  margin-top: 10px;
 }
 
 @font-face {
@@ -81,16 +83,14 @@ html {
 }
 
 button {
+  cursor: pointer;
   height: 3.5rem;
   width: 50%;
-  font-weight: bold;
-  background: #167899;
-  color: white;
-  border-style: none;
-  border-radius: 0.5rem;
   font-size: 16px;
-  cursor: pointer;
+  color: white;
+  background: #005d6d;
   border: 1px solid #414141;
+  border-radius: 0.5rem;
 }
 
 .bold {
@@ -103,13 +103,13 @@ a {
 }
 
 .success {
-  color: rgb(0, 130, 0);
+  color: rgb(0, 155, 0);
   text-align: center;
   font-size: 22px;
 }
 
 .error {
-  color: rgb(219, 19, 19);
+  color: rgb(155, 0, 0);
   margin-top: 5px;
 }
 .error_center {
