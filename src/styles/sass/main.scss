@@ -18,6 +18,11 @@ html {
 }
 
 button {
+    height: 3.5rem;
+    width: 50%;
+    font-weight: bold;
+    background: $primary-clr;
+    color: $text-btn-clr;
     border-style: none;
     border-radius: 0.5rem;
     font-size: 16px;

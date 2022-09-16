@@ -6,8 +6,10 @@
         flex-direction: column;
 
         &_logo {
-            width: 300px;
-            margin: 50px auto 50px auto;
+            min-width: 320px;
+            width: 50%;
+            max-width: 600px;
+            margin: 50px auto;
         }
     }
     
@@ -46,27 +48,21 @@
     }
 }
 
-.btn {
-    height: 3.5rem;
-    width: 50%;
-    font-weight: bold;
-    background: $primary-clr;
-    color: $text-btn-logindex-clr;
-    
-    &_form {
-        width: 100%;
-        transition: transform 300ms ease-in-out;
-        &:hover {
-            filter: brightness(1.1);
-            transform: scale(1.02);
-        }
+.btn_form {
+    width: 100%;
+    transition: transform 300ms ease-in-out;
+    &:hover {
+        filter: brightness(1.1);
+        transform: scale(1.02);
     }
+}
 
-    &_signup {
+button {
+    &#signup {
         margin-right: 5px;
     }
 
-    &_signin {
+    &#signin {
         margin-left: 5px;
     }
 
@@ -76,7 +72,7 @@
         transition: background-color 300ms ease-in-out;
         &:hover {
             background-color: $primary-clr;
-            color: $text-btn-logindex-clr;
+            color: $text-btn-clr;
         }
     }
 }

@@ -3,8 +3,10 @@
   flex-direction: column;
 }
 .log_container_header_logo {
-  width: 300px;
-  margin: 50px auto 50px auto;
+  min-width: 320px;
+  width: 50%;
+  max-width: 600px;
+  margin: 50px auto;
 }
 .log_container_section {
   margin: auto;
@@ -39,13 +41,6 @@
   border-color: #167899;
 }
 
-.btn {
-  height: 3.5rem;
-  width: 50%;
-  font-weight: bold;
-  background: #167899;
-  color: white;
-}
 .btn_form {
   width: 100%;
   transition: transform 300ms ease-in-out;
@@ -54,18 +49,19 @@
   filter: brightness(1.1);
   transform: scale(1.02);
 }
-.btn_signup {
+
+button#signup {
   margin-right: 5px;
 }
-.btn_signin {
+button#signin {
   margin-left: 5px;
 }
-.btn.inactive {
-  background-color: #82bacd;
+button.inactive {
+  background-color: rgba(130, 186, 205, 0.8);
   color: black;
   transition: background-color 300ms ease-in-out;
 }
-.btn.inactive:hover {
+button.inactive:hover {
   background-color: #167899;
   color: white;
 }
@@ -85,6 +81,11 @@ html {
 }
 
 button {
+  height: 3.5rem;
+  width: 50%;
+  font-weight: bold;
+  background: #167899;
+  color: white;
   border-style: none;
   border-radius: 0.5rem;
   font-size: 16px;
