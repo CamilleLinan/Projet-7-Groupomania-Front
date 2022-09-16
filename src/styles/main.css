@@ -64,10 +64,6 @@ button.inactive:hover {
   background-color: #005d6d;
 }
 
-.success {
-  margin-top: 10px;
-}
-
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-Regular.ttf");
