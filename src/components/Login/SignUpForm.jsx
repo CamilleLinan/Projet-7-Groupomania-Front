@@ -1,7 +1,6 @@
 import React, { useState }  from "react";
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import SignInForm from "./SignInForm";
 
 
 // Fonction : S'Enregistrer
@@ -53,7 +52,6 @@ const SignUpForm = () => {
         {formSubmit ? (
             <>
                 <h4 className="success bold">Inscription réussie ! Veuillez vous connecter.</h4>
-                <SignInForm />
             </>
         ) : (
             <>
