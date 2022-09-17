@@ -8,16 +8,6 @@
   max-width: 600px;
   margin: 50px auto;
 }
-.log_container_section {
-  margin: auto;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(5px);
-  border-radius: 0.5rem;
-  padding: 2rem 2rem 2rem 2rem;
-  width: 50%;
-  min-width: 250px;
-  max-width: 600px;
-}
 .log_container_section_header {
   display: flex;
   justify-content: space-between;
@@ -64,6 +54,72 @@ button.inactive:hover {
   background-color: #005d6d;
 }
 
+@media screen and (max-width: 768px) {
+  .nav_container_title h2 {
+    display: none;
+  }
+  .nav_container_link_icon {
+    margin-right: 35px;
+  }
+}
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.nav_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(15px);
+  margin: 0 -7px;
+  margin-bottom: 0;
+}
+.nav_container_logo {
+  margin: 10px 0px 7px 35px;
+}
+.nav_container_logo img {
+  width: 12rem;
+}
+.nav_container_title_welcome {
+  font-size: 20px;
+}
+.nav_container_link {
+  display: flex;
+  justify-content: space-around;
+  width: 15%;
+  margin: 10px 15px 7px 0px;
+}
+.nav_container_link_icon {
+  font-size: 1.65rem;
+  color: #414141;
+  transition: color 250ms ease-in-out;
+  cursor: pointer;
+}
+.nav_container_link_icon:hover {
+  color: #005d6d;
+  filter: brightness(1.2);
+}
+
+.errorAuth_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8rem !important;
+}
+.errorAuth_container_title {
+  text-align: center;
+  margin-top: 0;
+  font-size: 25px;
+}
+.errorAuth_container a {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 @font-face {
   font-family: "Lato";
   src: url("fonts/Lato-Regular.ttf");
@@ -73,8 +129,10 @@ button.inactive:hover {
   src: url("fonts/Lato-Bold.ttf");
 }
 html {
+  position: relative;
   font-family: "Lato";
   font-size: 16px;
+  color: #414141;
   background: url("img/groupomania-bg.jpg") fixed no-repeat;
 }
 
@@ -96,6 +154,17 @@ button {
 a {
   color: #414141;
   text-decoration: none;
+}
+
+.bg_section {
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(5px);
+  border-radius: 0.5rem;
+  margin: auto;
+  padding: 2rem;
+  width: 50%;
+  min-width: 250px;
+  max-width: 600px;
 }
 
 .success {
