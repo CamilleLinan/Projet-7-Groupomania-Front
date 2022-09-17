@@ -1,0 +1,57 @@
+@import 'variables';
+
+@media screen and (max-width: 768px) {
+    .nav_container {
+        &_title h2 {
+            display: none;
+        }
+        &_link_icon {
+            margin-right: 35px;
+        }
+    }
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.nav_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $bg-section;
+    backdrop-filter: blur(15px);
+    margin: 0 -7px;
+    margin-bottom: 0;
+    
+    &_logo  {
+        margin: 10px 0px 7px 35px;
+        & img {
+            width: 12rem;
+        }
+    }
+
+    &_title_welcome {
+        font-size: 20px;
+    }
+
+    &_link {
+        display: flex;
+        justify-content: space-around;
+        width: 15%;
+        margin: 10px 15px 7px 0px;
+
+        &_icon {
+            font-size: 1.65rem;
+            color: $text-clr;
+            transition: color 250ms ease-in-out;
+            cursor: pointer;
+            &:hover {
+                color: $primary-clr;
+                filter: brightness(1.2);
+            }
+        }
+    }
+}

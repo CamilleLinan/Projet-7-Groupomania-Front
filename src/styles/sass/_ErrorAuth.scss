@@ -1,0 +1,20 @@
+@import 'variables';
+
+.errorAuth_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8rem !important;
+
+    &_title {
+        text-align: center;
+        margin-top: 0;
+        font-size: 25px;
+    }
+
+    & a {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+}
