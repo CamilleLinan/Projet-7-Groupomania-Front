@@ -11,6 +11,8 @@ const SignUpForm = () => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ errorEmail, setErrorEmail ] = useState('');
+    const [ confirmPassword, setConfirmPassword ] = useState('');
+    const [ errorConfirmPassword, setErrorConfirmPassword ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
     // RegExp pour valider le formulaire
@@ -19,10 +21,23 @@ const SignUpForm = () => {
     const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    
+
+    // Fonction pour vérifier que les mots de passe sont identiques
+    const handleConfirmPassword = (e) => {
+        setConfirmPassword(e.target.value);
+        if (password === e.target.value) {
+            setErrorConfirmPassword({ ...errorConfirmPassword, message: '' });
+        } else {
+            setFormSubmit(false);
+            setErrorConfirmPassword({ ...errorConfirmPassword, message: 'Les mots de passe ne sont pas identiques' });
+        }
+    };
+
     // Fonction de soumission du formulaire
     const onSubmit = async () => {
-        
+        if (password !== confirmPassword) {
+            return;
+        } else {
         await axios({
             method: "post",
             url: `http://localhost:3001/api/users/signup`,
@@ -45,7 +60,9 @@ const SignUpForm = () => {
                     setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })
                 }
             });
-    }
+        }
+    };
+
 
     return (
     <>
@@ -107,6 +124,19 @@ const SignUpForm = () => {
                         value={password}
                     />
                     <div className="error bold">{errors.password && `Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre`}</div>
+                    <br/>
+                    <label htmlFor="confirmPassword" className="form_label">Confirmer le mot de passe</label>
+                    <br/>
+                    <input 
+                        type="password"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        className="form_input"
+                        onChange={handleConfirmPassword}
+                        value={confirmPassword}
+                        required
+                    />
+                    <div className="error bold">{errorConfirmPassword.message}</div>
                     <div className="error error_center bold">{errorServer.message}</div>
                     <br/>
                     <button type="submit" className="btn_form">Créer un compte</button>

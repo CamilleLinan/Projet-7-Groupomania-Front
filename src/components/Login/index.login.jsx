@@ -20,7 +20,7 @@ const LogIndex = () => {
             <div className="log_container_header">
                 <img src={logo} alt="groupomania-logo" className="log_container_header_logo" />
             </div>
-            <div className="log_container_section">
+            <div className="log_container_section bg_section">
                 <div className="log_container_section_header">
                     <button onClick={handleModals} id="signup" className={signUpModal ? "active bold" : "inactive bold"}>S'inscrire</button>
                     <button onClick={handleModals} id="signin" className={signInModal ? "active bold" : "inactive bold"}>Se connecter</button>
