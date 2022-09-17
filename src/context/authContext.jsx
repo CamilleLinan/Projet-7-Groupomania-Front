@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { createContext } from "react";
 
+
 // Context pour stoker ensuite les données de l'utilisateur
 const defaultValue = {
     userId: null,
     token: "",
     userIsLoggedIn: false,
     signin: ()=>{},
+    logout: ()=>{},
 }
 
 const AuthContext = createContext(defaultValue);
@@ -28,6 +30,13 @@ export const AuthContextProvider = (props) => {
         localStorage.setItem('token', token);
     };
     
+    // Fonction pour se déconnecter et supprimer le token
+    const logoutHandler = () => {
+        localStorage.clear();
+        setUserId(null);
+        setToken(null);
+    }
+
     // Convertion du token en booléan
     const userIsLoggedIn = !!token;
     console.log('userIsLoggedIn =')
@@ -39,6 +48,7 @@ export const AuthContextProvider = (props) => {
         token: token,
         isLoggedIn: userIsLoggedIn,
         signin: signInHandler,
+        logout: logoutHandler,
     };
 
     return(
