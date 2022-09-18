@@ -2,6 +2,7 @@
 @import 'Login';
 @import 'Navbar';
 @import 'ErrorAuth';
+@import 'Profil';
 
 @font-face {
     font-family: 'Lato';
@@ -13,12 +14,20 @@
     src: url('fonts/Lato-Bold.ttf');
 }
 
+@media screen and (min-width: 360px) {
+    html {
+        min-width: 300px;
+    }
+}
+
 html {
     position: relative;
     font-family: 'Lato';
     font-size: 16px;
     color: $text-clr;
     background: url('img/groupomania-bg.jpg') fixed no-repeat;
+    min-width: 365px;
+    max-width: 2400px;
 }
 
 button {
@@ -47,9 +56,6 @@ a {
     border-radius: 0.5rem;
     margin: auto;
     padding: 2rem;
-    width: 50%;
-    min-width: 250px;
-    max-width: 600px;
 }
 
 .success {

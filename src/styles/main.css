@@ -8,6 +8,11 @@
   max-width: 600px;
   margin: 50px auto;
 }
+.log_container_section {
+  width: 50%;
+  min-width: 250px;
+  max-width: 600px;
+}
 .log_container_section_header {
   display: flex;
   justify-content: space-between;
@@ -55,16 +60,20 @@ button.inactive:hover {
 }
 
 @media screen and (max-width: 768px) {
-  .nav_container_title h2 {
+  .nav_container_title_welcome {
     display: none;
   }
   .nav_container_link_icon {
-    margin-right: 35px;
+    margin-right: 30px;
+  }
+  .nav_container_link_logout_icon {
+    margin-right: 70px;
   }
 }
 nav {
   position: fixed;
   top: 0;
+  z-index: 1000;
   width: 100%;
 }
 
@@ -78,9 +87,10 @@ nav {
   margin-bottom: 0;
 }
 .nav_container_logo {
-  margin: 10px 0px 7px 35px;
+  margin: 10px 0px 7px 0px;
 }
 .nav_container_logo img {
+  margin-left: 30px;
   width: 12rem;
 }
 .nav_container_title_welcome {
@@ -99,7 +109,7 @@ nav {
   cursor: pointer;
 }
 .nav_container_link_icon:hover {
-  color: #005d6d;
+  color: rgba(0, 141, 173, 0.7411764706);
   filter: brightness(1.2);
 }
 
@@ -107,17 +117,94 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   margin-top: 8rem !important;
+  width: 60%;
+  height: 150px;
 }
 .errorAuth_container_title {
   text-align: center;
-  margin-top: 0;
+  margin: 0;
   font-size: 25px;
 }
 .errorAuth_container a {
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .profil_container {
+    width: 70% !important;
+  }
+  .profil_container_update {
+    flex-direction: column;
+  }
+  .profil_container_update_photobox {
+    width: 95% !important;
+  }
+  .profil_container_update_infos {
+    width: 95% !important;
+    margin-top: 40px;
+  }
+  .updateprofil_title {
+    margin-top: 0 !important;
+    margin-bottom: 40px !important;
+  }
+  .separateBox {
+    margin-top: 60px !important;
+    border-top: 1px solid rgba(65, 65, 65, 0.3);
+  }
+}
+.profil_container {
+  margin-top: 90px !important;
+  margin-bottom: 40px !important;
+  width: 80%;
+  min-width: 250px;
+  max-width: 950px;
+}
+.profil_container_title {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 25px;
+}
+.profil_container_update {
+  border-top: 1px solid rgba(65, 65, 65, 0.3);
+  padding-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.profil_container_update_title {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 21px;
+}
+.profil_container_update_photobox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+}
+.profil_container_update_photobox_photo {
+  margin: 20px auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 5rem;
+}
+.profil_container_update_infos {
+  width: 40%;
+}
+
+.btn_update_infos {
+  height: 2.5rem;
+}
+
+.separateBox {
+  margin-top: -15px;
+  border-left: 1px solid rgba(65, 65, 65, 0.3);
 }
 
 @font-face {
@@ -128,12 +215,19 @@ nav {
   font-family: "Lato-Bold";
   src: url("fonts/Lato-Bold.ttf");
 }
+@media screen and (min-width: 360px) {
+  html {
+    min-width: 300px;
+  }
+}
 html {
   position: relative;
   font-family: "Lato";
   font-size: 16px;
   color: #414141;
   background: url("img/groupomania-bg.jpg") fixed no-repeat;
+  min-width: 365px;
+  max-width: 2400px;
 }
 
 button {
@@ -162,9 +256,6 @@ a {
   border-radius: 0.5rem;
   margin: auto;
   padding: 2rem;
-  width: 50%;
-  min-width: 250px;
-  max-width: 600px;
 }
 
 .success {
