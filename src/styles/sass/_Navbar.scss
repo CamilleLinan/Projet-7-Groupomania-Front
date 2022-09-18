@@ -2,18 +2,26 @@
 
 @media screen and (max-width: 768px) {
     .nav_container {
-        &_title h2 {
+        &_title_welcome {
             display: none;
         }
-        &_link_icon {
-            margin-right: 35px;
+
+        &_link { 
+            &_icon {
+                margin-right: 30px;
+            }
+            &_logout_icon {
+                margin-right: 70px;
+            }
         }
+
     }
 }
 
 nav {
     position: fixed;
     top: 0;
+    z-index: 1000;
     width: 100%;
 }
 
@@ -27,8 +35,9 @@ nav {
     margin-bottom: 0;
     
     &_logo  {
-        margin: 10px 0px 7px 35px;
+        margin: 10px 0px 7px 0px;
         & img {
+            margin-left: 30px;
             width: 12rem;
         }
     }
@@ -49,7 +58,7 @@ nav {
             transition: color 250ms ease-in-out;
             cursor: pointer;
             &:hover {
-                color: $primary-clr;
+                color: $secondary-clr;
                 filter: brightness(1.2);
             }
         }

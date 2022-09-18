@@ -41,15 +41,17 @@ const Navbar = () => {
                     <img src={logo} alt="groupomania-logo" className="nav_container_logo_img" />
                 </div>
                 <div className="nav_container_title">
-                    <h2 className="nav_container_title_welcome bold">Bonjour {userFirstName} !</h2>
+                    <h1 className="nav_container_title_welcome bold">Bonjour {userFirstName} !</h1>
                 </div>
                 <div className="nav_container_link">
-                    <NavLink end to="/profil" title='Profil'>
-                        <i className='nav_container_link_icon nav_container_link_icon_profil'>{profilIcon}</i>
+                    <NavLink end to="/profil">
+                        <div className="nav_container_link_profil">
+                            <i className='nav_container_link_icon nav_container_link_profil_icon'>{profilIcon}</i>
+                        </div>
                     </NavLink>
                     <NavLink end to="/">
                         <div onClick={authCtx.logout} className="nav_container_link_logout" title="Déconnexion">
-                            <i className='nav_container_link_icon nav_container_link_icon_logout'>{logoutIcon}</i>
+                            <i className='nav_container_link_icon nav_container_link_logout_icon'>{logoutIcon}</i>
                         </div>
                     </NavLink>
                 </div>

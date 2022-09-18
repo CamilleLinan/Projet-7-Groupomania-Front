@@ -13,10 +13,16 @@
         }
     }
     
-    &_section_header {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
+    &_section {
+        width: 50%;
+        min-width: 250px;
+        max-width: 600px;
+    
+        &_header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
     }
 }
 
