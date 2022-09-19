@@ -14,12 +14,6 @@
     src: url('fonts/Lato-Bold.ttf');
 }
 
-@media screen and (min-width: 360px) {
-    html {
-        min-width: 300px;
-    }
-}
-
 html {
     position: relative;
     font-family: 'Lato';
@@ -32,13 +26,16 @@ html {
 
 button {
     cursor: pointer;
-    height: 3.5rem;
+    height: 3.2rem;
     width: 50%;
     font-size: 16px;
     color: $text-btn-clr;
     background: $primary-clr;
     border: 1px solid $text-clr;
     border-radius: 0.5rem;
+    &:hover {
+        box-shadow: 0 0 16px #0000002e;
+    }
 }
 
 .bold {
@@ -46,6 +43,7 @@ button {
 }
 
 a {
+    display: block;
     color: $text-clr;
     text-decoration: none;
 }

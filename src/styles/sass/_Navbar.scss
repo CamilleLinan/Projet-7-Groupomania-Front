@@ -51,16 +51,23 @@ nav {
         justify-content: space-around;
         width: 15%;
         margin: 10px 15px 7px 0px;
-
-        &_icon {
-            font-size: 1.65rem;
-            color: $text-clr;
-            transition: color 250ms ease-in-out;
-            cursor: pointer;
-            &:hover {
-                color: $secondary-clr;
-                filter: brightness(1.2);
-            }
-        }
     }
 }
+
+.active_link {
+    color: $primary-clr;
+    filter: brightness(1.5);
+    text-shadow: 0 0 16px #0000002e;
+}
+
+.link_icon {
+    font-size: 22px;
+    transition: color 250ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+        color: $primary-clr;
+        filter: brightness(1.5);
+        text-shadow: 0 0 16px #0000002e;
+    }
+}
+

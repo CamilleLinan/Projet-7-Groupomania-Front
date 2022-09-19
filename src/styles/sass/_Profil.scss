@@ -2,15 +2,29 @@
 
 @media screen and (max-width: 768px) {
     .profil_container {
-        width: 70% !important;
         &_update {
-        flex-direction: column;
+            flex-direction: column;
             &_photobox {
                 width: 95% !important;
+                &_photo {
+                    height: 15rem !important;
+                    border-radius: 10rem !important;
+                }
             }
             &_infos {
                 width: 95% !important;
                 margin-top: 40px;
+            }
+        }
+        &_footer {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin: auto;
+            &_btn {
+                width: 100% !important;
+                margin: 0 !important;
+                margin-bottom: 15px !important;
             }
         }
     }
@@ -26,58 +40,81 @@
     }
 }
 
+// Update photo/infos
 .profil_container {
-    margin-top: 90px !important;
-    margin-bottom: 40px !important;
     width: 80%;
     min-width: 250px;
     max-width: 950px;
-
-    &_title {
-        margin-top: 0;
-        margin-bottom: 30px;
-        font-size: 25px;
-    }
-
-    &_update {
-        border-top: 1px solid rgba(65, 65, 65, 0.3);
-        padding-top: 15px;
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-
+    margin: auto;
+    margin-bottom: 40px !important;
+    margin-top: 120px !important;
+        
         &_title {
-            text-align: center;
-            margin-top: 20px;
+            margin-top: 0;
             margin-bottom: 30px;
-            font-size: 21px;
+            font-size: 25px;
         }
 
-        &_photobox {
+        &_update {
+            border-top: 1px solid rgba(65, 65, 65, 0.3);
+            padding-top: 15px;
+            width: 100%;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            width: 40%;
-            &_photo {
-                margin: 20px auto;
-                width: 150px;
-                height: 150px;
-                border-radius: 5rem;
+            justify-content: space-around;
+
+            &_title {
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: 30px;
+                font-size: 24px;
+            }
+
+            &_photobox {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                width: 40%;
+                &_photo {
+                    width: 15rem;
+                    height: 20rem;
+                    border-radius: 2rem;
+                    object-fit: cover;
+                    box-shadow: 0 0 16px #0000002e;
+                }
+            }
+
+            &_infos {
+                width: 40%;
             }
         }
-
-        &_infos {
-            width: 40%;
-        }
     }
+
+
+#file {
+    margin-top: 25px;
 }
 
-.btn_update_infos {
-    height: 2.5rem;
+.btn_update_profil {
+    height: 2.2rem;
 }
 
 .separateBox {
     margin-top: -15px;
     border-left: 1px solid rgba(65, 65, 65, 0.3);
+}
+
+// DeleteProfil
+.profil_container_footer {
+    display: flex;
+    justify-content: flex-end;
+    &_btn {
+        width: 50%;
+    }
+}
+
+.btn_deleteprofil {
+    margin-top: 25px;
+    margin-left: 5px;
+    background-color: rgb(156, 0, 0);
 }
