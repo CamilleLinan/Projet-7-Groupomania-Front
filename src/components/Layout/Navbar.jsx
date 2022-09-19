@@ -1,12 +1,14 @@
-import logo from '../../styles/img/groupomania-logo-navbar.png';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useState, useContext } from 'react';
 import AuthContext from '../../context/authContext';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import logo from '../../styles/img/groupomania-logo-navbar.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
+const homeIcon = <FontAwesomeIcon icon ={faHouse} />
 const profilIcon = <FontAwesomeIcon icon={faCircleUser} />
 const logoutIcon = <FontAwesomeIcon icon={faRightFromBracket} />
 
@@ -44,14 +46,27 @@ const Navbar = () => {
                     <h1 className="nav_container_title_welcome bold">Bonjour {userFirstName} !</h1>
                 </div>
                 <div className="nav_container_link">
-                    <NavLink end to="/profil">
-                        <div className="nav_container_link_profil">
-                            <i className='nav_container_link_icon nav_container_link_profil_icon'>{profilIcon}</i>
-                        </div>
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? "active_link link_icon" : "inactive_link link_icon")}
+                        title="Fil d'actualité"
+                        end to="/trending"
+                    >
+                        {homeIcon}
                     </NavLink>
-                    <NavLink end to="/">
-                        <div onClick={authCtx.logout} className="nav_container_link_logout" title="Déconnexion">
-                            <i className='nav_container_link_icon nav_container_link_logout_icon'>{logoutIcon}</i>
+                    <NavLink  
+                        className={({ isActive }) => (isActive ? "active_link link_icon" : "inactive_link link_icon")}
+                        title="Profil" 
+                        end to="/profil"
+                    >
+                        {profilIcon}
+                    </NavLink>
+                    <NavLink 
+                        className="link_icon"
+                        title="Déconnexion" 
+                        end to="/"
+                    >
+                        <div onClick={authCtx.logout}>
+                            {logoutIcon}
                         </div>
                     </NavLink>
                 </div>

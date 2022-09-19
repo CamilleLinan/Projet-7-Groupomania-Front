@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
+import DeleteProfil from "./DeleteProfil";
 import UpdatePhoto from "./UpdatePhoto";
 import UpdateProfilForm from "./UpdateProfilForm";
 
 
 // Récupérer et afficher les informations utilisateur
 const IndexProfil = () => {
+
     const [ userPicture, setUserPicture ] = useState('');
     const [ userFirstName, setUserFirstName ] = useState('');
     const [ userLastName, setUserLastName ] = useState('');
@@ -41,13 +43,20 @@ const IndexProfil = () => {
     fetchHandler();
 
     return (
-        <div className="profil_container bg_section">
-            <h2 className="profil_container_title bold">Votre profil</h2>
-            <div className="profil_container_update">
-                <UpdatePhoto propPicture={userPicture} />
-                <span className="separateBox"></span>
-                <UpdateProfilForm propFirstName={userFirstName} propLastName={userLastName} propEmail={userEmail} />
+        <div className="profil_container">
+            <div className="bg_section">
+                <h2 className="profil_container_title bold">Votre profil</h2>
+                <div className="profil_container_update">
+                    <div className="profil_container_update_photobox">
+                        <h3 className="profil_container_update_title photobox_title bold">Votre photo</h3>
+                        <img src={userPicture} alt="" className="profil_container_update_photobox_photo" />
+                        <UpdatePhoto />
+                    </div>
+                    <span className="separateBox"></span>
+                    <UpdateProfilForm propFirstName={userFirstName} propLastName={userLastName} propEmail={userEmail} />
+                </div>
             </div>
+            <DeleteProfil />
         </div>
     )
 }
