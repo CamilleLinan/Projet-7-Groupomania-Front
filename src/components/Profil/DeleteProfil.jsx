@@ -2,10 +2,17 @@ import axios from "axios";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/authContext";
+import ConfirmModal from "../Layout/ConfirmModal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { useState } from "react";
 
+const modalIcon = <FontAwesomeIcon icon={faCircleExclamation} />
 
 // Supprimer le profil
 const DeleteProfil = () => {
+    const [ popUpConfirm, setPopUpConfirm ] = useState(false);
+
     const navigate = useNavigate();
 
     // Utilisation du context et dotenv
@@ -14,8 +21,15 @@ const DeleteProfil = () => {
     const API_URI = process.env.REACT_APP_API_URL;
     const url = `${API_URI}api/users/${authCtx.userId}`;
     
+    const cancelConfirm = () => {
+        setPopUpConfirm(false)
+    }
+
+    const deleteHandler = () => {
+        setPopUpConfirm(true)
+    }
+
     const deleteUser = async () => {
-        
         await axios({
             method:'DELETE',
             url: url,
@@ -36,9 +50,18 @@ const DeleteProfil = () => {
     };
 
     return (
+        <>
+        {popUpConfirm && <ConfirmModal
+            icon={modalIcon} 
+            title='Confirmer la suppression'
+            message='Êtes-vous sûr de vouloir supprimer ce profil ?'
+            onCancel={cancelConfirm}
+            onConfirm={deleteUser}
+        />}
         <div className="profil_container_footer">
-            <button onClick={deleteUser} className="profil_container_footer_btn btn_deleteprofil">Delete profil</button>
+            <button onClick={deleteHandler} className="profil_container_footer_btn">Supprimer le profil</button>
         </div>
+        </>
     )
 }
 
