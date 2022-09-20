@@ -39,17 +39,16 @@
 .btn_form {
   background-color: #005d6d;
   width: 100%;
-  transition: transform 300ms ease-in-out;
-}
-.btn_form:hover {
-  transform: scale(1.02);
+  height: 3.2rem;
 }
 
 button#signup {
   margin-right: 5px;
+  height: 3.2rem;
 }
 button#signin {
   margin-left: 5px;
+  height: 3.2rem;
 }
 button.inactive {
   background-color: rgba(0, 141, 173, 0.7411764706);
@@ -59,15 +58,15 @@ button.inactive:hover {
   background-color: #005d6d;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .nav_container_title_welcome {
     display: none;
   }
-  .nav_container_link_icon {
-    margin-right: 30px;
+  .nav_container_link {
+    margin-right: 50px !important;
   }
-  .nav_container_link_logout_icon {
-    margin-right: 70px;
+  .link_icon {
+    margin-right: 40px;
   }
 }
 nav {
@@ -81,7 +80,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);
   margin: 0 -7px;
   margin-bottom: 0;
@@ -100,12 +99,12 @@ nav {
   display: flex;
   justify-content: space-around;
   width: 15%;
-  margin: 10px 15px 7px 0px;
+  margin: 5px 30px 7px 0px;
 }
 
 .active_link {
   color: #005d6d;
-  filter: brightness(1.5);
+  filter: brightness(1.3);
   text-shadow: 0 0 16px rgba(0, 0, 0, 0.1803921569);
 }
 
@@ -116,7 +115,7 @@ nav {
 }
 .link_icon:hover {
   color: #005d6d;
-  filter: brightness(1.5);
+  filter: brightness(1.3);
   text-shadow: 0 0 16px rgba(0, 0, 0, 0.1803921569);
 }
 
@@ -140,9 +139,10 @@ nav {
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .profil_container_update {
     flex-direction: column;
+    align-items: center;
   }
   .profil_container_update_photobox {
     width: 95% !important;
@@ -156,15 +156,12 @@ nav {
     margin-top: 40px;
   }
   .profil_container_footer {
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
-    margin: auto;
   }
   .profil_container_footer_btn {
-    width: 100% !important;
-    margin: 0 !important;
-    margin-bottom: 15px !important;
+    width: 40% !important;
+    margin-top: 15px !important;
   }
   .updateprofil_title {
     margin-top: 0 !important;
@@ -173,6 +170,8 @@ nav {
   .separateBox {
     margin-top: 60px !important;
     border-top: 1px solid rgba(65, 65, 65, 0.3);
+    width: 100%;
+    z-index: 3;
   }
 }
 .profil_container {
@@ -182,10 +181,19 @@ nav {
   margin: auto;
   margin-bottom: 40px !important;
   margin-top: 120px !important;
+  z-index: 10;
 }
-.profil_container_title {
+.profil_container_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.profil_container_header_title {
   margin-top: 0;
   margin-bottom: 30px;
+  font-size: 25px;
+}
+.profil_container_header_icon {
   font-size: 25px;
 }
 .profil_container_update {
@@ -237,13 +245,80 @@ nav {
   justify-content: flex-end;
 }
 .profil_container_footer_btn {
-  width: 50%;
+  font-size: 12px;
+  width: 25%;
+  height: auto;
+  margin-top: 15px;
+  background-color: rgb(156, 0, 0);
+  opacity: 0.5;
+  transition: opacity 300ms ease-in-out;
+}
+.profil_container_footer_btn:hover {
+  opacity: 1;
 }
 
-.btn_deleteprofil {
-  margin-top: 25px;
+.modal_backdrop {
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 900;
+}
+.modal_container {
+  background-color: rgb(249, 249, 249);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 900;
+  width: 45%;
+  min-width: 330px;
+  max-width: 400px;
+  border: 1px solid #005d6d;
+  border-radius: 0.6rem;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.1803921569);
+}
+.modal_container_bg {
+  background-color: rgba(233, 233, 233, 0.568627451);
+  border-radius: 0 0 0.6rem 0.6rem;
+}
+.modal_container_header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0 1rem 1rem;
+  font-size: 20px;
+}
+.modal_container_header_title {
+  margin: 0 10px;
+}
+.modal_container_section {
+  padding: 0.5rem 1rem;
+}
+.modal_container_section_message {
+  font-size: 17px;
+  text-align: center;
+}
+.modal_container_footer {
+  display: flex;
+  justify-content: center;
+  padding: 0rem 1rem 1rem 1rem;
+}
+.modal_container_footer_btn {
+  margin-top: 15px;
+  width: 39%;
+  height: 2rem;
+}
+
+.btn_cancel {
+  margin-right: 5px;
+  color: #414141;
+  background-color: white;
+  border-color: #005d6d;
+}
+.btn_confirm {
   margin-left: 5px;
-  background-color: rgb(156, 0, 0);
 }
 
 @font-face {
@@ -266,15 +341,16 @@ html {
 
 button {
   cursor: pointer;
-  height: 3.2rem;
   width: 50%;
   font-size: 16px;
   color: white;
   background: #005d6d;
   border: 1px solid #414141;
   border-radius: 0.5rem;
+  transition: transform 300ms ease-in-out;
 }
 button:hover {
+  transform: scale(1.02);
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.1803921569);
 }
 
@@ -289,7 +365,7 @@ a {
 }
 
 .bg_section {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(5px);
   border-radius: 0.5rem;
   margin: auto;

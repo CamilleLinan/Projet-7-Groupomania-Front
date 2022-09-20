@@ -3,6 +3,7 @@
 @import 'Navbar';
 @import 'ErrorAuth';
 @import 'Profil';
+@import 'ConfirmModal';
 
 @font-face {
     font-family: 'Lato';
@@ -26,14 +27,15 @@ html {
 
 button {
     cursor: pointer;
-    height: 3.2rem;
     width: 50%;
     font-size: 16px;
     color: $text-btn-clr;
     background: $primary-clr;
     border: 1px solid $text-clr;
     border-radius: 0.5rem;
+    transition: transform 300ms ease-in-out;
     &:hover {
+        transform: scale(1.02);
         box-shadow: 0 0 16px #0000002e;
     }
 }
