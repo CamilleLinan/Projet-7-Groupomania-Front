@@ -17,9 +17,7 @@ const DeleteProfil = () => {
 
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
-
     const API_URI = process.env.REACT_APP_API_URL;
-    const url = `${API_URI}api/users/${authCtx.userId}`;
     
     const cancelConfirm = () => {
         setPopUpConfirm(false)
@@ -29,10 +27,10 @@ const DeleteProfil = () => {
         setPopUpConfirm(true)
     }
 
-    const deleteUser = async () => {
+    const confirmDelete = async () => {
         await axios({
             method:'DELETE',
-            url: url,
+            url: `${API_URI}api/users/${authCtx.userId}`,
             body: JSON.stringify({
                 userId: authCtx.userId
             }),
@@ -56,7 +54,7 @@ const DeleteProfil = () => {
             title='Confirmer la suppression'
             message='Êtes-vous sûr de vouloir supprimer ce profil ?'
             onCancel={cancelConfirm}
-            onConfirm={deleteUser}
+            onConfirm={confirmDelete}
         />}
         <div className="profil_container_footer">
             <button onClick={deleteHandler} className="profil_container_footer_btn">Supprimer le profil</button>
@@ -65,4 +63,4 @@ const DeleteProfil = () => {
     )
 }
 
-export default DeleteProfil
+export default DeleteProfil;

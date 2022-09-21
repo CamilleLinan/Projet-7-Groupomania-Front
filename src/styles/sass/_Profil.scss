@@ -6,6 +6,7 @@
         &_update {
             flex-direction: column;
             align-items: center;
+            
             &_photobox {
                 width: 95% !important;
                 &_photo {
@@ -13,11 +14,13 @@
                     border-radius: 10rem !important;
                 }
             }
+
             &_infos {
                 width: 95% !important;
                 margin-top: 40px;
             }
         }
+
         &_footer {
             align-items: flex-end;
             width: 100%;
@@ -30,7 +33,7 @@
 
     .updateprofil_title {
         margin-top: 0 !important;
-        margin-bottom: 40px !important;
+        margin-bottom: 20px !important;
     }
 
     .separateBox {
@@ -76,11 +79,11 @@
 
             &_title {
                 text-align: center;
-                margin-top: 20px;
+                margin-top: 5px;
                 margin-bottom: 30px;
                 font-size: 24px;
             }
-
+            // UpdatePhoto
             &_photobox {
                 display: flex;
                 flex-direction: column;
@@ -89,26 +92,66 @@
                 width: 40%;
                 &_photo {
                     width: 15rem;
-                    height: 20rem;
-                    border-radius: 2rem;
+                    height: 15rem;
+                    border-radius: 10rem;
                     object-fit: cover;
                     box-shadow: 0 0 16px #0000002e;
                 }
             }
-
+            // UpdateInfos
             &_infos {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
                 width: 40%;
+                font-size: 18px;
+                
+                &_input {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+                    
+                    &_title {
+                        margin: 10px 0;
+                    }
+
+                    &_subtitle {
+                        margin: 0;
+                    }
+                    
+                    &_icon {
+                        margin-bottom: 0;
+                        margin-left: 7px;
+                        font-size: 15px;
+                        opacity: 0.7;
+                        cursor: pointer;
+                        &:hover {
+                            color: $primary-clr;
+                            opacity: 1;
+                        }
+                    }
+                }
             }
         }
     }
 
+
+.update_infos_input {
+    margin-bottom: 10px;
+}
+
+.error_profil {
+    margin-bottom: 5px;
+    margin-top: -8px !important;
+    font-size: 15px;
+}
 
 #file {
     margin-top: 25px;
 }
 
 .btn_update_profil {
-    height: 2.2rem;
+    height: 2rem;
 }
 
 .separateBox {

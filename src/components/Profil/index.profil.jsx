@@ -4,7 +4,7 @@ import AuthContext from "../../context/authContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAddressCard } from '@fortawesome/free-regular-svg-icons';
 import UpdatePhoto from "./UpdatePhoto";
-import UpdateProfilForm from "./UpdateProfilForm";
+import UpdateInfos from "./UpdateInfos";
 import DeleteProfil from "./DeleteProfil";
 
 const profilHeaderIcon = <FontAwesomeIcon icon={faAddressCard} />
@@ -45,7 +45,7 @@ const IndexProfil = () => {
     fetchHandler();
 
     return (
-        <> 
+
         <div className="profil_container">
             <div className="bg_section">
                 <header className="profil_container_header">
@@ -59,13 +59,13 @@ const IndexProfil = () => {
                         <UpdatePhoto />
                     </div>
                     <span className="separateBox"></span>
-                    <UpdateProfilForm propFirstName={userFirstName} propLastName={userLastName} propEmail={userEmail} />
+                    <UpdateInfos propFirstName={userFirstName} propLastName={userLastName} propEmail={userEmail} />
                 </section>
             </div>
             <DeleteProfil />
         </div>
-        </>
+
     )
 }
 
-export default IndexProfil
+export default IndexProfil;

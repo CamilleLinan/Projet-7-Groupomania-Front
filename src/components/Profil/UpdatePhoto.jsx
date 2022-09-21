@@ -48,4 +48,4 @@ const UpdatePhoto = () => {
     )
 }
 
-export default UpdatePhoto
+export default UpdatePhoto;
