@@ -5,7 +5,7 @@ const ErrorAuth = () => {
         <div className='bg_section errorAuth_container'>
             <h1 className='errorAuth_container_title'>Vous devez être connecté pour accéder à cette page !</h1>
             <NavLink end to='/' title='login'>
-                <button className='errorAuth_container_btn'>S'inscrire / Se connecter</button>
+                <button className='btn_form'>S'inscrire / Se connecter</button>
             </NavLink>
         </div>
     )

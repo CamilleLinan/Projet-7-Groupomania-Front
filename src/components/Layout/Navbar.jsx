@@ -37,39 +37,37 @@ const Navbar = () => {
     fetchHandler();
 
     return(
-        <nav>
-            <div className="nav_container">
-                <div className="nav_container_logo">
-                    <img src={logo} alt="groupomania-logo" className="nav_container_logo_img" />
-                </div>
-                <div className="nav_container_title">
-                    <h1 className="nav_container_title_welcome bold">Bonjour {userFirstName} !</h1>
-                </div>
-                <div className="nav_container_link">
-                    <NavLink 
-                        className={({ isActive }) => (isActive ? "active_link link_icon" : "inactive_link link_icon")}
-                        title="Fil d'actualité"
-                        end to="/trending"
-                    >
-                        {homeIcon}
-                    </NavLink>
-                    <NavLink  
-                        className={({ isActive }) => (isActive ? "active_link link_icon" : "inactive_link link_icon")}
-                        title="Profil" 
-                        end to="/profil"
-                    >
-                        {profilIcon}
-                    </NavLink>
-                    <NavLink 
-                        className="link_icon"
-                        title="Déconnexion" 
-                        end to="/"
-                    >
-                        <div onClick={authCtx.logout}>
-                            {logoutIcon}
-                        </div>
-                    </NavLink>
-                </div>
+        <nav className="nav_container">
+            <div className="nav_container_logo">
+                 <img src={logo} alt="groupomania-logo" className="nav_container_logo_img" />
+            </div>
+            <div className="nav_container_title">
+                <h1 className="nav_container_title_welcome bold">Bonjour {userFirstName} !</h1>
+            </div>
+            <div className="nav_container_link">
+                <NavLink 
+                    className={({ isActive }) => (isActive ? "active_link link_icon" : "inactive_link link_icon")}
+                    title="Fil d'actualité"
+                    end to="/trending"
+                >
+                    {homeIcon}
+                </NavLink>
+                <NavLink  
+                    className={({ isActive }) => (isActive ? "active_link link_icon" : "inactive_link link_icon")}
+                    title="Profil" 
+                    end to="/profil"
+                >
+                    {profilIcon}
+                </NavLink>
+                <NavLink 
+                    className="link_icon"
+                    title="Déconnexion" 
+                    end to="/"
+                >
+                    <div onClick={authCtx.logout}>
+                        {logoutIcon}
+                    </div>
+                </NavLink>
             </div>
         </nav>
     )

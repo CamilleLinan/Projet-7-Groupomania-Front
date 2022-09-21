@@ -1,4 +1,3 @@
-import React from 'react';
 import Routes from './components/Routes/index.routes';
 
 const App = () => {
