@@ -1,34 +1,34 @@
-import React, { useState } from "react";
-import axios from 'axios';
+import { useForm } from "react-hook-form";
+import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useContext } from "react";
 import AuthContext from "../../context/authContext";
+import axios from 'axios';
 
 
 // Fonction : Se Connecter
 const SignInForm = () => {
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
     const [ errorSignIn, setErrorSignIn ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
     // Utilisation du context
     const authCtx = useContext(AuthContext);
+    const API_URI = process.env.REACT_APP_API_URL;
 
-    // Utilisation de useNavigate() pour la redirection
+    // Utilisation de useNavigate
     const navigate = useNavigate();
 
+    const { register, formState: { errors }, handleSubmit } = useForm({
+        email: '',
+        password: '',
+    });
+
     // Fonction de soumission du formulaire
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (data) => {
 
         await axios ({
             method: "post",
-            url: `http://localhost:3001/api/users/signin`,
-            data: {
-                email,
-                password
-            }
+            url: `${API_URI}api/users/signin`,
+            data
         })
 
         .then((res) => {
@@ -40,39 +40,40 @@ const SignInForm = () => {
         .catch((error) => {
             console.log(error.response);
             if (error.response.status === 401) {
-                setErrorSignIn({ ...errorSignIn, message: 'La paire identifiant/mot de passe est incorrecte.' })
+                setErrorSignIn({ ...errorSignIn })
             } else {
-                setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })
+                setErrorServer({ ...errorServer })
             }
         });
     }
 
     return (
         <>
-            <form onSubmit={handleSubmit} id="sign-up-form">
-                <label htmlFor="email" className="form_label">Email</label>
+            <form onSubmit={handleSubmit(onSubmit)} id="sign-up-form">
+                
+                <label htmlFor="email" className="form_label bold">Email</label>
                 <input 
                     type="email" 
                     name="email" 
                     id="email" 
                     className="form_input"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
+                    {...register('email', { required: true })}
                 />
-                <div className="error bold"></div>
-                <br/>
-                <label htmlFor="password" className="form_label">Mot de passe</label>
+                {errors.mail && <p className="error bold">Veuillez renseigner une adresse mail</p>}
+
+                <label htmlFor="password" className="form_label bold">Mot de passe</label>
                 <input 
                     type="password" 
                     name="password" 
                     id="password"
                     className="form_input" 
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
+                    {...register('password', { required: true })}
                 />
-                <div className="error bold"></div>
-                <div className="error error_center bold">{errorSignIn.message}{errorServer.message}</div>
-                <br/>
+                {errors.password && <p className="error bold">Veuillez renseigner un mot de passe</p>}
+
+                {errorSignIn && <p className="error error_center bold">La paire identifiant/mot de passe est incorrecte.</p>}
+                {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
+
                 <button type="submit" className="btn_form">Se connecter</button>
             </form>
 
