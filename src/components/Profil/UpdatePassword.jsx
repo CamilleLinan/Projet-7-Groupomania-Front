@@ -4,8 +4,12 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
+const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
+const showPassword = <FontAwesomeIcon icon={faEye} />
 
 // Modifier les informations de l'utilisateur
 const UpdatePassword = () => {
@@ -13,6 +17,7 @@ const UpdatePassword = () => {
     const authCtx = useContext(AuthContext);
     
     const [ inputPassword, setInputPassword ] = useState(false);
+    const [ passwordIsVisible, setPasswordIsVisible ] = useState(false);
 
     const [ password, setPassword ] = useState('');
     const [ confirmPassword, setConfirmPassword ] = useState('');
@@ -34,7 +39,7 @@ const UpdatePassword = () => {
         if (password === e.target.value) {
             setErrorConfirmPassword({ ...errorConfirmPassword, message: '' });
         } else {
-            setErrorConfirmPassword({ ...errorConfirmPassword, message: 'Les mots de passe ne sont pas identiques' });
+            setErrorConfirmPassword({ ...errorConfirmPassword });
         }
     };
 
@@ -55,7 +60,7 @@ const UpdatePassword = () => {
             })
             .catch((error) => {
                 console.log(error.response);
-                setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });
+                setErrorServer({ ...errorServer });
         })
     };
 
@@ -66,11 +71,11 @@ const UpdatePassword = () => {
                     <h4 className="profil_container_update_infos_input_title bold">Modifier le mot de passe</h4>
                     <i className="profil_container_update_infos_input_icon" onClick={() => setInputPassword(!inputPassword)}>{penIcon}</i>
                 </div>
-                    {inputPassword ? 
-                    <>
+
+                {inputPassword ? <>
                     <label htmlFor="password" className="form_label bold">Nouveau mot de passe</label>
                     <input 
-                        type="password"
+                        type={!passwordIsVisible ? "password" : "text"} 
                         name="password"
                         id="password"
                         className="form_input update_infos_input"
@@ -78,7 +83,11 @@ const UpdatePassword = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                     />
-                    {errors.password ? <p className="error error_profil">Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre</p> : <br/>}
+                    <div id="icon-password-update" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
+                        {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
+                        {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                    </div>
+                    {errors.password && <p className="error error_profil bold">Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre</p>}
 
                     <label htmlFor="confirmPassword" className="form_label bold">Confirmer le mot de passe</label>
                     <input 
@@ -90,10 +99,10 @@ const UpdatePassword = () => {
                         value={confirmPassword}
                         required
                     />
-                    {errorConfirmPassword ? <p className="error error_profil">{errorConfirmPassword.message}</p> : null}
-                {errorServer ? <p className="error error_center bold">{errorServer.message}</p> : null}
+                    {errorConfirmPassword && <p className="error error_profil bold">Les mots de passe ne sont pas identiques</p>}
+                    {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
                 </> : <br/>}
-                <button type="submit" className="btn_form btn_update_profil">Modifier votre mot de passe</button>
+                <button type="submit" className="btn_form btn_update_profil bold">Modifier votre mot de passe</button>
             </form>
     )
 }

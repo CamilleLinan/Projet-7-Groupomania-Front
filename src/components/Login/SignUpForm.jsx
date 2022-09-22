@@ -1,14 +1,20 @@
 import { useState }  from "react";
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
+const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
+const showPassword = <FontAwesomeIcon icon={faEye} />
 
 // Fonction : S'Enregistrer
 const SignUpForm = () => {
 
-    const [ formSubmit, setFormSubmit ] = useState(false);
+    const [ formSubmit, setFormSubmit ] = useState();
     const [ errorEmail, setErrorEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ passwordIsVisible, setPasswordIsVisible ] = useState(false);
     const [ confirmPassword, setConfirmPassword ] = useState('');
     const [ errorConfirmPassword, setErrorConfirmPassword ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
@@ -109,7 +115,7 @@ const SignUpForm = () => {
 
                     <label htmlFor="password" className="form_label bold">Mot de passe</label>
                     <input 
-                        type="password"
+                        type={!passwordIsVisible ? "password" : "text"}
                         name="password"
                         id="password"
                         className="form_input"
@@ -117,6 +123,10 @@ const SignUpForm = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                     />
+                        <div id="icon-password-signup" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
+                            {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
+                            {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                        </div>
                     {errors.password && <p className="error bold">Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre</p>}
 
                     <label htmlFor="confirmPassword" className="form_label bold">Confirmer le mot de passe</label>
@@ -133,7 +143,7 @@ const SignUpForm = () => {
                     
                     {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
 
-                    <button type="submit" className="btn_form">Créer un compte</button>
+                    <button type="submit" className="btn_form bold">Créer un compte</button>
                 </form>
             </>
         )}

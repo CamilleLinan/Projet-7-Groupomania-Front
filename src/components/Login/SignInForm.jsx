@@ -3,10 +3,17 @@ import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import AuthContext from "../../context/authContext";
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
+const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
+const showPassword = <FontAwesomeIcon icon={faEye} />
 
 // Fonction : Se Connecter
 const SignInForm = () => {
+
+    const [ passwordIsVisible, setPasswordIsVisible ] = useState(false);
     const [ errorSignIn, setErrorSignIn ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
@@ -63,18 +70,22 @@ const SignInForm = () => {
 
                 <label htmlFor="password" className="form_label bold">Mot de passe</label>
                 <input 
-                    type="password" 
+                    type={!passwordIsVisible ? "password" : "text"} 
                     name="password" 
                     id="password"
                     className="form_input" 
                     {...register('password', { required: true })}
                 />
+                <div id="icon-password-signin" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
+                    {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
+                    {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                 </div>
                 {errors.password && <p className="error bold">Veuillez renseigner un mot de passe</p>}
 
                 {errorSignIn && <p className="error error_center bold">La paire identifiant/mot de passe est incorrecte.</p>}
                 {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
 
-                <button type="submit" className="btn_form">Se connecter</button>
+                <button type="submit" className="btn_form bold">Se connecter</button>
             </form>
 
         </>
