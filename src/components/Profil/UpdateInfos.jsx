@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import AuthContext from "../../context/authContext";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -10,26 +10,42 @@ const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
 
 // Modifier les informations de l'utilisateur
 
-const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
+const UpdateInfos = ({ propData }) => {
     const authCtx = useContext(AuthContext);
-    
-    const [ inputFirstName, setInputFirstName ] = useState(false);
-    const [ inputLastName, setInputLastName ] = useState(false);
-    const [ inputEmail, setInputEmail ] = useState(false);
 
-    const [ updateFirstName, setUpdateFirstName ] = useState(propFirstName);
-    const [ updateLastName, setUpdateLastName ] = useState(propLastName);
-    const [ updateEmail, setUpdateEmail ] = useState(propEmail);
+    const [ dataUpdate, setDataUpdate ] = useState(propData);
+    const [ modify, setModify ] = useState(false);
 
     const [ errorEmail, setErrorEmail ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
-    // Utilisation de useEffect pour garder les données dans le state
+    const firstnameInputRef = useRef();
+    const lastnameInputRef = useRef();
+    const emailInputRef = useRef();
+
+    // Utilisation de useEffect pour mettre à jour les données dans le state
     useEffect(() => {
-        setUpdateFirstName(propFirstName);
-        setUpdateLastName(propLastName);
-        setUpdateEmail(propEmail);
-    }, [propFirstName, propLastName, propEmail])
+        setDataUpdate(propData);
+    }, [propData])
+
+    const modifyHandler = () => {
+        setModify((modify) => !modify);
+        console.log(modify);
+    }
+
+    // Surveiller les modifications faites
+    const changeHandler = () => {
+        const enteredFirstname = firstnameInputRef.current.value;
+        const enteredLastname = lastnameInputRef.current.value;
+        const enteredEmail = emailInputRef.current.value;
+
+        setDataUpdate({
+            ...propData,
+            'firstname': enteredFirstname,
+            'lastname': enteredLastname,
+            'email': enteredEmail,
+        })
+    }
 
     // Regex pour valider les champs
     const regexNames = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/i;
@@ -46,6 +62,9 @@ const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
     const API_URI = process.env.REACT_APP_API_URL;
 
     const onSubmit = async (data) => {
+        if (modify) {
+            return
+        } else {
         await axios({
             method: "PUT",
             url: `${API_URI}api/users/${authCtx.userId}`,
@@ -65,6 +84,7 @@ const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
                     setErrorServer({ ...errorServer });
                 }  
             })
+        }
     };
 
     return (
@@ -73,56 +93,74 @@ const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
             <form action="" onSubmit={handleSubmit(onSubmit)} id="update-infos-form">
                 
                 <label htmlFor="firstname" className="form_label bold">Prénom :</label>
+                {!modify ? <>
                 <div className="profil_container_update_infos_input">
-                    <p className="profil_container_update_infos_input_subtitle">{updateFirstName}</p>
-                    <i className="profil_container_update_infos_input_icon" onClick={() => setInputFirstName(!inputFirstName)}>{penIcon}</i>
+                    <p className="profil_container_update_infos_input_subtitle">{dataUpdate.firstname}</p>
                 </div>
-                {inputFirstName ? <>
+                <br/>
+                </> : <>
                 <input 
                     type='text'
                     name="firstname"
                     id="firstname"
                     className="form_input update_infos_input"
                     {...register('firstname', { minLength: 2, maxLength: 20, pattern: regexNames })}
+                    onChange={changeHandler}
+                    value={dataUpdate.firstname}
+                    ref={firstnameInputRef}
                 /> 
                 {errors.firstname && <p className="error error_profil bold">Veuillez renseigner votre prénom sans chiffre ni caractère spécial</p>}
-                </> : <br/>}
+                </>}
                 
                 <label htmlFor="lastname" className="form_label bold">Nom :</label>
+                {!modify ? <>
                 <div className="profil_container_update_infos_input">
-                    <p className="profil_container_update_infos_input_subtitle">{updateLastName}</p>
-                    <i className="profil_container_update_infos_input_icon" onClick={() => setInputLastName(!inputLastName)}>{penIcon}</i>
+                    <p className="profil_container_update_infos_input_subtitle">{dataUpdate.lastname}</p>
                 </div>
-                {inputLastName ? <>
+                <br/>
+                </> : <>
                 <input 
                     type='text'
                     name="lastname"
                     id="lastname"
                     className="form_input update_infos_input"
                     {...register('lastname', { minLength: 2, maxLength: 20, pattern: regexNames })}
+                    onChange={changeHandler}
+                    value={dataUpdate.lastname}
+                    ref={lastnameInputRef}
                 /> 
                 {errors.lastname && <p className="error error_profil bold">Veuillez renseigner votre nom sans chiffre ni caractère spécial</p>}
-                </> : <br/>}
+                </>}
 
                 <label htmlFor="email" className="form_label bold">Email :</label>
+                {!modify ? <>
                 <div className="profil_container_update_infos_input">
-                    <p className="profil_container_update_infos_input_subtitle">{updateEmail}</p>
-                    <i className="profil_container_update_infos_input_icon" onClick={() => setInputEmail(!inputEmail)}>{penIcon}</i>
+                    <p className="profil_container_update_infos_input_subtitle">{dataUpdate.email}</p>
                 </div>
-                {inputEmail ? <>
+                <br/>
+                </> : <>
                 <input 
                     type='email' 
                     name="email"
                     id="email"
                     className="form_input update_infos_input"
                     {...register('email', { pattern: regexEmail })}
+                    onChange={changeHandler}
+                    value={dataUpdate.email}
+                    ref={emailInputRef}
                 /> 
                 {errors.email && <p className="error error_profil bold">Veuillez renseigner une adresse mail valide type : exemple@mail.com</p>}
                 {errorEmail && <p className="error error_profil bold">Cette email est déjà utilisée</p>}
-                </> : <br/>}
+                </>}
 
                 {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
-                <button type="submit" className="btn_form btn_update_profil bold">Modifier vos informations</button>
+                {!modify ? 
+                <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
+                    Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>
+                </button> : 
+                <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
+                    Enregistrer
+                </button>}
             </form>
             <UpdatePassword />
         </div>
