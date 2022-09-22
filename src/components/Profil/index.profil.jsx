@@ -20,15 +20,11 @@ const IndexProfil = () => {
     const authCtx = useContext(AuthContext);
 
     const API_URI = process.env.REACT_APP_API_URL;
-    const url = `${API_URI}api/users/${authCtx.userId}`;
 
-    const fetchHandler = async () => {
+    const getUserData = async () => {
         await axios ({
             method: 'GET',
-            url: url,
-            body: JSON.stringify({
-                userId: authCtx.userId
-            }),
+            url: `${API_URI}api/users/${authCtx.userId}`,
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             }
@@ -41,8 +37,8 @@ const IndexProfil = () => {
             })
             .catch(err => console.log(err));
     };
-
-    fetchHandler();
+    
+    getUserData();
 
     return (
 
@@ -55,8 +51,7 @@ const IndexProfil = () => {
                 <section className="profil_container_update">
                     <div className="profil_container_update_photobox">
                         <h3 className="profil_container_update_title photobox_title bold">Votre photo</h3>
-                        <img src={userPicture} alt="" className="profil_container_update_photobox_photo" />
-                        <UpdatePhoto />
+                        <UpdatePhoto propPicture={userPicture} />
                     </div>
                     <span className="separateBox"></span>
                     <UpdateInfos propFirstName={userFirstName} propLastName={userLastName} propEmail={userEmail} />

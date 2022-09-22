@@ -1,11 +1,19 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/authContext";
 
 
 // Modifier la photo de profil
-const UpdatePhoto = () => {
-    const [ userPicture, setUserPicture ] = useState('');
+const UpdatePhoto = ({ propPicture }) => {
+     
+    const [ userPicture, setUserPicture ] = useState(propPicture);
+    const [ showOldPicture, setShowOldPicture ] = useState(true);
+    const [ userChoice, setUserChoice ] = useState('');
+    const [ showChoice, setShowChoice ] = useState(false);
+
+    useEffect(() => {
+        setUserPicture(propPicture);
+    }, [propPicture])
 
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
@@ -31,7 +39,20 @@ const UpdatePhoto = () => {
             })
     };
 
+    const handlePictureChanged = () => {
+        setShowOldPicture(false);
+        console.log('handlePictureChanged');
+    }
+
+    const onUserPictureChanged = () => {
+        setShowChoice(true);
+        console.log('onUserPictureChanged');
+    }
+
     return (
+        <>
+        {showOldPicture && <img src={userPicture} alt="" className="profil_container_update_photobox_photo" />}
+        {showChoice && <img src={userChoice} alt="" className="profil_container_update_photobox_photo" />}
         <form action="" onSubmit={modifyPicture} className="update-photo-form">
             <label htmlFor="file" className="profil_container_update_photobox_label"></label>
             <input 
@@ -39,12 +60,18 @@ const UpdatePhoto = () => {
                 name="file" 
                 id="file"
                 accept=".jpg, .jpeg, .png"
-                onChange={(e) => setUserPicture(e.target.files[0])}
+                onChange={(e) => {
+                    setUserPicture(e.target.files[0]);
+                    setUserChoice(e.target.files);
+                    handlePictureChanged();
+                    onUserPictureChanged();
+                }}
             />
             <div className="error bold"></div>
             <br/>
-            <button type="submit" className="btn_form btn_update_profil">Modifier votre photo</button>
+            <button type="submit" className="btn_form btn_update_profil bold">Modifier votre photo</button>
         </form>
+        </>
     )
 }
 

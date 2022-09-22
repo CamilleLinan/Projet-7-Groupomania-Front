@@ -4,7 +4,6 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from "react-router-dom";
 import UpdatePassword from "./UpdatePassword";
 
 const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
@@ -12,7 +11,6 @@ const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
 // Modifier les informations de l'utilisateur
 
 const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
-    const navigate = useNavigate();
     const authCtx = useContext(AuthContext);
     
     const [ inputFirstName, setInputFirstName ] = useState(false);
@@ -58,14 +56,13 @@ const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
         })
             .then((res) => {
                 console.log(res);
-                navigate('/profil');
             })
             .catch((error) => {
                 console.log(error.response);
                 if (error.response.status === 400) {
-                    setErrorEmail({ ...errorEmail, message: 'Cette email est déjà utilisée' });
+                    setErrorEmail({ ...errorEmail });
                 } else {
-                    setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });
+                    setErrorServer({ ...errorServer });
                 }  
             })
     };
@@ -88,7 +85,7 @@ const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
                     className="form_input update_infos_input"
                     {...register('firstname', { minLength: 2, maxLength: 20, pattern: regexNames })}
                 /> 
-                {errors.firstname ? <p className="error error_profil">Veuillez renseigner votre prénom sans chiffre ni caractère spécial</p> : null}
+                {errors.firstname && <p className="error error_profil bold">Veuillez renseigner votre prénom sans chiffre ni caractère spécial</p>}
                 </> : <br/>}
                 
                 <label htmlFor="lastname" className="form_label bold">Nom :</label>
@@ -104,7 +101,7 @@ const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
                     className="form_input update_infos_input"
                     {...register('lastname', { minLength: 2, maxLength: 20, pattern: regexNames })}
                 /> 
-                {errors.lastname ? <p className="error error_profil">Veuillez renseigner votre nom sans chiffre ni caractère spécial</p> : null}
+                {errors.lastname && <p className="error error_profil bold">Veuillez renseigner votre nom sans chiffre ni caractère spécial</p>}
                 </> : <br/>}
 
                 <label htmlFor="email" className="form_label bold">Email :</label>
@@ -120,12 +117,12 @@ const UpdateInfos = ({ propFirstName, propLastName, propEmail }) => {
                     className="form_input update_infos_input"
                     {...register('email', { pattern: regexEmail })}
                 /> 
-                {errors.email ? <p className="error error_profil">Veuillez renseigner une adresse mail valide type : exemple@mail.com</p> : null}
-                {errorEmail ? <p className="error error_profil">{errorEmail.message}</p> : null }
+                {errors.email && <p className="error error_profil bold">Veuillez renseigner une adresse mail valide type : exemple@mail.com</p>}
+                {errorEmail && <p className="error error_profil bold">Cette email est déjà utilisée</p>}
                 </> : <br/>}
 
-                {errorServer ? <p className="error error_center bold">{errorServer.message}</p> : null}
-                <button type="submit" className="btn_form btn_update_profil">Modifier vos informations</button>
+                {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
+                <button type="submit" className="btn_form btn_update_profil bold">Modifier vos informations</button>
             </form>
             <UpdatePassword />
         </div>
