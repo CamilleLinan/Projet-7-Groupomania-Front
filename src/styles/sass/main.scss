@@ -20,7 +20,7 @@ html {
     font-family: 'Lato';
     font-size: 16px;
     color: $text-clr;
-    background: url('img/groupomania-bg1.jpg') fixed no-repeat;
+    background: url('img/groupomania-bg5.jpg') fixed no-repeat;
     background-size:cover;
     min-width: 365px;
     max-width: 2400px;
@@ -53,10 +53,10 @@ a {
 
 .bg_section {
     background-color: $bg-section;
-    backdrop-filter: blur(20px);
-    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+    border-radius: 0.9rem;
     margin: auto;
-    padding: 2rem;
+    padding: 1.8rem;
 }
 
 .success {
@@ -74,3 +74,66 @@ a {
         margin-top: 5px;
     }
 } 
+
+form {
+    position: relative;
+}
+
+#icon-password {
+    &-signup {
+        position: absolute;
+        top: 232px;
+        right: 8px;
+    }
+    &-signin {
+        position: absolute;
+        top: 97px;
+        right: 8px;
+    }
+
+    &-update {
+        position: absolute;
+        top: 84px;
+        right: 8px;
+    }
+}
+
+.icon_password {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    opacity: 0.8;
+    cursor: pointer;
+    &:hover .show {
+        opacity: 1;
+    }
+    &:hover .hidden {
+        opacity: 1;
+    }
+
+    &_hidden {
+        position: absolute;
+        transition: opacity 100ms ease-in-out;
+        &:hover {
+            opacity: 0;
+        }
+
+        &_show {
+            opacity: 0;
+            transition: opacity 100ms ease-in-out;
+        }
+    }
+
+    &_show {
+        position: absolute;
+        transition: opacity 100ms ease-in-out;
+        &:hover {
+            opacity: 0;
+        }
+
+        &_hidden {
+            opacity: 0;
+            transition: opacity 100ms ease-in-out;
+        }
+    }
+}

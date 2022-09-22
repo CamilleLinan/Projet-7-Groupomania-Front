@@ -9,6 +9,7 @@
   margin: 50px auto;
 }
 .log_container_section {
+  background-color: rgba(255, 255, 255, 0.4) !important;
   width: 50%;
   min-width: 250px;
   max-width: 600px;
@@ -53,7 +54,7 @@ button#signin {
   height: 3.2rem;
 }
 button.inactive {
-  color: #252525;
+  color: #000000;
   background-color: transparent;
   transition: all 400ms ease-in-out;
 }
@@ -84,7 +85,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(15px);
   margin: 0 -7px;
   margin-bottom: 0;
@@ -353,7 +354,7 @@ nav {
 
 .btn_cancel {
   margin-right: 5px;
-  color: #252525;
+  color: #000000;
   background-color: white;
   border-color: #1e6e7d;
 }
@@ -373,8 +374,8 @@ html {
   position: relative;
   font-family: "Lato";
   font-size: 16px;
-  color: #252525;
-  background: url("img/groupomania-bg1.jpg") fixed no-repeat;
+  color: #000000;
+  background: url("img/groupomania-bg5.jpg") fixed no-repeat;
   background-size: cover;
   min-width: 365px;
   max-width: 2400px;
@@ -386,7 +387,7 @@ button {
   font-size: 16px;
   color: white;
   background: #1e6e7d;
-  border: 1px solid #252525;
+  border: 1px solid #000000;
   border-radius: 0.5rem;
   transition: transform 300ms ease-in-out;
 }
@@ -401,16 +402,16 @@ button:hover {
 
 a {
   display: block;
-  color: #252525;
+  color: #000000;
   text-decoration: none;
 }
 
 .bg_section {
-  background-color: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(20px);
-  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 0.9rem;
   margin: auto;
-  padding: 2rem;
+  padding: 1.8rem;
 }
 
 .success {
@@ -427,6 +428,62 @@ a {
 .error_center {
   text-align: center;
   margin-top: 5px;
+}
+
+form {
+  position: relative;
+}
+
+#icon-password-signup {
+  position: absolute;
+  top: 232px;
+  right: 8px;
+}
+#icon-password-signin {
+  position: absolute;
+  top: 97px;
+  right: 8px;
+}
+#icon-password-update {
+  position: absolute;
+  top: 84px;
+  right: 8px;
+}
+
+.icon_password {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.icon_password:hover .show {
+  opacity: 1;
+}
+.icon_password:hover .hidden {
+  opacity: 1;
+}
+.icon_password_hidden {
+  position: absolute;
+  transition: opacity 100ms ease-in-out;
+}
+.icon_password_hidden:hover {
+  opacity: 0;
+}
+.icon_password_hidden_show {
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+}
+.icon_password_show {
+  position: absolute;
+  transition: opacity 100ms ease-in-out;
+}
+.icon_password_show:hover {
+  opacity: 0;
+}
+.icon_password_show_hidden {
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
 }
 
 /*# sourceMappingURL=main.css.map */
