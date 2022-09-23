@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import AuthContext from "../../context/authContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAddressCard } from '@fortawesome/free-regular-svg-icons';
@@ -11,17 +11,13 @@ const profilHeaderIcon = <FontAwesomeIcon icon={faAddressCard} />
 
 // Récupérer et afficher les informations utilisateur
 const IndexProfil = () => {
-    const [ userPicture, setUserPicture ] = useState('');
-    const [ userFirstName, setUserFirstName ] = useState('');
-    const [ userLastName, setUserLastName ] = useState('');
-    const [ userEmail, setUserEmail ] = useState('');
+    const [ data, setData ] = useState([]);
 
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
-
     const API_URI = process.env.REACT_APP_API_URL;
 
-    const getUserData = async () => {
+    const getUserData =  useCallback( async () => {
         await axios ({
             method: 'GET',
             url: `${API_URI}api/users/${authCtx.userId}`,
@@ -30,15 +26,16 @@ const IndexProfil = () => {
             }
         })
             .then(res => {
-                setUserPicture(res.data.userPicture);
-                setUserFirstName(res.data.firstname);
-                setUserLastName(res.data.lastname);
-                setUserEmail(res.data.email);
+                setData(res.data);
             })
             .catch(err => console.log(err));
-    };
+    }, [API_URI, authCtx.token, authCtx.userId]);
     
-    getUserData();
+    useEffect(() => {
+        getUserData();
+    }, [getUserData])
+
+    console.log(data);
 
     return (
 
@@ -51,10 +48,10 @@ const IndexProfil = () => {
                 <section className="profil_container_update">
                     <div className="profil_container_update_photobox">
                         <h3 className="profil_container_update_title photobox_title bold">Votre photo</h3>
-                        <UpdatePhoto propPicture={userPicture} />
+                        <UpdatePhoto propData={data} />
                     </div>
                     <span className="separateBox"></span>
-                    <UpdateInfos propFirstName={userFirstName} propLastName={userLastName} propEmail={userEmail} />
+                    <UpdateInfos propData={data} />
                 </section>
             </div>
             <DeleteProfil />

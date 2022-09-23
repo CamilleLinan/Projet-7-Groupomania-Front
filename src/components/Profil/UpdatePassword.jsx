@@ -3,20 +3,22 @@ import AuthContext from "../../context/authContext";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
 const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
 const showPassword = <FontAwesomeIcon icon={faEye} />
+const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
+const checkIcon = <FontAwesomeIcon icon={faCheck} />
 
 // Modifier les informations de l'utilisateur
 const UpdatePassword = () => {
 
     const authCtx = useContext(AuthContext);
     
-    const [ inputPassword, setInputPassword ] = useState(false);
+    const [ modify, setModify ] = useState(false);
     const [ passwordIsVisible, setPasswordIsVisible ] = useState(false);
 
     const [ password, setPassword ] = useState('');
@@ -24,6 +26,11 @@ const UpdatePassword = () => {
     const [ errorConfirmPassword, setErrorConfirmPassword ] = useState('');
     
     const [ errorServer, setErrorServer ] = useState('');
+
+    const modifyHandler = () => {
+        setModify((modify) => !modify);
+        console.log(modify);
+    }
 
     // Regex pour valider les champs
     const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,30}$/;
@@ -47,32 +54,33 @@ const UpdatePassword = () => {
     const API_URI = process.env.REACT_APP_API_URL;
 
     const onSubmit = async (data) => {
-        await axios({
-            method: "PUT",
-            url: `${API_URI}api/users/${authCtx.userId}`,
-            headers: {
-                Authorization: `Bearer ${authCtx.token}`,
-            },
-            data
-        })
-            .then((res) => {
-                console.log(res);
+        if (!modify) {
+            await axios({
+                method: "PUT",
+                url: `${API_URI}api/users/${authCtx.userId}`,
+                headers: {
+                    Authorization: `Bearer ${authCtx.token}`,
+                },
+                data
             })
-            .catch((error) => {
-                console.log(error.response);
-                setErrorServer({ ...errorServer });
-        })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                    setErrorServer({ ...errorServer });
+                })
+        }
     };
 
     return (
             <form action="" onSubmit={handleSubmit(onSubmit)} id="update-password-form">
                 
                 <div className="profil_container_update_infos_input">
-                    <h4 className="profil_container_update_infos_input_title bold">Modifier le mot de passe</h4>
-                    <i className="profil_container_update_infos_input_icon" onClick={() => setInputPassword(!inputPassword)}>{penIcon}</i>
+                    <h4 className="profil_container_update_infos_input_title bold">Mot de passe</h4>
                 </div>
 
-                {inputPassword ? <>
+                {modify ? <>
                     <label htmlFor="password" className="form_label bold">Nouveau mot de passe</label>
                     <input 
                         type={!passwordIsVisible ? "password" : "text"} 
@@ -102,7 +110,13 @@ const UpdatePassword = () => {
                     {errorConfirmPassword && <p className="error error_profil bold">Les mots de passe ne sont pas identiques</p>}
                     {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
                 </> : <br/>}
-                <button type="submit" className="btn_form btn_update_profil bold">Modifier votre mot de passe</button>
+                {!modify ? 
+                <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
+                    Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>
+                </button> : 
+                <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
+                    Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
+                </button>}
             </form>
     )
 }

@@ -4,9 +4,11 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import UpdatePassword from "./UpdatePassword";
 
 const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
+const checkIcon = <FontAwesomeIcon icon={faCheck} />
 
 // Modifier les informations de l'utilisateur
 
@@ -30,7 +32,6 @@ const UpdateInfos = ({ propData }) => {
 
     const modifyHandler = () => {
         setModify((modify) => !modify);
-        console.log(modify);
     }
 
     // Surveiller les modifications faites
@@ -61,29 +62,28 @@ const UpdateInfos = ({ propData }) => {
     // Utilisation de dotenv
     const API_URI = process.env.REACT_APP_API_URL;
 
-    const onSubmit = async (data) => {
-        if (modify) {
-            return
-        } else {
-        await axios({
-            method: "PUT",
-            url: `${API_URI}api/users/${authCtx.userId}`,
-            headers: {
-                Authorization: `Bearer ${authCtx.token}`,
-            },
-            data
-        })
-            .then((res) => {
-                console.log(res);
+    const onSubmit = async (e, data) => {
+        if (!modify) {
+            e.preventDefault();
+            await axios({
+                method: "PUT",
+                url: `${API_URI}api/users/${authCtx.userId}`,
+                headers: {
+                    Authorization: `Bearer ${authCtx.token}`,
+                },
+                data
             })
-            .catch((error) => {
-                console.log(error.response);
-                if (error.response.status === 400) {
-                    setErrorEmail({ ...errorEmail });
-                } else {
-                    setErrorServer({ ...errorServer });
-                }  
-            })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                    if (error.response.status === 400) {
+                        setErrorEmail({ ...errorEmail });
+                    } else {
+                        setErrorServer({ ...errorServer });
+                    }  
+                })
         }
     };
 
@@ -94,10 +94,7 @@ const UpdateInfos = ({ propData }) => {
                 
                 <label htmlFor="firstname" className="form_label bold">Prénom :</label>
                 {!modify ? <>
-                <div className="profil_container_update_infos_input">
-                    <p className="profil_container_update_infos_input_subtitle">{dataUpdate.firstname}</p>
-                </div>
-                <br/>
+                    <p className="profil_container_update_infos_input">{dataUpdate.firstname}</p>
                 </> : <>
                 <input 
                     type='text'
@@ -114,10 +111,7 @@ const UpdateInfos = ({ propData }) => {
                 
                 <label htmlFor="lastname" className="form_label bold">Nom :</label>
                 {!modify ? <>
-                <div className="profil_container_update_infos_input">
-                    <p className="profil_container_update_infos_input_subtitle">{dataUpdate.lastname}</p>
-                </div>
-                <br/>
+                    <p className="profil_container_update_infos_input">{dataUpdate.lastname}</p>
                 </> : <>
                 <input 
                     type='text'
@@ -134,10 +128,7 @@ const UpdateInfos = ({ propData }) => {
 
                 <label htmlFor="email" className="form_label bold">Email :</label>
                 {!modify ? <>
-                <div className="profil_container_update_infos_input">
-                    <p className="profil_container_update_infos_input_subtitle">{dataUpdate.email}</p>
-                </div>
-                <br/>
+                    <p className="profil_container_update_infos_input">{dataUpdate.email}</p>
                 </> : <>
                 <input 
                     type='email' 
@@ -159,7 +150,7 @@ const UpdateInfos = ({ propData }) => {
                     Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>
                 </button> : 
                 <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
-                    Enregistrer
+                    Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
                 </button>}
             </form>
             <UpdatePassword />
