@@ -69,6 +69,7 @@ const SignInForm = () => {
                 {errors.mail && <p className="error bold">Veuillez renseigner une adresse mail</p>}
 
                 <label htmlFor="password" className="form_label bold">Mot de passe</label>
+                <div className="container_password_input">
                 <input 
                     type={!passwordIsVisible ? "password" : "text"} 
                     name="password" 
@@ -79,6 +80,7 @@ const SignInForm = () => {
                 <div id="icon-password-signin" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
                     {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
                     {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                 </div>
                  </div>
                 {errors.password && <p className="error bold">Veuillez renseigner un mot de passe</p>}
 

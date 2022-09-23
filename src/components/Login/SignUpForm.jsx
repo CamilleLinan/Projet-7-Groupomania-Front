@@ -114,6 +114,7 @@ const SignUpForm = () => {
                     {errorEmail && <p className="error bold">{errorEmail.message}</p>}
 
                     <label htmlFor="password" className="form_label bold">Mot de passe</label>
+                    <div className="container_password_input">
                     <input 
                         type={!passwordIsVisible ? "password" : "text"}
                         name="password"
@@ -127,6 +128,7 @@ const SignUpForm = () => {
                             {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
                             {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
                         </div>
+                    </div>
                     {errors.password && <p className="error bold">Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre</p>}
 
                     <label htmlFor="confirmPassword" className="form_label bold">Confirmer le mot de passe</label>

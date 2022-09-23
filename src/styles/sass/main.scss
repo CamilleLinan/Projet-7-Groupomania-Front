@@ -81,25 +81,27 @@ a {
 
 
 // ICON PASSWORD \\
-form {
+.container_password_input {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 #icon-password {
     &-signup {
         position: absolute;
-        top: 232px;
+        bottom: 17px;
         right: 8px;
     }
     &-signin {
         position: absolute;
-        top: 97px;
+        bottom: 17px;
         right: 8px;
     }
 
     &-update {
         position: absolute;
-        top: 84px;
+        bottom: 17px;
         right: 8px;
     }
 }

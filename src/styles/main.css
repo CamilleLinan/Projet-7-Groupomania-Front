@@ -427,23 +427,25 @@ a {
   margin-top: 5px;
 }
 
-form {
+.container_password_input {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 #icon-password-signup {
   position: absolute;
-  top: 232px;
+  bottom: 17px;
   right: 8px;
 }
 #icon-password-signin {
   position: absolute;
-  top: 97px;
+  bottom: 17px;
   right: 8px;
 }
 #icon-password-update {
   position: absolute;
-  top: 84px;
+  bottom: 17px;
   right: 8px;
 }
 

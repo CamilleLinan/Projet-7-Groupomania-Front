@@ -84,6 +84,7 @@ const UpdatePassword = () => {
 
                 {modify ? <>
                     <label htmlFor="password" className="form_label bold">Nouveau mot de passe</label>
+                    <div className="container_password_input">
                     <input 
                         type={!passwordIsVisible ? "password" : "text"} 
                         name="password"
@@ -96,6 +97,7 @@ const UpdatePassword = () => {
                     <div id="icon-password-update" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
                         {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
                         {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                    </div>
                     </div>
                     {errors.password && <p className="error error_profil bold">Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre</p>}
 
