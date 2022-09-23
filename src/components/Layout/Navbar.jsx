@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import AuthContext from '../../context/authContext';
 import axios from 'axios';
 import logo from '../../styles/img/groupomania-logo-navbar.png';
@@ -12,9 +12,7 @@ const homeIcon = <FontAwesomeIcon icon ={faHouse} />
 const profilIcon = <FontAwesomeIcon icon={faCircleUser} />
 const logoutIcon = <FontAwesomeIcon icon={faRightFromBracket} />
 
-const Navbar = () => {
-    const [ userFirstName, setUserFirstName ] = useState('');
-
+const Navbar = (props) => {
     const authCtx = useContext(AuthContext);  
 
     const fetchHandler = async () => {
@@ -29,7 +27,7 @@ const Navbar = () => {
             }
         })
             .then(res => {
-                setUserFirstName(res.data.firstname);
+                console.log(res);
             })
             .catch(err => console.log(err));
     };
@@ -42,7 +40,7 @@ const Navbar = () => {
                  <img src={logo} alt="groupomania-logo" className="nav_container_logo_img" />
             </div>
             <div className="nav_container_title">
-                <h1 className="nav_container_title_welcome bold">Bonjour {userFirstName} !</h1>
+                <h1 className="nav_container_title_welcome bold">{props.message}</h1>
             </div>
             <div className="nav_container_link">
                 <NavLink 

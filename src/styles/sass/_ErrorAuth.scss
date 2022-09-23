@@ -6,8 +6,9 @@
     align-items: center;
     justify-content: space-around;
     margin-top: 8rem !important;
-    width: 60%;
-    height: 150px;
+    width: 56%;
+    min-width: 260px;
+    max-width: 430px;
 
     &_title {
         text-align: center;
@@ -19,5 +20,11 @@
         display: flex;
         justify-content: center;
         width: 100%;
+    }
+
+    & button {
+        margin-top: 20px;
+        width: 200px;
+        height: 2.5rem;
     }
 }
