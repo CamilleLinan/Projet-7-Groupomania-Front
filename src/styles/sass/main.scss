@@ -5,6 +5,8 @@
 @import 'Profil';
 @import 'ConfirmModal';
 
+
+// PAGE \\
 @font-face {
     font-family: 'Lato';
     src: url('fonts/Lato-Regular.ttf');
@@ -59,6 +61,8 @@ a {
     padding: 1.8rem;
 }
 
+
+// SUCCESS / ERROR \\
 .success {
     color: $success-clr;
     text-align: center;
@@ -75,6 +79,8 @@ a {
     }
 } 
 
+
+// ICON PASSWORD \\
 form {
     position: relative;
 }
@@ -102,7 +108,7 @@ form {
     display: flex;
     align-content: center;
     justify-content: center;
-    opacity: 0.8;
+    opacity: 0.5;
     cursor: pointer;
     &:hover .show {
         opacity: 1;
@@ -113,27 +119,24 @@ form {
 
     &_hidden {
         position: absolute;
-        transition: opacity 100ms ease-in-out;
         &:hover {
             opacity: 0;
         }
 
         &_show {
             opacity: 0;
-            transition: opacity 100ms ease-in-out;
         }
     }
 
     &_show {
         position: absolute;
-        transition: opacity 100ms ease-in-out;
         &:hover {
             opacity: 0;
         }
-
+        
         &_hidden {
             opacity: 0;
-            transition: opacity 100ms ease-in-out;
+
         }
     }
 }

@@ -243,19 +243,10 @@ nav {
 .profil_container_update_infos_input_title {
   margin: 10px 0;
 }
-.profil_container_update_infos_input_subtitle {
-  margin: 0;
-}
 .profil_container_update_infos_input_icon {
   margin-bottom: 0;
   margin-left: 7px;
   font-size: 15px;
-  opacity: 0.7;
-  cursor: pointer;
-}
-.profil_container_update_infos_input_icon:hover {
-  color: #1e6e7d;
-  opacity: 1;
 }
 
 .update_infos_input {
@@ -454,7 +445,7 @@ form {
   display: flex;
   align-content: center;
   justify-content: center;
-  opacity: 0.8;
+  opacity: 0.5;
   cursor: pointer;
 }
 .icon_password:hover .show {
@@ -465,25 +456,21 @@ form {
 }
 .icon_password_hidden {
   position: absolute;
-  transition: opacity 100ms ease-in-out;
 }
 .icon_password_hidden:hover {
   opacity: 0;
 }
 .icon_password_hidden_show {
   opacity: 0;
-  transition: opacity 100ms ease-in-out;
 }
 .icon_password_show {
   position: absolute;
-  transition: opacity 100ms ease-in-out;
 }
 .icon_password_show:hover {
   opacity: 0;
 }
 .icon_password_show_hidden {
   opacity: 0;
-  transition: opacity 100ms ease-in-out;
 }
 
 /*# sourceMappingURL=main.css.map */
