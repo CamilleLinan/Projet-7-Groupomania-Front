@@ -1,19 +1,22 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/authContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
+const checkIcon = <FontAwesomeIcon icon={faCheck} />
 
 // Modifier la photo de profil
-const UpdatePhoto = ({ propPicture }) => {
+const UpdatePhoto = ({ propData }) => {
      
-    const [ userPicture, setUserPicture ] = useState(propPicture);
+    const [ dataPicture, setDataPicture ] = useState(propData);
     const [ showOldPicture, setShowOldPicture ] = useState(true);
     const [ userChoice, setUserChoice ] = useState('');
     const [ showChoice, setShowChoice ] = useState(false);
 
     useEffect(() => {
-        setUserPicture(propPicture);
-    }, [propPicture])
+        setDataPicture(propData);
+    }, [propData])
 
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
@@ -23,7 +26,7 @@ const UpdatePhoto = ({ propPicture }) => {
     
     const modifyPicture = async () => {
         const data = new FormData();
-        data.append('image', userPicture);
+        data.append('image', dataPicture);
 
         await axios.put(url, data, {
             headers: {
@@ -51,7 +54,7 @@ const UpdatePhoto = ({ propPicture }) => {
 
     return (
         <>
-        {showOldPicture && <img src={userPicture} alt="" className="profil_container_update_photobox_photo" />}
+        {showOldPicture && <img src={dataPicture.userPicture} alt="" className="profil_container_update_photobox_photo" />}
         {showChoice && <img src={userChoice} alt="" className="profil_container_update_photobox_photo" />}
         <form action="" onSubmit={modifyPicture} className="update-photo-form">
             <label htmlFor="file" className="profil_container_update_photobox_label"></label>
@@ -61,7 +64,7 @@ const UpdatePhoto = ({ propPicture }) => {
                 id="file"
                 accept=".jpg, .jpeg, .png"
                 onChange={(e) => {
-                    setUserPicture(e.target.files[0]);
+                    setDataPicture(e.target.files[0]);
                     setUserChoice(e.target.files);
                     handlePictureChanged();
                     onUserPictureChanged();
@@ -69,7 +72,9 @@ const UpdatePhoto = ({ propPicture }) => {
             />
             <div className="error bold"></div>
             <br/>
-            <button type="submit" className="btn_form btn_update_profil bold">Modifier votre photo</button>
+            <button type="submit" className="btn_form btn_update_profil bold">
+                Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
+            </button>
         </form>
         </>
     )

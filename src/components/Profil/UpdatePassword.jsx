@@ -7,11 +7,13 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faKey } from '@fortawesome/free-solid-svg-icons';
 
 const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
 const showPassword = <FontAwesomeIcon icon={faEye} />
 const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
 const checkIcon = <FontAwesomeIcon icon={faCheck} />
+const keyIcon = <FontAwesomeIcon icon={faKey} />
 
 // Modifier les informations de l'utilisateur
 const UpdatePassword = () => {
@@ -77,7 +79,7 @@ const UpdatePassword = () => {
             <form action="" onSubmit={handleSubmit(onSubmit)} id="update-password-form">
                 
                 <div className="profil_container_update_infos_input">
-                    <h4 className="profil_container_update_infos_input_title bold">Mot de passe</h4>
+                    <h4 className="profil_container_update_infos_input_title bold">Mot de passe<i className="profil_container_update_infos_input_icon">{keyIcon}</i></h4>
                 </div>
 
                 {modify ? <>
