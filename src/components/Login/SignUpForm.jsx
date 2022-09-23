@@ -39,7 +39,7 @@ const SignUpForm = () => {
             setErrorConfirmPassword({ ...errorConfirmPassword, message: '' });
         } else {
             setFormSubmit(false);
-            setErrorConfirmPassword({ ...errorConfirmPassword });
+            setErrorConfirmPassword({ ...errorConfirmPassword, message: 'Les mots de passe ne sont pas identiques' });
         }
     };
 
@@ -63,9 +63,9 @@ const SignUpForm = () => {
             .catch((error) => {
                 console.log(error.response);
                 if (error.response.status === 400) {
-                    setErrorEmail({ ...errorEmail });
+                    setErrorEmail({ ...errorEmail, message: 'Cette adresse email est déjà utilisée' });
                 } else {
-                    setErrorServer({ ...errorServer })
+                    setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })
                 }
             });
         }
@@ -111,7 +111,7 @@ const SignUpForm = () => {
                         {...register('email', { required: true, pattern: regexEmail })}
                     />
                     {errors.email && <p className="error bold">Veuillez renseigner une adresse mail valide type : exemple@mail.com</p>}
-                    {errorEmail && <p className="error error_center bold">Cette adresse email est déjà utilisée</p>}
+                    {errorEmail && <p className="error bold">{errorEmail.message}</p>}
 
                     <label htmlFor="password" className="form_label bold">Mot de passe</label>
                     <input 
@@ -139,9 +139,9 @@ const SignUpForm = () => {
                         value={confirmPassword}
                         required
                     />
-                    {errorConfirmPassword && <p className="error bold">Les mots de passe ne sont pas identiques</p>}
+                    {errorConfirmPassword && <p className="error bold">{errorConfirmPassword.message}</p>}
                     
-                    {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
+                    {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
 
                     <button type="submit" className="btn_form bold">Créer un compte</button>
                 </form>

@@ -47,9 +47,9 @@ const SignInForm = () => {
         .catch((error) => {
             console.log(error.response);
             if (error.response.status === 401) {
-                setErrorSignIn({ ...errorSignIn })
+                setErrorSignIn({ ...errorSignIn, message: 'La paire identifiant/mot de passe est incorrecte.' })
             } else {
-                setErrorServer({ ...errorServer })
+                setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })
             }
         });
     }
@@ -82,8 +82,8 @@ const SignInForm = () => {
                  </div>
                 {errors.password && <p className="error bold">Veuillez renseigner un mot de passe</p>}
 
-                {errorSignIn && <p className="error error_center bold">La paire identifiant/mot de passe est incorrecte.</p>}
-                {errorServer && <p className="error error_center bold">Une erreur interne est survenue. Merci de revenir plus tard.</p>}
+                {errorSignIn && <p className="error error_center bold">{errorSignIn.message}</p>}
+                {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
 
                 <button type="submit" className="btn_form bold">Se connecter</button>
             </form>
