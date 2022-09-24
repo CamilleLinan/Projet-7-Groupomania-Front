@@ -19,7 +19,6 @@ const UpdateInfos = ({ propData }) => {
     const [ dataUpdate, setDataUpdate ] = useState(propData);
     const [ modify, setModify ] = useState(false);
 
-    const [ errorEmail, setErrorEmail ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
     const firstnameInputRef = useRef();
@@ -68,7 +67,7 @@ const UpdateInfos = ({ propData }) => {
     
     // Utilisation de useForm
     const formOptions = { resolver: yupResolver(formSchema) }
-    const { register, formState: { errors }, handleSubmit } = useForm(formOptions, {
+    const { register, formState: { errors }, setError, handleSubmit } = useForm(formOptions, {
         firstname: '',
         lastname: '',
         email: '',
@@ -93,13 +92,24 @@ const UpdateInfos = ({ propData }) => {
                 .catch((error) => {
                     console.log(error.response);
                     if (error.response.status === 400) {
-                        setErrorEmail({ ...errorEmail, message: 'Cette adresse email est déjà utilisée' });
+                        setError('email', {message: 'Cette adresse email est déjà utilisée' });
                     } else {
                         setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });
                     }  
                 })
         }
     };
+
+    const registerHandler = () => {
+        if (errors.firstname || errors.lastname || errors.email || errorServer.message) {
+            console.log('not ok')
+            return
+        } else {
+            console.log('ok')
+            handleSubmit(onSubmit());
+            setModify(!modify);
+        }
+    }
 
     return (
         <div className="profil_container_update_infos">
@@ -155,7 +165,7 @@ const UpdateInfos = ({ propData }) => {
                     ref={emailInputRef}
                 /> 
                 {errors.email && <p className="error error_profil bold">{errors.email.message}</p>}
-                {errorEmail && <p className="error error_profil bold">{errorEmail.message}</p>}
+                {setError.email && <p className="error bold">{setError.email.message}</p>}
                 </>}
 
                 {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
@@ -163,7 +173,7 @@ const UpdateInfos = ({ propData }) => {
                 <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
                     Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>
                 </button> : 
-                <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
+                <button onClick={registerHandler} className="btn_form btn_update_profil bold">
                     Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
                 </button>}
             </form>

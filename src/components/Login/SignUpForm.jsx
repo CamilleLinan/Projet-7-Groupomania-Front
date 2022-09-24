@@ -13,10 +13,7 @@ const showPassword = <FontAwesomeIcon icon={faEye} />
 const SignUpForm = () => {
 
     const [ formSubmit, setFormSubmit ] = useState();
-    
     const [ passwordIsVisible, setPasswordIsVisible ] = useState(false);
-    
-    const [ errorEmail, setErrorEmail ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
     // Utilisation de YupResolver
@@ -51,7 +48,7 @@ const SignUpForm = () => {
 
     // Utilisation de useForm
     const formOptions = { resolver: yupResolver(formSchema) }
-    const { register, formState: { errors }, handleSubmit } = useForm(formOptions, {
+    const { register, formState: { errors }, setError, handleSubmit } = useForm(formOptions, {
         firstname: '',
         lastname: '',
         email: '',
@@ -75,7 +72,7 @@ const SignUpForm = () => {
             .catch((error) => {
                 console.log(error.response);
                 if (error.response.status === 400) {
-                    setErrorEmail({ ...errorEmail, message: 'Cette adresse email est déjà utilisée' });
+                    setError('email', {message: 'Cette adresse email est déjà utilisée' });
                 } else {
                     setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })
                 }
@@ -120,7 +117,7 @@ const SignUpForm = () => {
                         {...register('email')}
                     />
                     {errors.email && <p className="error bold">{errors.email.message}</p>}
-                    {errorEmail && <p className="error bold">{errorEmail.message}</p>}
+                    {setError.email && <p className="error bold">{setError.email.message}</p>}
 
                     <label htmlFor="password" className="form_label bold">Mot de passe</label>
                     <div className="container_password_input">
@@ -148,7 +145,7 @@ const SignUpForm = () => {
                     />
                     {errors.confirmPassword && <p className="error bold">{errors.confirmPassword.message}</p>}
                     
-                    {errorServer && <p className="error error_center bold">{errorServer?.message}</p>}
+                    {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
 
                     <button type="submit" className="btn_form bold">Créer un compte</button>
                 </form>
