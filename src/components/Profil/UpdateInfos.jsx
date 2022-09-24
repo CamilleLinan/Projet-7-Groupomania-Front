@@ -18,11 +18,10 @@ const UpdateInfos = ({ propData }) => {
 
     const [ dataUpdate, setDataUpdate ] = useState(propData);
     const [ modify, setModify ] = useState(false);
-
     const [ errorServer, setErrorServer ] = useState('');
 
     const firstnameInputRef = useRef();
-    const lastnameInputRef = useRef();
+    const lastnameInputRef = useRef(null);
     const emailInputRef = useRef();
 
     // Utilisation de useEffect pour mettre à jour les données dans le state
@@ -41,10 +40,10 @@ const UpdateInfos = ({ propData }) => {
         const enteredEmail = emailInputRef.current.value;
 
         setDataUpdate({
-            ...propData,
-            'firstname': enteredFirstname,
-            'lastname': enteredLastname,
-            'email': enteredEmail,
+           ...propData,
+           'firstname': enteredFirstname,
+           'lastname': enteredLastname,
+           'email': enteredEmail,
         })
     }
     
@@ -68,9 +67,9 @@ const UpdateInfos = ({ propData }) => {
     // Utilisation de useForm
     const formOptions = { resolver: yupResolver(formSchema) }
     const { register, formState: { errors }, setError, handleSubmit } = useForm(formOptions, {
-        firstname: '',
-        lastname: '',
-        email: '',
+            firstname: '',
+            lastname: '',
+            email: '',
     });
 
     // Utilisation de dotenv
@@ -127,7 +126,7 @@ const UpdateInfos = ({ propData }) => {
                     className="form_input update_infos_input"
                     {...register('firstname')}
                     onChange={changeHandler}
-                    value={dataUpdate.firstname}
+                    defaultValue={dataUpdate.firstname}
                     ref={firstnameInputRef}
                 /> 
                 {errors.firstname && <p className="error error_profil bold">{errors.firstname.message}</p>}
@@ -144,7 +143,7 @@ const UpdateInfos = ({ propData }) => {
                     className="form_input update_infos_input"
                     {...register('lastname')}
                     onChange={changeHandler}
-                    value={dataUpdate.lastname}
+                    defaultValue={dataUpdate.lastname}
                     ref={lastnameInputRef}
                 /> 
                 {errors.lastname && <p className="error error_profil bold">{errors.lastname.message}</p>}
@@ -161,7 +160,7 @@ const UpdateInfos = ({ propData }) => {
                     className="form_input update_infos_input"
                     {...register('email')}
                     onChange={changeHandler}
-                    value={dataUpdate.email}
+                    defaultValue={dataUpdate.email}
                     ref={emailInputRef}
                 /> 
                 {errors.email && <p className="error error_profil bold">{errors.email.message}</p>}
