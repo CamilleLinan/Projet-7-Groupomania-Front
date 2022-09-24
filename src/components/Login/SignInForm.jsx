@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 import AuthContext from "../../context/authContext";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,7 +25,17 @@ const SignInForm = () => {
     // Utilisation de useNavigate
     const navigate = useNavigate();
 
-    const { register, formState: { errors }, handleSubmit } = useForm({
+    // Utilisation de YupResolver
+    const formSchema = Yup.object().shape({
+        email: Yup.string()
+            .required('Veuillez renseigner votre adresse mail'),
+        password: Yup.string()
+            .required('Veuillez renseigner votre mot de passe'),
+    });
+
+    // Utilisation de useForm
+    const formOptions = { resolver: yupResolver(formSchema) }
+    const { register, formState: { errors }, handleSubmit } = useForm(formOptions, {
         email: '',
         password: '',
     });
@@ -63,9 +75,9 @@ const SignInForm = () => {
                     name="email" 
                     id="email" 
                     className="form_input"
-                    {...register('email', { required: true })}
+                    {...register('email')}
                 />
-                {errors.mail && <p className="error bold">Veuillez renseigner une adresse mail</p>}
+                {errors.mail && <p className="error bold">{errors.email.message}</p>}
 
                 <label htmlFor="password" className="form_label bold">Mot de passe</label>
                 <div className="container_password_input">
@@ -74,14 +86,14 @@ const SignInForm = () => {
                     name="password" 
                     id="password"
                     className="form_input" 
-                    {...register('password', { required: true })}
+                    {...register('password')}
                 />
-                <div id="icon-password-signin" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
-                    {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
-                    {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                    <div id="icon-password-signin" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
+                        {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
+                        {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                    </div>
                  </div>
-                 </div>
-                {errors.password && <p className="error bold">Veuillez renseigner un mot de passe</p>}
+                {errors.password && <p className="error bold">{errors.password.message}</p>}
 
                 {errorSignIn && <p className="error error_center bold">{errorSignIn.message}</p>}
                 {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
