@@ -2,8 +2,7 @@ import { useState }  from "react";
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
 const showPassword = <FontAwesomeIcon icon={faEye} />

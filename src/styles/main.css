@@ -159,8 +159,7 @@ nav {
     width: 95% !important;
   }
   .profil_container_update_photobox_photo {
-    height: 15rem !important;
-    border-radius: 10rem !important;
+    margin-bottom: 20px;
   }
   .profil_container_update_infos {
     width: 95% !important;
@@ -179,10 +178,13 @@ nav {
     margin-bottom: 20px !important;
   }
   .separateBox {
-    margin-top: 60px !important;
+    margin-top: 40px !important;
     border-top: 1px solid rgba(65, 65, 65, 0.3);
     width: 100%;
     z-index: 3;
+  }
+  #file {
+    margin: 10px auto 0px auto !important;
   }
 }
 .profil_container {
@@ -255,6 +257,14 @@ nav {
   font-size: 15px;
 }
 
+.update-photo-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex: 2;
+}
+
 .update_infos_input {
   margin-bottom: 10px;
 }
@@ -266,7 +276,7 @@ nav {
 }
 
 #file {
-  margin-top: 25px;
+  margin-bottom: -70px;
 }
 
 .btn_update_profil {

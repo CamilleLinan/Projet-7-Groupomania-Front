@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from "../../context/authContext";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
 const showPassword = <FontAwesomeIcon icon={faEye} />

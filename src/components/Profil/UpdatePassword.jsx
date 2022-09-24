@@ -3,11 +3,7 @@ import AuthContext from "../../context/authContext";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faKey } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faEye, faPenToSquare, faCheck, faKey } from '@fortawesome/free-solid-svg-icons';
 
 const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
 const showPassword = <FontAwesomeIcon icon={faEye} />
@@ -31,7 +27,6 @@ const UpdatePassword = () => {
 
     const modifyHandler = () => {
         setModify((modify) => !modify);
-        console.log(modify);
     }
 
     // Regex pour valider les champs

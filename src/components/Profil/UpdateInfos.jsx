@@ -3,8 +3,7 @@ import AuthContext from "../../context/authContext";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 import UpdatePassword from "./UpdatePassword";
 
 const penIcon = <FontAwesomeIcon icon={faPenToSquare} />
@@ -62,9 +61,8 @@ const UpdateInfos = ({ propData }) => {
     // Utilisation de dotenv
     const API_URI = process.env.REACT_APP_API_URL;
 
-    const onSubmit = async (e, data) => {
+    const onSubmit = async (data) => {
         if (!modify) {
-            e.preventDefault();
             await axios({
                 method: "PUT",
                 url: `${API_URI}api/users/${authCtx.userId}`,

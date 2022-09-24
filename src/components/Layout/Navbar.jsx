@@ -4,9 +4,7 @@ import AuthContext from '../../context/authContext';
 import axios from 'axios';
 import logo from '../../styles/img/groupomania-logo-navbar.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faCircleUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const homeIcon = <FontAwesomeIcon icon ={faHouse} />
 const profilIcon = <FontAwesomeIcon icon={faCircleUser} />

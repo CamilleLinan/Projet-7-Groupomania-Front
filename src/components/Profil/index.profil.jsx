@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useContext, useState, useEffect, useCallback } from "react";
 import AuthContext from "../../context/authContext";
+import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAddressCard } from '@fortawesome/free-regular-svg-icons';
 import UpdatePhoto from "./UpdatePhoto";
@@ -46,10 +46,7 @@ const IndexProfil = () => {
                     <i className="profil_container_header_icon">{profilHeaderIcon}</i>
                 </header>
                 <section className="profil_container_update">
-                    <div className="profil_container_update_photobox">
-                        <h3 className="profil_container_update_title photobox_title bold">Votre photo</h3>
-                        <UpdatePhoto propData={data} />
-                    </div>
+                    <UpdatePhoto propDataPicture={data.userPicture} />
                     <span className="separateBox"></span>
                     <UpdateInfos propData={data} />
                 </section>
