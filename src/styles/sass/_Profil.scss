@@ -1,0 +1,179 @@
+@import 'variables';
+
+@media(max-width: 768px) {
+    .profil_container {
+        &_update {
+            flex-direction: column;
+            align-items: center;
+            
+            &_photobox {
+                width: 95% !important;
+                &_photo {
+                    margin-bottom: 20px;
+                }
+            }
+
+            &_infos {
+                width: 95% !important;
+                margin-top: 40px;
+            }
+        }
+
+        &_footer {
+            align-items: flex-end;
+            width: 100%;
+            &_btn {
+                width: 40% !important;
+                margin-top: 15px !important;
+            }
+        }
+    }
+
+    .updateprofil_title {
+        margin-top: 0 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .separateBox {
+        margin-top: 40px !important;
+        border-top: 1px solid rgba(65, 65, 65, 0.3);
+        width: 100%;
+        z-index: 3;
+    }
+
+    #file_profil {
+        margin: 10px auto 0px auto !important;
+    }
+
+}
+
+// Update photo/infos
+.profil_container {
+    width: 80%;
+    min-width: 250px;
+    max-width: 950px;
+    margin: auto;
+    margin-bottom: 40px !important;
+    margin-top: 120px !important;
+    z-index: 10;
+
+        &_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            
+            &_title {
+                margin-top: 0;
+                margin-bottom: 30px;
+                font-size: 25px;
+            }
+
+            &_icon {
+                font-size: 25px;
+            }
+        }
+
+        &_update {
+            border-top: 1px solid rgba(65, 65, 65, 0.3);
+            padding-top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+
+            &_title {
+                text-align: center;
+                margin-top: 5px;
+                margin-bottom: 30px;
+                font-size: 24px;
+            }
+            // UpdatePhoto
+            &_photobox {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                width: 40%;
+                &_photo {
+                    width: 15rem;
+                    height: 15rem;
+                    border-radius: 10rem;
+                    object-fit: cover;
+                    box-shadow: 0 0 16px #0000002e;
+                }
+            }
+            // UpdateInfos
+            &_infos {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 40%;
+                font-size: 18px;
+                
+                &_input {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+                    
+                    &_title {
+                        margin: 10px 0;
+                    }
+                    
+                    &_icon {
+                        margin-bottom: 0;
+                        margin-left: 7px;
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+
+.update-photo-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 2;
+}
+
+.update_infos_input {
+    margin-bottom: 10px;
+}
+
+.error_profil {
+    margin-bottom: 5px;
+    margin-top: -8px !important;
+    font-size: 15px;
+}
+
+#file {
+    margin-bottom: -70px;
+}
+
+.btn_update_profil {
+    height: 2rem;
+}
+
+.separateBox {
+    margin-top: -15px;
+    border-left: 1px solid rgba(65, 65, 65, 0.3);
+}
+
+// DeleteProfil
+.profil_container_footer {
+    display: flex;
+    justify-content: flex-end;
+    
+    &_btn {
+        font-size: 12px;
+        width: 25%;
+        height: auto;
+        margin-top: 15px;
+        background-color: rgb(156, 0, 0);
+        opacity: 0.5;
+        transition: opacity 300ms ease-in-out;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

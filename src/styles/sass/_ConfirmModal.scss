@@ -1,0 +1,72 @@
+.modal {
+    &_backdrop {
+        backdrop-filter: blur(5px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 900;
+    }
+
+    &_container {
+        background-color: rgb(249, 249, 249);
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 900;
+        width: 45%;
+        min-width: 330px;
+        max-width: 400px;
+        border: 1px solid $primary-clr;
+        border-radius: 0.6rem;
+        box-shadow: 0 0 16px #0000002e;
+        &_bg {
+            background-color: #e9e9e991;
+            border-radius: 0 0 0.6rem 0.6rem;
+        }
+        
+        &_header {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0 1rem 1rem;
+            font-size: 20px;
+            &_title {
+                margin: 0 10px;
+            }
+        }
+
+        &_section {
+            padding: 0.5rem 1rem;
+            &_message {
+                font-size: 17px;
+                text-align: center;
+            }
+        }
+        
+        &_footer {
+            display: flex;
+            justify-content: center;
+            padding: 0rem 1rem 1rem 1rem;
+            
+            &_btn {
+                margin-top: 15px;
+                width: 39%;
+                height: 2rem;
+            }
+        }
+    }
+}
+
+.btn {
+    &_cancel {
+        margin-right: 5px;
+        color: $text-clr;
+        background-color: white;
+        border-color: $primary-clr;
+    }
+    &_confirm {
+        margin-left: 5px;
+    }
+}

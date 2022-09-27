@@ -13,10 +13,17 @@
         }
     }
     
-    &_section_header {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
+    &_section {
+        background-color: $bg-form-section !important;
+        width: 50%;
+        min-width: 250px;
+        max-width: 600px;
+    
+        &_header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
     }
 }
 
@@ -25,12 +32,13 @@
     margin-top: 10px;
     &_input {
         width: 99%;
-        height: 35px;
+        height: 1.8rem;
         margin-top: 5px;
+        margin-bottom: 10px;
         border: 1px solid rgb(80, 79, 79);
         border-radius: 0.5rem;
         font-size: 16px;
-        background: rgba(255, 255, 255, 0.65);
+        background: rgba(255, 255, 255, 0.7);
         &:focus {
             outline: solid $primary-clr;
             border-color: $primary-clr;
@@ -41,25 +49,27 @@
 .btn_form {
     background-color: $primary-clr;
     width: 100%;
-    transition: transform 300ms ease-in-out;
-    &:hover {
-         transform: scale(1.02);
-    }
+    margin-top: 10px;
+    height: 3.1rem;
 }
 
 button {
     &#signup {
         margin-right: 5px;
+        height: 3.2rem;
     }
 
     &#signin {
         margin-left: 5px;
+        height: 3.2rem;
     }
 
     &.inactive {
-        background-color: $secondary-clr;
-        transition: background-color 300ms ease-in-out;
+        color: $text-clr;
+        background-color: transparent;
+        transition: all 400ms ease-in-out;
         &:hover {
+            color: $text-btn-clr;
             background-color: $primary-clr;
         }
     }

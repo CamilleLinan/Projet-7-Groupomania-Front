@@ -1,68 +1,84 @@
-import React, { useState }  from "react";
+import { useState }  from "react";
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
+const hiddenPassword = <FontAwesomeIcon icon={faEyeSlash} />
+const showPassword = <FontAwesomeIcon icon={faEye} />
 
 // Fonction : S'Enregistrer
 const SignUpForm = () => {
-    const [ formSubmit, setFormSubmit ] = useState(false);
-    const [ firstname, setFirstname ] = useState('');
-    const [ lastname, setLastname ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
+
+    const [ formSubmit, setFormSubmit ] = useState();
+    const [ passwordIsVisible, setPasswordIsVisible ] = useState(false);
     const [ errorEmail, setErrorEmail ] = useState('');
-    const [ confirmPassword, setConfirmPassword ] = useState('');
-    const [ errorConfirmPassword, setErrorConfirmPassword ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
-    // RegExp pour valider le formulaire
-    const regexNames = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/i;
-    const regexEmail = /^[A-Z0-9._-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
+    // Utilisation de YupResolver
+    const formSchema = Yup.object().shape({
+        firstname: Yup.string().trim()
+            .required('Veuillez renseigner votre prénom')
+            .min(2, 'Doit contenir minimum 2 caractères')
+            .max(30, 'Doit contenir maximum 30 caractères')
+            .matches(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/i, 
+            'Ne doit contenir ni chiffre ni caractère spécial'),
+        lastname: Yup.string().trim()
+            .required('Veuillez renseigner votre nom')
+            .min(2, 'Doit contenir minimum 2 caractères')
+            .max(30, 'Doit contenir maximum 30 caractères')
+            .matches(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/i, 
+            'Ne doit contenir ni chiffre ni caractère spécial'),
+        email: Yup.string().trim()
+            .required('Veuillez renseigner votre adresse mail')
+            .matches(/^[A-Z0-9._-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 
+            'Veuillez renseigner une adresse mail valide'),
+        password: Yup.string().trim()
+            .required('Veuillez renseigner un mot de passe')
+            .min(4, 'Doit contenir minimum 4 caractères')
+            .max(30, 'Doit contenir maximum 30 caractères')
+            .matches(/(?=.*\d){1}/i, 'Doit contenir au moins un chiffre')
+            .matches(/(?=.*[A-Z]){1,}.*/, 'Doit contenir au moins une majuscule')
+            .matches(/(?=.*[a-z]){1,}.*/, 'Doit contenir au moins une minuscule'),
+        confirmPassword: Yup.string()
+            .required('Veuillez confirmer le mot de passe')
+            .oneOf([Yup.ref('password')], 'Les mots de passe ne sont pas identiques'),
+    });
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    // Utilisation de useForm
+    const formOptions = { resolver: yupResolver(formSchema) }
+    const { register, formState: { errors }, handleSubmit } = useForm(formOptions, {
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+    });
 
-    // Fonction pour vérifier que les mots de passe sont identiques
-    const handleConfirmPassword = (e) => {
-        setConfirmPassword(e.target.value);
-        if (password === e.target.value) {
-            setErrorConfirmPassword({ ...errorConfirmPassword, message: '' });
-        } else {
-            setFormSubmit(false);
-            setErrorConfirmPassword({ ...errorConfirmPassword, message: 'Les mots de passe ne sont pas identiques' });
-        }
-    };
+    // Utilisation de dotenv
+    const API_URI = process.env.REACT_APP_API_URL;
 
     // Fonction de soumission du formulaire
-    const onSubmit = async () => {
-        if (password !== confirmPassword) {
-            return;
-        } else {
+    const onSubmit = async (data) => {
         await axios({
             method: "post",
-            url: `http://localhost:3001/api/users/signup`,
-            data: {
-                firstname,
-                lastname,
-                email,
-                password
-            }
+            url: `${API_URI}api/users/signup`,
+            data
         })
             .then((res) => {
                 console.log(res);
                 setFormSubmit(true);
             })
             .catch((error) => {
-                console.log(error.response);
-                if (error.response.status === 400) {
-                    setErrorEmail({ ...errorEmail, message: 'Cette adresse email est déjà utilisée' });
+                console.log(error.response.data);
+                if (error.response.data.errors.email) {
+                    setErrorEmail(error.response.data.errors.email);
                 } else {
                     setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })
                 }
             });
-        }
     };
-
 
     return (
     <>
@@ -72,74 +88,67 @@ const SignUpForm = () => {
             </>
         ) : (
             <>
-                <form action="" onSubmit={handleSubmit(onSubmit)} id="sign-up-form">
-                    <label htmlFor="firstname" className="form_label">Prénom</label>
-                    <br/>
+                <form action="" onSubmit={handleSubmit(onSubmit)} id="sign-up-form">      
+                    <label htmlFor="firstname" className="form_label bold">Prénom</label>
                     <input 
                         type="text"
                         name="firstname"
                         id="firstname"
                         className="form_input"
-                        {...register('firstname', { required: true, minLength: 2, maxLength: 20, pattern: regexNames })}
-                        onChange={(e) => setFirstname(e.target.value)}
-                        value={firstname}
+                        {...register('firstname')}
                     />
-                    <div className="error bold">{errors.firstname && "Veuillez renseigner votre prénom sans chiffre ni caractère spécial"}</div>
-                    <br/>
-                    <label htmlFor="lastname" className="form_label">Nom</label>
-                    <br/>
+                    {errors.firstname && <p className="error bold">{errors.firstname.message}</p>}
+
+                    <label htmlFor="lastname" className="form_label bold">Nom</label>
                     <input 
                         type="text"
                         name="lastname"
                         id="lastname"
                         className="form_input"
-                        {...register('lastname', { required: true, minLength: 2, maxLength: 20, pattern: regexNames })}
-                        onChange={(e) => setLastname(e.target.value)}
-                        value={lastname}
+                        {...register('lastname')}
                     />
-                    <div className="error bold">{errors.lastname && "Veuillez renseigner votre nom sans chiffre ni caractère spécial"}</div>
-                    <br/>
-                    <label htmlFor="email" className="form_label">Email</label>
-                    <br/>
+                    {errors.lastname && <p className="error bold">{errors.lastname.message}</p>}
+
+                    <label htmlFor="email" className="form_label bold">Email</label>
                     <input 
                         type="email"
                         name="email"
                         id="email"
                         className="form_input"
-                        {...register('email', { required: true, pattern: regexEmail })}
-                        onChange={(e) => setEmail(e.target.value)}
-                        value={email}
+                        {...register('email')}
                     />
-                    <div className="error bold">{errors.email && `Veuillez renseigner une adresse mail valide type : exemple@mail.com`}{errorEmail.message}</div>
-                    <br/>
-                    <label htmlFor="password" className="form_label">Mot de passe</label>
-                    <br/>
+                    {errors.email && <p className="error bold">{errors.email.message}</p>}
+                    {errorEmail && <p className="error bold">{errorEmail}</p>}
+
+                    <label htmlFor="password" className="form_label bold">Mot de passe</label>
+                    <div className="container_password_input">
                     <input 
-                        type="password"
+                        type={!passwordIsVisible ? "password" : "text"}
                         name="password"
                         id="password"
                         className="form_input"
-                        {...register('password', { required: true, minLength: 4, maxLength: 30, pattern: regexPassword })}
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
+                        {...register('password')}
                     />
-                    <div className="error bold">{errors.password && `Le mot de passe doit contenir entre 4 et 30 caractères, au moins une majuscule et une minuscule, et au moins un chiffre`}</div>
-                    <br/>
-                    <label htmlFor="confirmPassword" className="form_label">Confirmer le mot de passe</label>
-                    <br/>
+                        <div id="icon-password-signup" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
+                            {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
+                            {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                        </div>
+                    </div>
+                    {errors.password && <p className="error bold">{errors.password.message}</p>}
+
+                    <label htmlFor="confirmPassword" className="form_label bold">Confirmer le mot de passe</label>
                     <input 
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
                         className="form_input"
-                        onChange={handleConfirmPassword}
-                        value={confirmPassword}
-                        required
+                        {...register('confirmPassword')}
                     />
-                    <div className="error bold">{errorConfirmPassword.message}</div>
-                    <div className="error error_center bold">{errorServer.message}</div>
-                    <br/>
-                    <button type="submit" className="btn_form">Créer un compte</button>
+                    {errors.confirmPassword && <p className="error bold">{errors.confirmPassword.message}</p>}
+                    
+                    {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+
+                    <button type="submit" className="btn_form bold">Créer un compte</button>
                 </form>
             </>
         )}
