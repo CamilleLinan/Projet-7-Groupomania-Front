@@ -11,37 +11,31 @@ const checkIcon = <FontAwesomeIcon icon={faCheck} />
 const UpdatePhoto = ({ propDataPicture }) => {
      
     const [ dataPicture, setDataPicture ] = useState(propDataPicture);
-
-    // const [ showOldPicture, setShowOldPicture ] = useState(true);
-    // const [ userChoice, setUserChoice ] = useState('');
-    // const [ showChoice, setShowChoice ] = useState(false);
-
+    const [ newDataPicture, setNewDataPicture ] = useState('');
     const [ modify, setModify ] = useState(false);
 
+    // modifyHandler
     const modifyHandler = () => {
         setModify((modify) => !modify);
     }
     
+    // useEffect
     useEffect(() => {
         setDataPicture(propDataPicture);
     }, [propDataPicture])
 
-
+    // change
     const changeHandler = (e) => {
         let newPicture;
 
+        // Checker file
         if (e.target.files) {
-            newPicture = e.target.files[0]
+            newPicture = URL.createObjectURL(e.target.files[0])
+            setNewDataPicture(e.target.files[0])
+            
         }
-
-        setDataPicture({
-            ...propDataPicture,
-            'userPicture': newPicture
-        })
-        console.log('newPicture -->');
-        console.log(newPicture);
+        setDataPicture(newPicture)
     }
-
 
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
@@ -53,36 +47,23 @@ const UpdatePhoto = ({ propDataPicture }) => {
         e.preventDefault();
         
         if (!modify) {
-        console.log('dataPicture -->');
-        console.log(dataPicture.userPicture.name);
-        const data = new FormData();
-        data.append('image', dataPicture.userPicture);
-        
-        await axios.put(url, data, {
-            headers: {
-                Authorization: `Bearer ${authCtx.token}`,
-                "Content-Type": "multipart/form-data",
-            },
-        })
-            .then((res) => {
-                console.log(res.data);
-                setDataPicture(dataPicture.newPicture);
+            const data = new FormData();
+            data.append('image', newDataPicture);
+            
+            await axios.put(url, data, {
+                headers: {
+                    Authorization: `Bearer ${authCtx.token}`,
+                    "Content-Type": "multipart/form-data",
+                },
             })
-            .catch((error) => {
-                console.log(error.response);
-            })
+                .then((res) => {
+                    console.log(res.data);
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                })
         }
     };
-
-    // const handlePictureChanged = () => {
-    //     setShowOldPicture(false);
-    //     console.log('handlePictureChanged');
-    // }
-
-    //  const onUserPictureChanged = (e) => {
-    //      setUserChoice(e.target.files[0]);
-    //      console.log('onUserPictureChanged');
-    //  }
 
     return (
         <div className="profil_container_update_photobox">
@@ -97,10 +78,7 @@ const UpdatePhoto = ({ propDataPicture }) => {
                     name="file" 
                     id="file"
                     accept=".jpg, .jpeg, .png"
-                    onChange={
-                        // setDataPicture(e.target.files[0])
-                        changeHandler
-                    }
+                    onChange={changeHandler}
                 />
                 <div className="error bold"></div>
             </>}

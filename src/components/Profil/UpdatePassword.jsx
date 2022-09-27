@@ -54,14 +54,14 @@ const UpdatePassword = () => {
         if (!modify) {
             await axios({
                 method: "PUT",
-                url: `${API_URI}api/users/${authCtx.userId}`,
+                url: `${API_URI}api/users/${authCtx.userId}/password`,
                 headers: {
                     Authorization: `Bearer ${authCtx.token}`,
                 },
                 data
             })
                 .then((res) => {
-                    console.log(res.data.password);
+                    console.log(res.data);
                 })
                 .catch((error) => {
                     console.log(error.response);
