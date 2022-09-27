@@ -11,6 +11,7 @@
 # production
 /build
 /.env
+/src/components/Profil/Test.jsx
 
 # misc
 .DS_Store

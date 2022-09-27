@@ -65,7 +65,8 @@ const UpdatePhoto = ({ propDataPicture }) => {
             },
         })
             .then((res) => {
-                console.log(res);
+                console.log(res.data);
+                setDataPicture(dataPicture.newPicture);
             })
             .catch((error) => {
                 console.log(error.response);

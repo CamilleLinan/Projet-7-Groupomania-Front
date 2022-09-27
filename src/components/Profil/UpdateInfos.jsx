@@ -18,6 +18,7 @@ const UpdateInfos = ({ propData }) => {
 
     const [ dataUpdate, setDataUpdate ] = useState(propData);
     const [ modify, setModify ] = useState(false);
+    const [ errorEmail, setErrorEmail ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
     const firstnameInputRef = useRef();
@@ -66,10 +67,12 @@ const UpdateInfos = ({ propData }) => {
     
     // Utilisation de useForm
     const formOptions = { resolver: yupResolver(formSchema) }
-    const { register, formState: { errors }, setError, handleSubmit } = useForm(formOptions, {
+    const { register, formState: { errors }, handleSubmit } = useForm(formOptions, {
+        defaultValue: {    
             firstname: '',
             lastname: '',
             email: '',
+        }
     });
 
     // Utilisation de dotenv
@@ -87,11 +90,12 @@ const UpdateInfos = ({ propData }) => {
             })
                 .then((res) => {
                     console.log(res);
+                    setDataUpdate(data);
                 })
                 .catch((error) => {
                     console.log(error.response);
-                    if (error.response.status === 400) {
-                        setError('email', {message: 'Cette adresse email est déjà utilisée' });
+                    if (error.response.data.err.code === 11000) {
+                        setErrorEmail( ...errorEmail, {message: 'Cette adresse email est déjà utilisée'});
                     } else {
                         setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });
                     }  
@@ -100,13 +104,14 @@ const UpdateInfos = ({ propData }) => {
     };
 
     const registerHandler = () => {
-        if (errors.firstname || errors.lastname || errors.email || errorServer.message) {
-            console.log('not ok')
-            return
-        } else {
+        if (!errors.firstname & !errors.lastname & !errorEmail & !errorServer.message) {
             console.log('ok')
+            setErrorEmail('');
             handleSubmit(onSubmit());
             setModify(!modify);
+        } else {
+            console.log('not ok')
+            console.log(errorEmail)
         }
     }
 
@@ -124,10 +129,10 @@ const UpdateInfos = ({ propData }) => {
                     name="firstname"
                     id="firstname"
                     className="form_input update_infos_input"
-                    {...register('firstname')}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.firstname}
                     ref={firstnameInputRef}
+                    {...register('firstname')}
                 /> 
                 {errors.firstname && <p className="error error_profil bold">{errors.firstname.message}</p>}
                 </>}
@@ -141,10 +146,10 @@ const UpdateInfos = ({ propData }) => {
                     name="lastname"
                     id="lastname"
                     className="form_input update_infos_input"
-                    {...register('lastname')}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.lastname}
                     ref={lastnameInputRef}
+                    {...register('lastname')}
                 /> 
                 {errors.lastname && <p className="error error_profil bold">{errors.lastname.message}</p>}
                 </>}
@@ -158,13 +163,13 @@ const UpdateInfos = ({ propData }) => {
                     name="email"
                     id="email"
                     className="form_input update_infos_input"
-                    {...register('email')}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.email}
                     ref={emailInputRef}
+                    {...register('email')}
                 /> 
                 {errors.email && <p className="error error_profil bold">{errors.email.message}</p>}
-                {setError.email && <p className="error bold">{setError.email.message}</p>}
+                {errorEmail && <p className="error error_profil bold">{errorEmail.message}</p>}
                 </>}
 
                 {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
