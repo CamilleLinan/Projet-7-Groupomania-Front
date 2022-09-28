@@ -3,6 +3,10 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/authContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+
+const penIcon = <FontAwesomeIcon icon={faPen} />
+const trashIcon = <FontAwesomeIcon icon={faTrash} />
 
 const likeIcon = <FontAwesomeIcon icon={faThumbsUp} />
 const commentIcon = <FontAwesomeIcon icon={faComment} />
@@ -60,39 +64,47 @@ const DisplayPost = () => {
     console.log(userData);
 
     if (postData.length > 0) {
-
         return (
             postData.map((post, i) => {
                 return ( 
-                <>
-                <div className='trending_container_post bg_section'>
-                    <div className="trending_container_post_poster">
-                        {userData.map((poster, i) => {
-                            if (userData._id === postData.posterId && userData.userPicture) {
-                            return <img className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
-                            } return null 
-                        })},
-                        <div className="trending_container_post_poster_infos">
-                            <p className="trending_container_post_poster_infos_name bold">{post.posterId} {post.firstname} {post.lastname}</p>
-                            <p className="trending_container_post_poster_infos_date">{post.createdAt}</p>
+                    <>
+                    <div className='trending_container_post bg_section'>
+                        <div className="trending_container_post_poster">
+                            {userData.map((poster, i) => {
+                                if (poster._id === post.posterId && poster.userPicture) {
+                                return <img key={post.toString()} className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
+                                } return null 
+                            })}
+                            <div className="trending_container_post_poster_infos">
+                            {userData.map((poster, i) => {
+                                if (poster._id === post.posterId) {
+                                return <p className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
+                                } return null 
+                            })}
+                                <p className="trending_container_post_poster_infos_date">{post.createdAt}</p>
+                            </div>
+                            {authCtx.userId === post.posterId &&
+                            <div className="trending_container_post_icons">
+                                <i onClick={post.modifyPost} id='modify-post-icon' title='Éditer' className='trending_container_post_icons_icon trending_container_post_icons_icon_modify'>{penIcon}</i>
+                                <i onClick={post.deletePost} id='delete-post-icon' title='Supprimer' className='trending_container_post_icons_icon trending_container_post_icons_icon_delete'>{trashIcon}</i>
+                            </div>}
+                        </div>
+        
+                        <div className="trending_container_post_content">
+                            <p className="trending_container_post_content_message">{post.message}</p>
+                            <img className="trending_container_post_content_image" src={post.postPicture} alt='' />
+                        </div>
+        
+                        <div className='trending_container_post_btn_container'>
+                            <button onClick={post.onLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon}</button>
+                            <button onClick={post.onComment} className='trending_container_post_btn trending_container_post_btn_comment'>{commentIcon}</button>
                         </div>
                     </div>
-    
-                    <div className="trending_container_post_content">
-                        <p className="trending_container_post_content_message">{post.message}</p>
-                        <img className="trending_container_post_content_image" src={post.postPicture} alt='' />
-                    </div>
-    
-                    <div className='trending_container_post_btn_container'>
-                        <button onClick={post.onLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon}</button>
-                        <button onClick={post.onComment} className='trending_container_post_btn trending_container_post_btn_comment'>{commentIcon}</button>
-                    </div>
-                </div>
-                </>
+                    </>
                 )
             })
         )
-        }
+    }
 }
 
 

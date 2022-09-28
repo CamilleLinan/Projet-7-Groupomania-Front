@@ -385,6 +385,8 @@ nav {
   display: flex;
   flex-direction: column;
   padding: 1rem !important;
+  border: 1px solid rgba(65, 65, 65, 0.3);
+  background-color: rgba(255, 255, 255, 0.6) !important;
 }
 .trending_container_newpost_header {
   display: flex;
@@ -421,10 +423,29 @@ nav {
   border-color: #1e6e7d;
 }
 .trending_container_post {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 1.5rem 0 0 0 !important;
   padding: 0 !important;
+  border: 1px solid rgba(65, 65, 65, 0.3);
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+.trending_container_post_icons {
+  position: absolute;
+  right: 1rem;
+}
+.trending_container_post_icons_icon {
+  font-size: 15px;
+  color: rgba(53, 53, 53, 0.7);
+  margin-left: 15px;
+  cursor: pointer;
+}
+.trending_container_post_icons_icon_modify:hover {
+  color: #1e6e7d;
+}
+.trending_container_post_icons_icon_delete:hover {
+  color: rgb(140, 0, 0);
 }
 .trending_container_post_poster {
   display: flex;
@@ -510,10 +531,11 @@ nav {
   cursor: auto;
 }
 
-.post_container {
+.posts_container {
   margin-top: 25px !important;
   display: flex;
   flex-direction: column-reverse;
+  margin-bottom: 40px;
 }
 
 @font-face {

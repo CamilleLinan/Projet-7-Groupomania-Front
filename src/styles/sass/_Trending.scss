@@ -17,6 +17,8 @@
         display: flex;
         flex-direction: column;
         padding: 1rem !important;
+        border: 1px solid rgba(65, 65, 65, 0.3);
+        background-color: rgba(255, 255, 255, 0.6) !important;
         
         &_header {
             display: flex;
@@ -59,10 +61,35 @@
     }
     // READ POST
     &_post {
+        position: relative;
         display: flex;
         flex-direction: column;
         margin: 1.5rem 0 0 0 !important;
         padding: 0 !important;
+        border: 1px solid rgba(65, 65, 65, 0.3);
+        background-color: rgba(255, 255, 255, 0.7) !important;
+
+        &_icons {
+            position: absolute;
+            right: 1rem;
+            &_icon {
+                font-size: 15px;
+                color: rgba(53, 53, 53, 0.7);
+                margin-left: 15px;
+                cursor: pointer;
+                
+                &_modify {
+                    &:hover {
+                        color: $primary-clr;
+                    }
+                }
+                &_delete {
+                    &:hover {
+                        color: $error-clr;
+                    }
+                }
+            }
+        }
 
         &_poster {
             display: flex;
@@ -163,8 +190,9 @@
     }
 }
 
-.post_container {
+.posts_container {
     margin-top: 25px !important;
     display: flex;
     flex-direction: column-reverse;
+    margin-bottom: 40px;
 }

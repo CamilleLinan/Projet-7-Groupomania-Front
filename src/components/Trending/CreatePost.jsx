@@ -22,7 +22,6 @@ const CreatePost = ({ propDataPicture }) => {
 
     // Fonction de soumission du formulaire
     const onSubmit = async () => {
-
         let formData = new FormData();
         formData.append('posterId', authCtx.userId);
         formData.append('message', userMessage);

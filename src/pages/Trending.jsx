@@ -34,11 +34,15 @@ const Trending = () => {
 
     return (
         <>
+        <div className="trending_background">
             <Navbar />
             <div className="trending_container">
                 <CreatePost propDataPicture={userData.userPicture} />
-                <DisplayPost />
+                <div className="posts_container">
+                    <DisplayPost />
+                </div>
             </div>
+        </div>
         </>
     );
 };
