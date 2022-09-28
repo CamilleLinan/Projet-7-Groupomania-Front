@@ -18,9 +18,9 @@ const PostCard = (props) => {
             <>
             <div className='trending_container_post bg_section'>
                 <div className="trending_container_post_poster">
-                    <img className="trending_container_post_poster_photo" src={poster.posterPicture} alt='' />
+                    <img className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
                     <div className="trending_container_post_poster_infos">
-                        <p className="trending_container_post_poster_infos_name bold">{post.posterId} {post.posterFirstname} {post.posterLastname}</p>
+                        <p className="trending_container_post_poster_infos_name bold">{post.posterId} {poster.firstname} {poster.lastname}</p>
                         <p className="trending_container_post_poster_infos_date">{post.createdAt}</p>
                     </div>
                 </div>

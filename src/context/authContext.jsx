@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createContext } from "react";
 
 
-// Context pour stoker ensuite les données de l'utilisateur
+// Context pour stoker les données de l'utilisateur
 const defaultValue = {
     userId: null,
     token: "",

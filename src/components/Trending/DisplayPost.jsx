@@ -1,12 +1,16 @@
 import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/authContext";
-import PostCard from "./PostCard";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons';
+
+const likeIcon = <FontAwesomeIcon icon={faThumbsUp} />
+const commentIcon = <FontAwesomeIcon icon={faComment} />
 
 const DisplayPost = () => {
 
     const [ postData, setPostData ] = useState([]);
-    const [ posterData, setPosterData ] = useState([]);
+    const [ userData, setUserData ] = useState([]);
     
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
@@ -34,35 +38,61 @@ const DisplayPost = () => {
     console.log('postData -->');
     console.log(postData);
 
-    const getPosterData =  useCallback( async () => {
-        const posterID = postData[0].posterId;
+    const getUserData =  useCallback( async () => {
         await axios ({
             method: 'GET',
-            url: `${API_URI}api/users/${posterID}`,
+            url: `${API_URI}api/users/`,
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             }
         })
             .then(res => {
-                setPosterData(res.data);
+                setUserData(res.data);
             })
             .catch(err => console.log(err));
-    }, [API_URI, authCtx.token, postData]);
+    }, [API_URI, authCtx.token]);
     
     useEffect(() => {
-        getPosterData();
-    }, [getPosterData])
+        getUserData();
+    }, [getUserData])
 
-    console.log('posterData -->');
-    console.log(posterData);
+    console.log('userData -->');
+    console.log(userData);
 
-    return (
-        <div className="post_container">
-            {postData && 
-                <PostCard posts={postData} posters={posterData} />
-            }
-        </div>
-    )
+    if (postData.length > 0) {
+
+        return (
+            postData.map((post, i) => {
+                return ( 
+                <>
+                <div className='trending_container_post bg_section'>
+                    <div className="trending_container_post_poster">
+                        {userData.map((poster, i) => {
+                            if (userData._id === postData.posterId && userData.userPicture) {
+                            return <img className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
+                            } return null 
+                        })},
+                        <div className="trending_container_post_poster_infos">
+                            <p className="trending_container_post_poster_infos_name bold">{post.posterId} {post.firstname} {post.lastname}</p>
+                            <p className="trending_container_post_poster_infos_date">{post.createdAt}</p>
+                        </div>
+                    </div>
+    
+                    <div className="trending_container_post_content">
+                        <p className="trending_container_post_content_message">{post.message}</p>
+                        <img className="trending_container_post_content_image" src={post.postPicture} alt='' />
+                    </div>
+    
+                    <div className='trending_container_post_btn_container'>
+                        <button onClick={post.onLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon}</button>
+                        <button onClick={post.onComment} className='trending_container_post_btn trending_container_post_btn_comment'>{commentIcon}</button>
+                    </div>
+                </div>
+                </>
+                )
+            })
+        )
+        }
 }
 
 
