@@ -451,7 +451,7 @@ nav {
   display: flex;
   align-items: center;
   width: 90%;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
 }
 .trending_container_post_poster_photo {
   width: 3rem;

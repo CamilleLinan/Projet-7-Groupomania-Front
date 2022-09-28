@@ -1,18 +1,16 @@
 import axios from "axios";
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/authContext";
 import ConfirmModal from "../Layout/ConfirmModal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCircleExclamation, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const modalIcon = <FontAwesomeIcon icon={faCircleExclamation} />
+const trashIcon = <FontAwesomeIcon icon={faTrash} />
 
 // Supprimer le profil
-const DeleteProfil = () => {
+const DeletePost = ({ propPostId }) => {
     const [ popUpConfirm, setPopUpConfirm ] = useState(false);
-
-    const navigate = useNavigate();
 
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
@@ -29,14 +27,13 @@ const DeleteProfil = () => {
     const confirmDelete = async () => {
         await axios({
             method:'DELETE',
-            url: `${API_URI}api/users/${authCtx.userId}`,
+            url: `${API_URI}api/post/${propPostId}`,
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             },
         })
             .then((res) => {
                 console.log(res);
-                navigate('/');
             })
             .catch((error) => {
                 console.log(error.response);
@@ -48,15 +45,13 @@ const DeleteProfil = () => {
         {popUpConfirm && <ConfirmModal
             icon={modalIcon} 
             title='Confirmer la suppression'
-            message='Êtes-vous sûr de vouloir supprimer ce profil ?'
+            message='Êtes-vous sûr de vouloir supprimer ce post ?'
             onCancel={cancelConfirm}
             onConfirm={confirmDelete}
         />}
-        <div className="profil_container_footer">
-            <button onClick={deleteHandler} className="profil_container_footer_btn">Supprimer le profil</button>
-        </div>
+            <i onClick={deleteHandler} title='Supprimer' className='trending_container_post_icons_icon trending_container_post_icons_icon_delete'>{trashIcon}</i>
         </>
     )
 }
 
-export default DeleteProfil;
+export default DeletePost;

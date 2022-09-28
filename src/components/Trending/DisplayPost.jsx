@@ -3,10 +3,8 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/authContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
-
-const penIcon = <FontAwesomeIcon icon={faPen} />
-const trashIcon = <FontAwesomeIcon icon={faTrash} />
+import DeletePost from "./DeletePost";
+import UpdatePost from "./UpdatePost";
 
 const likeIcon = <FontAwesomeIcon icon={faThumbsUp} />
 const commentIcon = <FontAwesomeIcon icon={faComment} />
@@ -72,32 +70,32 @@ const DisplayPost = () => {
                         <div className="trending_container_post_poster">
                             {userData.map((poster, i) => {
                                 if (poster._id === post.posterId && poster.userPicture) {
-                                return <img key={post.toString()} className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
+                                return <img key={poster.userPicture} className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
                                 } return null 
                             })}
                             <div className="trending_container_post_poster_infos">
                             {userData.map((poster, i) => {
                                 if (poster._id === post.posterId) {
-                                return <p className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
+                                return <p key={poster.names} className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
                                 } return null 
                             })}
-                                <p className="trending_container_post_poster_infos_date">{post.createdAt}</p>
+                                <p key={post.createdAt} className="trending_container_post_poster_infos_date">{post.createdAt}</p>
                             </div>
                             {authCtx.userId === post.posterId &&
                             <div className="trending_container_post_icons">
-                                <i onClick={post.modifyPost} id='modify-post-icon' title='Éditer' className='trending_container_post_icons_icon trending_container_post_icons_icon_modify'>{penIcon}</i>
-                                <i onClick={post.deletePost} id='delete-post-icon' title='Supprimer' className='trending_container_post_icons_icon trending_container_post_icons_icon_delete'>{trashIcon}</i>
+                                <UpdatePost propPostData={post} id='modify-post-icon' title='Éditer' />
+                                <DeletePost propPostId={post._id} title='Supprimer' />
                             </div>}
                         </div>
         
                         <div className="trending_container_post_content">
-                            <p className="trending_container_post_content_message">{post.message}</p>
-                            <img className="trending_container_post_content_image" src={post.postPicture} alt='' />
+                            <p key={post.message} className="trending_container_post_content_message">{post.message}</p>
+                            <img key={post.postPicture} className="trending_container_post_content_image" src={post.postPicture} alt='' />
                         </div>
         
                         <div className='trending_container_post_btn_container'>
-                            <button onClick={post.onLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon}</button>
-                            <button onClick={post.onComment} className='trending_container_post_btn trending_container_post_btn_comment'>{commentIcon}</button>
+                            <button className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon}</button>
+                            <button className='trending_container_post_btn trending_container_post_btn_comment'>{commentIcon}</button>
                         </div>
                     </div>
                     </>

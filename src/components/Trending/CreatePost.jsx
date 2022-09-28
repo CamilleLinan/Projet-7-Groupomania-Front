@@ -69,7 +69,8 @@ const CreatePost = ({ propDataPicture }) => {
                                 <input 
                                     type="file" 
                                     name="file" 
-                                    id="file_newpost" 
+                                    id="file_newpost"
+                                    accept=".jpg, .jpeg, .png, .gif" 
                                     className="trending_container_newpost_file_btn"
                                     onChange={(e) => setPostPicture(e.target.files[0])}
                                 />

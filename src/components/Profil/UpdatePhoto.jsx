@@ -28,7 +28,6 @@ const UpdatePhoto = ({ propDataPicture }) => {
     const changeHandler = (e) => {
         let newPicture;
 
-        // Checker file
         if (e.target.files) {
             newPicture = URL.createObjectURL(e.target.files[0])
             setNewDataPicture(e.target.files[0])
