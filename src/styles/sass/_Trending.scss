@@ -61,14 +61,13 @@
     &_post {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        margin-top: 1.5rem !important;
+        margin: 1.5rem 0 0 0 !important;
         padding: 0 !important;
 
         &_poster {
             display: flex;
             align-items: center;
-            border-bottom: 1px solid rgba(65, 65, 65, 0.3);
+            
             width: 90%;
             padding: 1rem;
 
@@ -99,11 +98,21 @@
         }
         
         &_content {
-            width: 95%;
+            border-top: 1px solid rgba(65, 65, 65, 0.3);
+            width: 100%;
 
             &_message {
                 width: 90%;
-                margin-bottom: 0;
+                margin: 18px 10px 0px 20px;
+            }
+
+            &_image {
+                display: flex;
+                align-items: center;
+                width: 95%;
+                max-height: 400px;
+                object-fit: cover;
+                margin: 20px auto !important;
             }
         }
 
@@ -114,6 +123,7 @@
             height: 2.5rem;
             color: $primary-clr;
             font-size: 20px;
+            padding: 0;
             
             &_container {
                 width: 100%;
@@ -151,4 +161,10 @@
             cursor: auto;
         }
     }
+}
+
+.post_container {
+    margin-top: 25px !important;
+    display: flex;
+    flex-direction: column-reverse;
 }

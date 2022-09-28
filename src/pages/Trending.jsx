@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import Navbar from "../components/Layout/Navbar";
 import CreatePost from "../components/Trending/CreatePost";
+import DisplayPost from "../components/Trending/DisplayPost";
 import AuthContext from "../context/authContext";
 
 const Trending = () => {
@@ -36,6 +37,7 @@ const Trending = () => {
             <Navbar />
             <div className="trending_container">
                 <CreatePost propDataPicture={userData.userPicture} />
+                <DisplayPost />
             </div>
         </>
     );
