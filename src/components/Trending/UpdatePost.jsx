@@ -64,6 +64,7 @@ const UpdatePost = ({ propPostData }) => {
     const url = `${API_URI}api/post/${propPostData._id}`;
 
     const confirmUpdate = async () => {
+        //e.preventDefault();
         let formData = new FormData();
         formData.append('message', newDataMessage);
         formData.append('image', newDataPicture);
@@ -76,6 +77,7 @@ const UpdatePost = ({ propPostData }) => {
             .then((res) => {
                 console.log(res);
                 setPopUpConfirm(false);
+                // prop.updateDisplayPost(res.post)
             })
             .catch((error) => {
                 console.log(error.response);
