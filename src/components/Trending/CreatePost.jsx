@@ -14,8 +14,6 @@ const CreatePost = ({ propDataPicture }) => {
         setDataPicture(propDataPicture);
     }, [propDataPicture])
 
-
-
     // Utilisation de dotenv
     const API_URI = process.env.REACT_APP_API_URL;
     const url = `${API_URI}api/post/`;

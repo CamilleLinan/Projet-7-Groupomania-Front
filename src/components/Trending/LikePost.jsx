@@ -9,6 +9,7 @@ const likeIcon = <FontAwesomeIcon icon={faThumbsUp} />
 const removeLikeIcon = <FontAwesomeIcon icon={fullFaThumbsUp} />
 
 const LikePost = ({ propPost }) => {
+
     const authCtx = useContext(AuthContext);
     const postId = propPost._id;
     const userId = authCtx.userId;
@@ -76,8 +77,8 @@ const LikePost = ({ propPost }) => {
     return (
         <>
             {!isLiked ?
-            <button onClick={addLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon}</button>
-            : <button onClick={removeLike} className='trending_container_post_btn trending_container_post_btn_like'>{removeLikeIcon}</button>}
+            <button onClick={addLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon} {propPost.likes}</button>
+            : <button onClick={removeLike} className='trending_container_post_btn trending_container_post_btn_like'>{removeLikeIcon} {propPost.likes}</button>}
         </>
     )
 }

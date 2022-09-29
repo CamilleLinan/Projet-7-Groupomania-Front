@@ -7,39 +7,40 @@ const ConfirmPostModal = (props) => {
                 <h3 className="modal_container_header_title bold">{props.title}</h3>
             </header>
             <div className="modal_container_bg">
-                <div className="modal_container_section">
-                    
-                    <label htmlFor="firstname" className="form_label bold">Modifier le message :</label>
-                    <br/>
-                    <input 
-                        type='text'
-                        name="message"
-                        id="message"
-                        className="form_input update_infos_input"
-                        onChange={props.onChangeMessage}
-                        defaultValue={props.defaultValueMessage}
-                        ref={props.refMessage}
-                        required
-                    /> 
-                    <br />
+                <form action="" onSubmit={props.onSubmit} id=''> 
+                    <div className="modal_container_section">
+                        <label htmlFor="firstname" className="form_label bold">Modifier le message :</label>
+                        <br/>
+                        <input 
+                            type='text'
+                            name="message"
+                            id="message"
+                            className="form_input update_infos_input"
+                            onChange={props.onChangeMessage}
+                            defaultValue={props.defaultValueMessage}
+                            ref={props.refMessage}
+                            required
+                        /> 
+                        <br />
 
-                    <label htmlFor="file" className="form_label bold">Modifier l'image :</label>
-                    <br/>
-                    <img src={props.postPicture} alt='' className="trending_container_post_content_image" />
-                    <br/>
-                    <input 
-                    type="file" 
-                    name="file" 
-                    id="file"
-                    accept=".jpg, .jpeg, .png, .gif"
-                    onChange={props.onChangePicture}
-                />
-                </div>
+                        <label htmlFor="file" className="form_label bold">Modifier l'image :</label>
+                        <br/>
+                        <img src={props.postPicture} alt='' className="trending_container_post_content_image" />
+                        <br/>
+                        <input 
+                            type="file" 
+                            name="file" 
+                            id="file"
+                            accept=".jpg, .jpeg, .png, .gif"
+                            onChange={props.onChangePicture}
+                        />
+                    </div>
 
-                <footer className="modal_container_footer">
-                    <button onClick={props.onCancel} className="modal_container_footer_btn btn_cancel">Annuler</button>
-                    <button onClick={props.onConfirm} className="modal_container_footer_btn btn_confirm">Confirmer</button>
-                </footer>
+                    <div className="modal_container_footer">
+                        <button onClick={props.onCancel} className="modal_container_footer_btn btn_cancel">Annuler</button>
+                        <button onClick={props.onConfirm} className="modal_container_footer_btn btn_confirm">Confirmer</button>
+                    </div>
+                </form>
             </div>
         </div>
         </div>

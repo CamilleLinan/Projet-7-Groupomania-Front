@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/authContext";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-regular-svg-icons';
 import DeletePost from "./DeletePost";
 import UpdatePost from "./UpdatePost";
 import LikePost from "./LikePost";
+import CommentPost from "./CommentPost";
 
-const commentIcon = <FontAwesomeIcon icon={faComment} />
 
 const DisplayPost = () => {
 
@@ -96,7 +94,7 @@ const DisplayPost = () => {
         
                         <div className='trending_container_post_btn_container'>
                             <LikePost propPost={post} />
-                            <button className='trending_container_post_btn trending_container_post_btn_comment'>{commentIcon}</button>
+                            <CommentPost propPost={post} />
                         </div>
                     </div>
                     </>
