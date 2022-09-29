@@ -3,27 +3,21 @@ import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { useContext, useState } from 'react';
 import AuthContext from '../../context/authContext';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
+import DisplayComment from './DisplayComment';
 
 const commentIcon = <FontAwesomeIcon icon={faComment} />
 
-const CommentPost = ({ propPost }) => {
+const CommentPost = ({ propPost, propUser }) => {
     const authCtx = useContext(AuthContext);
     const postId = propPost._id;
     const userId = authCtx.userId;
-    const comments = propPost.comments;
 
     const [ viewComment, setViewComment ] = useState(false);
+    const [ comment, setComment ] = useState('');
 
     const modifyHandler = () => {
         setViewComment((modify) => !modify);
     }
-
-    // Utilisation de useForm
-    const { register, handleSubmit } = useForm({
-        userId: userId,
-        comment: '',
-    });
 
     // Utilisation de dotenv
     const API_URI = process.env.REACT_APP_API_URL;
@@ -37,7 +31,10 @@ const CommentPost = ({ propPost }) => {
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             },
-            data
+            data: {
+                userId: userId,
+                comment: comment
+            }
         })
             .then((res) => {
                 console.log(res);
@@ -51,7 +48,7 @@ const CommentPost = ({ propPost }) => {
         <>
             <button onClick={modifyHandler} className='trending_container_post_btn trending_container_post_btn_comment'>{commentIcon}</button>
             {viewComment && <>
-            <form action='' onSubmit={handleSubmit(addComment)} id='comment-form'>
+            <form action='' onSubmit={addComment} id='comment-form'>
                 <label htmlFor="comment" className="form_label bold">Laisser un commentaire :</label>
                 <br/>
                 <input 
@@ -59,20 +56,12 @@ const CommentPost = ({ propPost }) => {
                     name='comment'
                     id='comment'
                     className='form_input'
-                    {...register('comment')} 
+                    onChange={(e) => setComment(e.target.value)} 
                 />
-                <button onClick={addComment}>Publier</button>
+                <button>Publier</button>
             </form>
             
-            {comments.length > 0 &&
-                comments.map((comment, i) => {
-                    return ( 
-                        <>
-                            <p key={comment.comment}>{comment.comment}</p>
-                        </>
-                    )
-                })
-            }
+            <DisplayComment propPost={propPost} propUser={propUser} />
             
             </>}
         </>

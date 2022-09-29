@@ -94,7 +94,7 @@ const DisplayPost = () => {
         
                         <div className='trending_container_post_btn_container'>
                             <LikePost propPost={post} />
-                            <CommentPost propPost={post} />
+                            <CommentPost propPost={post} propUser={userData} />
                         </div>
                     </div>
                     </>
