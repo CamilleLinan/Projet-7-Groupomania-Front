@@ -2,11 +2,11 @@ import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/authContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
 import DeletePost from "./DeletePost";
 import UpdatePost from "./UpdatePost";
+import LikePost from "./LikePost";
 
-const likeIcon = <FontAwesomeIcon icon={faThumbsUp} />
 const commentIcon = <FontAwesomeIcon icon={faComment} />
 
 const DisplayPost = () => {
@@ -90,11 +90,12 @@ const DisplayPost = () => {
         
                         <div className="trending_container_post_content">
                             <p key={post.message} className="trending_container_post_content_message">{post.message}</p>
-                            <img key={post.postPicture} className="trending_container_post_content_image" src={post.postPicture} alt='' />
+                            {post.postPicture && 
+                            <img key={post.postPicture} className="trending_container_post_content_image" src={post.postPicture} alt='' />}
                         </div>
         
                         <div className='trending_container_post_btn_container'>
-                            <button className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon}</button>
+                            <LikePost propPost={post} />
                             <button className='trending_container_post_btn trending_container_post_btn_comment'>{commentIcon}</button>
                         </div>
                     </div>
