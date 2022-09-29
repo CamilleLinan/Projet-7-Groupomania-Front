@@ -4,7 +4,6 @@ import AuthContext from "../../context/authContext";
 import DeletePost from "./DeletePost";
 import UpdatePost from "./UpdatePost";
 import LikePost from "./LikePost";
-import CommentPost from "./CommentPost";
 
 
 const DisplayPost = () => {
@@ -59,49 +58,50 @@ const DisplayPost = () => {
     console.log('userData -->');
     console.log(userData);
 
-    if (postData.length > 0) {
-        return (
-            postData.map((post, i) => {
-                return ( 
-                    <>
-                    <div className='trending_container_post bg_section'>
-                        <div className="trending_container_post_poster">
-                            {userData.map((poster, i) => {
-                                if (poster._id === post.posterId && poster.userPicture) {
-                                return <img key={poster.userPicture} className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
-                                } return null 
-                            })}
-                            <div className="trending_container_post_poster_infos">
-                            {userData.map((poster, i) => {
-                                if (poster._id === post.posterId) {
-                                return <p key={poster.names} className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
-                                } return null 
-                            })}
-                                <p key={post.createdAt} className="trending_container_post_poster_infos_date">{post.createdAt}</p>
-                            </div>
-                            {authCtx.userId === post.posterId &&
-                            <div className="trending_container_post_icons">
-                                <UpdatePost propPostData={post} id='modify-post-icon' title='Éditer' />
-                                <DeletePost propPostId={post._id} title='Supprimer' />
-                            </div>}
+            
+    return ( 
+    <>
+        {postData.length > 0 && 
+            postData.map((post, i) => (       
+                <div className='trending_container_post bg_section'>
+                    <div className="trending_container_post_poster">
+                        {userData.map((poster, i) => {
+                            if (poster._id === post.posterId && poster.userPicture) {
+                            return <img className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
+                            } return null 
+                        })}
+                        <div className="trending_container_post_poster_infos">
+                        {userData.map((poster, i) => {
+                            if (poster._id === post.posterId) {
+                            return <p key={poster.names} className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
+                            } return null 
+                        })}
+                            <p className="trending_container_post_poster_infos_date">{post.createdAt}</p>
                         </div>
-        
-                        <div className="trending_container_post_content">
-                            <p key={post.message} className="trending_container_post_content_message">{post.message}</p>
-                            {post.postPicture && 
-                            <img key={post.postPicture} className="trending_container_post_content_image" src={post.postPicture} alt='' />}
-                        </div>
-        
-                        <div className='trending_container_post_btn_container'>
-                            <LikePost propPost={post} />
-                            <CommentPost propPost={post} propUser={userData} />
-                        </div>
+                        {authCtx.userId === post.posterId &&
+                        <div className="trending_container_post_icons">
+                            <UpdatePost propPostData={post} id='modify-post-icon' title='Éditer' />
+                            <DeletePost propPostId={post._id} title='Supprimer' />
+                        </div>}
                     </div>
-                    </>
-                )
-            })
-        )
-    }
+            
+                    <div className="trending_container_post_content">
+                        <p key={post.message} className="trending_container_post_content_message">{post.message}</p>
+                        {post.postPicture && 
+                        <img key={post.postPicture} className="trending_container_post_content_image" src={post.postPicture} alt='' />}
+                    </div>
+            
+                    <div className='trending_container_post_btn_container'>
+                        <LikePost propPost={post} />
+                    </div>
+                </div>
+            ))       
+        }
+    </>
+    )
+            
+        
+    
 }
 
 

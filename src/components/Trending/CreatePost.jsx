@@ -76,7 +76,7 @@ const CreatePost = ({ propDataPicture }) => {
                                 {postPicture && <img src={postPicture} alt='' />}
 
                                 {errorServer && <p className="error bold">{errorServer.message}</p>}
-                                {userMessage ? <button type="submit"  className="btn_newpost">Publier</button> : <button type="submit" disabled={true} className="btn_newpost btn_newpost_disabled">Publier</button>}
+                                <button type="submit" disabled={!userMessage} className="btn_newpost btn_newpost_disabled">Publier</button>
                             </form>
                         </div>
                     </div>

@@ -515,14 +515,10 @@ nav {
   width: 100%;
 }
 .trending_container_post_btn_like {
+  width: 100%;
   border-radius: 0 0 0 0.8rem;
-  border-left-color: transparent;
-  border-right-color: rgba(65, 65, 65, 0.3);
-}
-.trending_container_post_btn_comment {
-  border-radius: 0 0 0.8rem 0;
-  border-right-color: transparent;
-  border-left-color: rgba(65, 65, 65, 0.3);
+  border-color: transparent;
+  border-top-color: rgba(65, 65, 65, 0.3);
 }
 
 #file_newpost {

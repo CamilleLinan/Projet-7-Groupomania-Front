@@ -34,6 +34,7 @@ const DeletePost = ({ propPostId }) => {
         })
             .then((res) => {
                 console.log(res);
+                setPopUpConfirm(false);
             })
             .catch((error) => {
                 console.log(error.response);
