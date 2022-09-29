@@ -42,46 +42,45 @@ const CreatePost = ({ propDataPicture }) => {
 
     return (
         <>
-            <div className="bg_section trending_container_newpost">
-                    <div className="trending_container_newpost_header">
-                        <div className="trending_container_newpost_photobox">
-                            <img src={dataPicture} alt="" className="trending_container_newpost_photo" />
-                        </div>
-                        <div className="trending_container_newpost_form">
-                            <form onSubmit={onSubmit} id="newpost_form">
-                                <label htmlFor="newpost" className="trending_container_newpost_form_label bold"></label>
-                                
-                                <input 
-                                    type="text" 
-                                    name="newpost" 
-                                    id="newpost" 
-                                    className="trending_container_newpost_form_input" 
-                                    placeholder="Quoi de neuf ?" 
-                                    onChange={(e) => setUserMessage(e.target.value)}
-                                    value={userMessage}
-                                    required
-                                />
-                                
-                                {userMessage && <>
-                                <label htmlFor="file" className="trending_container_newpost_file_label"></label>
-                                <input 
-                                    type="file" 
-                                    name="file" 
-                                    id="file_newpost"
-                                    accept=".jpg, .jpeg, .png, .gif" 
-                                    className="trending_container_newpost_file_btn"
-                                    onChange={(e) => setPostPicture(e.target.files[0])}
-                                />
-                                </>}
-                                {postPicture && <img src={postPicture} alt='' />}
-
-                                {errorServer && <p className="error bold">{errorServer.message}</p>}
-                                <button type="submit" disabled={!userMessage} className="btn_newpost btn_newpost_disabled">Publier</button>
-                            </form>
-                        </div>
+            <section className="bg_section trending_container_newpost">
+                <div className="trending_container_newpost_header">
+                    <div className="trending_container_newpost_photobox">
+                        <img src={dataPicture} alt="" className="trending_container_newpost_photo" />
                     </div>
-                    
-            </div>
+                    <article className="trending_container_newpost_form">
+                        <form onSubmit={onSubmit} id="newpost_form">
+                            <label htmlFor="newpost" className="trending_container_newpost_form_label bold"></label>
+                            
+                            <input 
+                                type="text" 
+                                name="newpost" 
+                                id="newpost" 
+                                className="trending_container_newpost_form_input" 
+                                placeholder="Quoi de neuf ?" 
+                                onChange={(e) => setUserMessage(e.target.value)}
+                                value={userMessage}
+                                required
+                            />
+                            
+                            {userMessage && <>
+                            <label htmlFor="file" className="trending_container_newpost_file_label"></label>
+                            <input 
+                                type="file" 
+                                name="file" 
+                                id="file_newpost"
+                                accept=".jpg, .jpeg, .png, .gif" 
+                                className="trending_container_newpost_file_btn"
+                                onChange={(e) => setPostPicture(e.target.files[0])}
+                            />
+                            </>}
+                            {postPicture && <img src={postPicture} alt='' />}
+
+                            {errorServer && <p className="error bold">{errorServer.message}</p>}
+                            <button type="submit" disabled={!userMessage} className="btn_newpost btn_newpost_disabled">Publier</button>
+                        </form>
+                    </article>
+                </div>     
+            </section>
         </>
     )
 }

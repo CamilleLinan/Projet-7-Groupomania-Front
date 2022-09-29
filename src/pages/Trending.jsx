@@ -37,9 +37,9 @@ const Trending = () => {
             <Navbar />
             <div className="trending_container">
                 <CreatePost propDataPicture={userData.userPicture} />
-                <div className="posts_container">
+                <ul className="posts_container">
                     <DisplayPost />
-                </div>
+                </ul>
             </div>
         </div>
         </>

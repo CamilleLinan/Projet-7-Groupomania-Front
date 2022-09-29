@@ -82,8 +82,8 @@ const UpdatePassword = () => {
     }
 
     return (
+        <article>
             <form action="" onSubmit={handleSubmit(onSubmit)} id="update-password-form">
-                
                 <div className="profil_container_update_infos_input">
                     <h4 className="profil_container_update_infos_input_title bold">Mot de passe<i className="profil_container_update_infos_input_icon">{keyIcon}</i></h4>
                 </div>
@@ -91,17 +91,17 @@ const UpdatePassword = () => {
                 {modify ? <>
                     <label htmlFor="password" className="form_label bold">Nouveau mot de passe</label>
                     <div className="container_password_input">
-                    <input 
-                        type={!passwordIsVisible ? "password" : "text"} 
-                        name="password"
-                        id="password"
-                        className="form_input update_infos_input"
-                        {...register('password', { required: true })}
-                    />
-                    <div id="icon-password-update" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
-                        {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
-                        {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
-                    </div>
+                        <input 
+                            type={!passwordIsVisible ? "password" : "text"} 
+                            name="password"
+                            id="password"
+                            className="form_input update_infos_input"
+                            {...register('password', { required: true })}
+                        />
+                        <div id="icon-password-update" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
+                            {!passwordIsVisible && <><i className="icon_password_hidden">{hiddenPassword}</i><i className="icon_password_hidden_show show">{showPassword}</i></>}
+                            {passwordIsVisible && <><i className="icon_password_show">{showPassword}</i><i className="icon_password_show_hidden hidden">{hiddenPassword}</i></>}
+                        </div>
                     </div>
                     {errors.password && <p className="error error_profil bold">{errors.password?.message}</p>}
 
@@ -124,6 +124,7 @@ const UpdatePassword = () => {
                     Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
                 </button>}
             </form>
+        </article>
     )
 }
 

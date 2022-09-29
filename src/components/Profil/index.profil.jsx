@@ -37,8 +37,7 @@ const IndexProfil = () => {
 
 
     return (
-
-        <div className="profil_container">
+        <section className="profil_container">
             <div className="bg_section">
                 <header className="profil_container_header">
                     <h2 className="profil_container_header_title bold">Votre profil</h2>
@@ -51,8 +50,7 @@ const IndexProfil = () => {
                 </section>
             </div>
             <DeleteProfil />
-        </div>
-
+        </section>
     )
 }
 

@@ -116,7 +116,7 @@ const UpdateInfos = ({ propData }) => {
     }
 
     return (
-        <div className="profil_container_update_infos">
+        <article className="profil_container_update_infos">
             <h3 className="profil_container_update_title updateprofil_title bold">Vos informations</h3>
             <form action="" onSubmit={handleSubmit(onSubmit)} id="update-infos-form">
                 
@@ -182,7 +182,7 @@ const UpdateInfos = ({ propData }) => {
                 </button>}
             </form>
             <UpdatePassword />
-        </div>
+        </article>
     )
 }
 

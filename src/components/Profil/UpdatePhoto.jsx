@@ -65,7 +65,7 @@ const UpdatePhoto = ({ propDataPicture }) => {
     };
 
     return (
-        <div className="profil_container_update_photobox">
+        <article className="profil_container_update_photobox">
             <h3 className="profil_container_update_title photobox_title bold">Votre photo</h3>
             <form action="" onSubmit={modifyPicture} className="update-photo-form">
             <img src={dataPicture} alt="" className="profil_container_update_photobox_photo" />
@@ -90,7 +90,7 @@ const UpdatePhoto = ({ propDataPicture }) => {
                     Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
                 </button>}
             </form>
-        </div>
+        </article>
     )
 }
 

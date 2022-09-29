@@ -51,7 +51,7 @@ const SignInForm = () => {
 
         .then((res) => {
             console.log(res);
-            authCtx.signin(res.data.token, res.data.userId);
+            authCtx.signin(res.data.token, res.data.userId, res.data.isAdmin);
             navigate('/trending');
 
         })
@@ -100,7 +100,6 @@ const SignInForm = () => {
 
                 <button type="submit" className="btn_form bold">Se connecter</button>
             </form>
-
         </>
     );
 };

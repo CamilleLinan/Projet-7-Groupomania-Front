@@ -36,10 +36,10 @@ const ConfirmPostModal = (props) => {
                         />
                     </div>
 
-                    <div className="modal_container_footer">
+                    <footer className="modal_container_footer">
                         <button onClick={props.onCancel} className="modal_container_footer_btn btn_cancel">Annuler</button>
                         <button onClick={props.onConfirm} className="modal_container_footer_btn btn_confirm">Confirmer</button>
-                    </div>
+                    </footer>
                 </form>
             </div>
         </div>

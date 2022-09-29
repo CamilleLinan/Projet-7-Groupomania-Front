@@ -471,6 +471,7 @@ nav {
   border: 1px solid rgba(65, 65, 65, 0.3);
   border-radius: 2rem;
   object-fit: cover;
+  margin-right: 0.5rem;
 }
 .trending_container_post_poster_infos {
   margin-left: 10px;
@@ -544,6 +545,14 @@ nav {
   display: flex;
   flex-direction: column-reverse;
   margin-bottom: 40px;
+  padding: 0 !important;
+}
+
+.nopost_container {
+  width: 90%;
+}
+.nopost_container_text {
+  text-align: center;
 }
 
 @font-face {

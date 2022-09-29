@@ -24,10 +24,10 @@ const Login = () => {
                     <button onClick={handleModals} id="signin" className={signInModal ? "active bold" : "inactive bold"}>Se connecter</button>
                 </div>
                 <br/>
-                <div className="log_container_section_form">
+                <article className="log_container_section_form">
                     {signUpModal && <SignUpForm />}
                     {signInModal && <SignInForm />}
-                </div>
+                </article>
             </section>
         </>
     );
