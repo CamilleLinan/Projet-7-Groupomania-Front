@@ -22,7 +22,6 @@ const Trending = () => {
             }
         })
             .then(res => {
-                console.log(res);
                 setUserData(res.data);
             })
             .catch(err => console.log(err));

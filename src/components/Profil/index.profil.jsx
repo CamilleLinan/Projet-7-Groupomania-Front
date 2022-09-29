@@ -35,7 +35,6 @@ const IndexProfil = () => {
         getUserData();
     }, [getUserData])
 
-    console.log(data);
 
     return (
 

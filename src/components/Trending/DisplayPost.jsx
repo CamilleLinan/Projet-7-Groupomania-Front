@@ -33,9 +33,7 @@ const DisplayPost = () => {
     useEffect(() => {
         getPostData();
     }, [getPostData])
-    
-    console.log('postData -->');
-    console.log(postData);
+
 
     const getUserData =  useCallback( async () => {
         await axios ({
@@ -54,9 +52,6 @@ const DisplayPost = () => {
     useEffect(() => {
         getUserData();
     }, [getUserData])
-
-    console.log('userData -->');
-    console.log(userData);
 
             
     return ( 

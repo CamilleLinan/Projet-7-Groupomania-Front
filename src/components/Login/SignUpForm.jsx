@@ -66,8 +66,7 @@ const SignUpForm = () => {
             url: `${API_URI}api/users/signup`,
             data
         })
-            .then((res) => {
-                console.log(res);
+            .then(() => {
                 setFormSubmit(true);
             })
             .catch((error) => {
