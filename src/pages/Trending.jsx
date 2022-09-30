@@ -31,6 +31,7 @@ const Trending = () => {
         getUserData();
     }, [getUserData])
 
+
     return (
         <>
         <div className="trending_background">
@@ -38,7 +39,7 @@ const Trending = () => {
             <div className="trending_container">
                 <CreatePost propDataPicture={userData.userPicture} />
                 <ul className="posts_container">
-                    <DisplayPost />
+                    <DisplayPost propIsAdmin={userData.isAdmin} />
                 </ul>
             </div>
         </div>

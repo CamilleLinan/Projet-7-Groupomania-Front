@@ -9,7 +9,7 @@ const modalIcon = <FontAwesomeIcon icon={faCircleExclamation} />
 const trashIcon = <FontAwesomeIcon icon={faTrash} />
 
 // Supprimer le profil
-const DeletePost = ({ propPostId }) => {
+const DeletePost = ({ propPostId, propIsAdmin }) => {
     const [ popUpConfirm, setPopUpConfirm ] = useState(false);
 
     // Utilisation du context et dotenv
@@ -31,6 +31,7 @@ const DeletePost = ({ propPostId }) => {
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             },
+            body: propIsAdmin
         })
             .then((res) => {
                 console.log(res);

@@ -9,7 +9,7 @@ const modalIcon = <FontAwesomeIcon icon={faCircleExclamation} />
 const penIcon = <FontAwesomeIcon icon={faPen} />
 
 // Modifier les informations de l'utilisateur
-const UpdatePost = ({ propPostData }) => {
+const UpdatePost = ({ propPostData, propIsAdmin }) => {
     const authCtx = useContext(AuthContext);
 
     const [ popUpConfirm, setPopUpConfirm ] = useState(false);
@@ -63,9 +63,10 @@ const UpdatePost = ({ propPostData }) => {
     const API_URI = process.env.REACT_APP_API_URL;
     const url = `${API_URI}api/post/${propPostData._id}`;
 
-    const confirmUpdate = async () => {
-        //e.preventDefault();
+    const confirmUpdate = async (e) => {
+        e.preventDefault();
         let formData = new FormData();
+        formData.append('isAdmin', propIsAdmin);
         formData.append('message', newDataMessage);
         formData.append('image', newDataPicture);
             

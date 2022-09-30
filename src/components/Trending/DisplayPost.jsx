@@ -6,7 +6,7 @@ import UpdatePost from "./UpdatePost";
 import LikePost from "./LikePost";
 
 
-const DisplayPost = () => {
+const DisplayPost = ({ propIsAdmin }) => {
 
     const [ postData, setPostData ] = useState([]);
     const [ userData, setUserData ] = useState([]);
@@ -69,10 +69,10 @@ const DisplayPost = () => {
                                         <p className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
                                         <p className="trending_container_post_poster_infos_date">{post.createdAt}</p>
                                     </div>
-                                    {(authCtx.userId === post.posterId || poster._id.isAdmin === true) &&
+                                    {(authCtx.userId === post.posterId || propIsAdmin) &&
                                         <div className="trending_container_post_icons">
-                                            <UpdatePost propPostData={post} id='modify-post-icon' title='Éditer' />
-                                            <DeletePost propPostId={post._id} title='Supprimer' />
+                                            <UpdatePost propPostData={post} propIsAdmin={propIsAdmin} id='modify-post-icon' title='Éditer' />
+                                            <DeletePost propPostId={post._id} propIsAdmin={propIsAdmin} title='Supprimer' />
                                         </div>}
                                 </div>
                             )   

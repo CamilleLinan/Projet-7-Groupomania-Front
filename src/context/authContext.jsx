@@ -6,7 +6,6 @@ import { createContext } from "react";
 const defaultValue = {
     userId: null,
     token: null,
-    isAdmin: false,
     userIsLoggedIn: false,
     signin: ()=>{},
     logout: ()=>{},
@@ -17,22 +16,18 @@ const AuthContext = createContext(defaultValue);
 // Contrôle de la présence du token dans le localStorage
 const userIdLocalStorage = localStorage.getItem('userId');
 const tokenLocalStorage = localStorage.getItem('token');
-const isAdminLocalStorage = localStorage.getItem('isAdmin');
 
 export const AuthContextProvider = (props) => {
     // Stockage des informations utilisateur
     const [ userId, setUserId ] = useState(userIdLocalStorage);
     const [ token, setToken ] = useState(tokenLocalStorage);
-    const [ isAdmin, setIsAdmin ] = useState(isAdminLocalStorage);
 
     // Fonction pour mettre à jour le token dans le state
     const signInHandler = (token, userId, isAdmin) => {
         setUserId(userId);
         setToken(token);
-        setIsAdmin(isAdmin);
         localStorage.setItem('userId', userId);
         localStorage.setItem('token', token);
-        localStorage.setItem('isAdmin', isAdmin);
     };
     
     // Fonction pour se déconnecter et supprimer le token
@@ -40,7 +35,6 @@ export const AuthContextProvider = (props) => {
         localStorage.clear();
         setUserId(null);
         setToken(null);
-        setIsAdmin(null)
     }
 
     // Convertion du token en booléan
@@ -50,7 +44,6 @@ export const AuthContextProvider = (props) => {
     const contextValue = {
         userId: userId,
         token: token,
-        isAdmin: isAdmin,
         isLoggedIn: userIsLoggedIn,
         signin: signInHandler,
         logout: logoutHandler,
