@@ -9,13 +9,17 @@ const likeIcon = <FontAwesomeIcon icon={faThumbsUp} />
 const removeLikeIcon = <FontAwesomeIcon icon={fullFaThumbsUp} />
 
 const LikePost = ({ propPost }) => {
-
     const authCtx = useContext(AuthContext);
-    const postId = propPost._id;
     const userId = authCtx.userId;
+    const postId = propPost._id;
     const usersLiked = propPost.usersLiked;
 
+    const [ likeUpdate, setLikeUpdate ] = useState(propPost.likes)
     const [ isLiked, setIsLiked ] = useState(false);
+
+    useEffect(() => {
+        setLikeUpdate(propPost.likes);
+    }, [propPost.likes])
 
     // Utilisation de dotenv
     const API_URI = process.env.REACT_APP_API_URL;
@@ -37,6 +41,7 @@ const LikePost = ({ propPost }) => {
             .then((res) => {
                 console.log(res);
                 setIsLiked(true);
+                setLikeUpdate(likeUpdate+1);
             })
             .catch((err) => {
                 console.log(err.response);       
@@ -60,6 +65,7 @@ const LikePost = ({ propPost }) => {
             .then((res) => {
                 console.log(res);
                 setIsLiked(false);
+                setLikeUpdate(likeUpdate-1);
             })
             .catch((err) => {
                 console.log(err.response);       
@@ -77,8 +83,8 @@ const LikePost = ({ propPost }) => {
     return (
         <>
             {!isLiked ?
-            <button onClick={addLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon} {propPost.likes}</button>
-            : <button onClick={removeLike} className='trending_container_post_btn trending_container_post_btn_like'>{removeLikeIcon} {propPost.likes}</button>}
+            <button onClick={addLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon} {likeUpdate}</button>
+            : <button onClick={removeLike} className='trending_container_post_btn trending_container_post_btn_like'>{removeLikeIcon} {likeUpdate}</button>}
         </>
     )
 }

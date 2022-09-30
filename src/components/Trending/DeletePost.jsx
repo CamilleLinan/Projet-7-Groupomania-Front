@@ -10,11 +10,8 @@ const trashIcon = <FontAwesomeIcon icon={faTrash} />
 
 // Supprimer le profil
 const DeletePost = ({ propPostId, propIsAdmin }) => {
+    
     const [ popUpConfirm, setPopUpConfirm ] = useState(false);
-
-    // Utilisation du context et dotenv
-    const authCtx = useContext(AuthContext);
-    const API_URI = process.env.REACT_APP_API_URL;
     
     const cancelConfirm = () => {
         setPopUpConfirm(false)
@@ -23,6 +20,10 @@ const DeletePost = ({ propPostId, propIsAdmin }) => {
     const deleteHandler = () => {
         setPopUpConfirm(true)
     }
+
+    // Utilisation du context et dotenv
+    const authCtx = useContext(AuthContext);
+    const API_URI = process.env.REACT_APP_API_URL;
 
     const confirmDelete = async () => {
         await axios({

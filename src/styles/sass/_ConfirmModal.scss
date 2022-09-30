@@ -72,8 +72,8 @@
 }
 
 .modal_container_post {
-    position: fixed;
+    position: absolute;
     width: 500px !important;
-    top: 35%;
-    z-index: 10000;
+    top: 30%;
+    margin-bottom: 0 !important;
 }
