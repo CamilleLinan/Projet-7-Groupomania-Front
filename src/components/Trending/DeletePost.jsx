@@ -37,6 +37,7 @@ const DeletePost = ({ propPostId, propIsAdmin }) => {
             .then((res) => {
                 console.log(res);
                 setPopUpConfirm(false);
+                window.location.reload();
             })
             .catch((error) => {
                 console.log(error.response);

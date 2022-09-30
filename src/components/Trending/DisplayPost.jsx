@@ -1,3 +1,4 @@
+import SimpleDateTime from 'react-simple-timestamp-to-date';
 import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/authContext";
@@ -67,7 +68,7 @@ const DisplayPost = ({ propIsAdmin }) => {
                                     <img className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
                                     <div>
                                         <p className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
-                                        <p className="trending_container_post_poster_infos_date">{post.createdAt}</p>
+                                        <p className="trending_container_post_poster_infos_date"><SimpleDateTime dateFormat="DMY" dateSeparator="/"  timeSeparator=":">{post.createdAt}</SimpleDateTime></p>
                                     </div>
                                     {(authCtx.userId === post.posterId || propIsAdmin) &&
                                         <div className="trending_container_post_icons">

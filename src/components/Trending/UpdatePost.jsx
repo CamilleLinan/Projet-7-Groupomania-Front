@@ -14,8 +14,7 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
 
     const [ popUpConfirm, setPopUpConfirm ] = useState(false);
 
-    const [ dataMessage, setDataMessage ] = useState(propPostData.message);
-    const [ newDataMessage, setNewDataMessage ] = useState('')
+    const [ postDataUpdate, setPostDataUpdate ] = useState(propPostData);
     const [ dataPicture, setDataPicture ] = useState(propPostData.postPicture);
     const [ newDataPicture, setNewDataPicture ] = useState('');
 
@@ -24,22 +23,21 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
     const messageInputRef = useRef();
 
     useEffect(() => {
-        setDataMessage(propPostData.message);
+        setPostDataUpdate(propPostData);
         setDataPicture(propPostData.postPicture);
-    }, [propPostData.message, propPostData.postPicture])
+    }, [propPostData, propPostData.postPicture])
 
-    // Surveiller les modifications faites
+    // Surveiller les modifications faites (message)
     const changeHandlerMessage = (e) => {
-        let newMessage;
+        const enteredMessage = messageInputRef.current.value;
 
-        if (e.target.value) {
-            newMessage = e.target.value;
-            setNewDataMessage(newMessage);
-        }
-
-        setDataMessage(newMessage);
+        setPostDataUpdate({
+            ...propPostData,
+            'message': enteredMessage,
+        })
     }
 
+    // Surveiller les modifications faites (image)
     const changeHandlerPicture = (e) => {
         let newPicture;
 
@@ -67,7 +65,7 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
         e.preventDefault();
         let formData = new FormData();
         formData.append('isAdmin', propIsAdmin);
-        formData.append('message', newDataMessage);
+        formData.append('message', postDataUpdate.message);
         formData.append('image', newDataPicture);
             
         await axios.put(url, formData, {
@@ -78,6 +76,8 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
             .then((res) => {
                 console.log(res);
                 setPopUpConfirm(false);
+                setPostDataUpdate(formData);
+                window.location.reload();
                 // prop.updateDisplayPost(res.post)
             })
             .catch((error) => {
@@ -93,7 +93,7 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
             title='Éditer le post'
             // Input message
             onChangeMessage={changeHandlerMessage}
-            defaultValueMessage={dataMessage}
+            defaultValueMessage={postDataUpdate.message}
             refMessage={messageInputRef}
             // Input image
             postPicture={dataPicture}

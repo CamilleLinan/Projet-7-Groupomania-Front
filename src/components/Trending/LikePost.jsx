@@ -2,11 +2,11 @@ import axios from 'axios';
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
-import { faThumbsUp as fullFaThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fullFaHeart } from '@fortawesome/free-solid-svg-icons';
 
-const likeIcon = <FontAwesomeIcon icon={faThumbsUp} />
-const removeLikeIcon = <FontAwesomeIcon icon={fullFaThumbsUp} />
+const likeIcon = <FontAwesomeIcon icon={faHeart} />
+const removeLikeIcon = <FontAwesomeIcon icon={fullFaHeart} />
 
 const LikePost = ({ propPost }) => {
     const authCtx = useContext(AuthContext);
