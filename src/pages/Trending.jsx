@@ -1,7 +1,5 @@
 import axios from "axios";
-import { useCallback, useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useCallback, useState, useEffect, useContext } from "react";
 import Navbar from "../components/Layout/Navbar";
 import CreatePost from "../components/Trending/CreatePost";
 import DisplayPost from "../components/Trending/DisplayPost";

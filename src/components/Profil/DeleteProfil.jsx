@@ -2,9 +2,9 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import ConfirmModal from "../Layout/ConfirmModal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import ConfirmModal from "../Layout/ConfirmModal";
 
 const modalIcon = <FontAwesomeIcon icon={faCircleExclamation} />
 
