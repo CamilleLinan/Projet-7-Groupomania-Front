@@ -23,7 +23,7 @@ export const AuthContextProvider = (props) => {
     const [ token, setToken ] = useState(tokenLocalStorage);
 
     // Fonction pour mettre à jour le token dans le state
-    const signInHandler = (token, userId, isAdmin) => {
+    const signInHandler = (token, userId) => {
         setUserId(userId);
         setToken(token);
         localStorage.setItem('userId', userId);

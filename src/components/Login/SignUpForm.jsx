@@ -57,20 +57,19 @@ const SignUpForm = () => {
     });
 
     // Utilisation de dotenv
-    const API_URI = process.env.REACT_APP_API_URL;
+    const API_URL_USER = process.env.REACT_APP_API_URL_USER;
 
     // Fonction de soumission du formulaire
     const onSubmit = async (data) => {
         await axios({
             method: "post",
-            url: `${API_URI}api/users/signup`,
+            url: `${API_URL_USER}/signup`,
             data
         })
             .then(() => {
                 setFormSubmit(true);
             })
             .catch((error) => {
-                console.log(error.response.data);
                 if (error.response.data.errors.email) {
                     setErrorEmail(error.response.data.errors.email);
                 } else {

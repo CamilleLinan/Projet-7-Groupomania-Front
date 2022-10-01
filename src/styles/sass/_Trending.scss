@@ -202,7 +202,10 @@
 
 .nopost_container {
     width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &_text {
-        text-align: center;
+        margin: 10px 0 !important;
     }
 }

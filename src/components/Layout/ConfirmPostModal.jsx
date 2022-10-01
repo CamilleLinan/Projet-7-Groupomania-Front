@@ -35,7 +35,8 @@ const ConfirmPostModal = (props) => {
                             onChange={props.onChangePicture}
                         />
                     </div>
-
+                    
+                    {props.error && <p className="error bold modal_container_section_message">{props.errorServer}</p>}
                     <footer className="modal_container_footer">
                         <button onClick={props.onCancel} className="modal_container_footer_btn btn_cancel">Annuler</button>
                         <button onClick={props.onConfirm} className="modal_container_footer_btn btn_confirm">Confirmer</button>

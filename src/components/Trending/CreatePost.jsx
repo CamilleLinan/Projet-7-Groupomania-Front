@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
-import AuthContext from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 
 const CreatePost = ({ propDataPicture }) => {
     const authCtx = useContext(AuthContext);
@@ -15,11 +15,13 @@ const CreatePost = ({ propDataPicture }) => {
     }, [propDataPicture])
 
     // Utilisation de dotenv
-    const API_URI = process.env.REACT_APP_API_URL;
-    const url = `${API_URI}api/post/`;
+    const API_URL_POST = process.env.REACT_APP_API_URL_POST;
+    const url = `${API_URL_POST}`;
 
     // Fonction de soumission du formulaire
-    const onSubmit = async () => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
         let formData = new FormData();
         formData.append('posterId', authCtx.userId);
         formData.append('message', userMessage);
@@ -31,12 +33,12 @@ const CreatePost = ({ propDataPicture }) => {
                 'Content-Type': `multipart/form-data`,
             },
         })
-            .then((res) => {
-                console.log(res);
+            .then(() => {
+                alert('Votre post va être publié !');
+                window.location.reload();
             })
-            .catch((err) => {
-                console.log(err.response);
-                    setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })        
+            .catch(() => {
+                setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' })        
             });
     };
 

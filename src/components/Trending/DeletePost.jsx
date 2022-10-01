@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useContext } from "react";
-import AuthContext from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import ConfirmModal from "../Layout/ConfirmModal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ const trashIcon = <FontAwesomeIcon icon={faTrash} />
 const DeletePost = ({ propPostId, propIsAdmin }) => {
     
     const [ popUpConfirm, setPopUpConfirm ] = useState(false);
+    const [ errorServer, setErrorServer ] = useState('');
     
     const cancelConfirm = () => {
         setPopUpConfirm(false)
@@ -23,24 +24,25 @@ const DeletePost = ({ propPostId, propIsAdmin }) => {
 
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
-    const API_URI = process.env.REACT_APP_API_URL;
+    const API_URL_POST = process.env.REACT_APP_API_URL_POST;
 
-    const confirmDelete = async () => {
+    const confirmDelete = async (e) => {
+        e.preventDefault();
+
         await axios({
             method:'DELETE',
-            url: `${API_URI}api/post/${propPostId}`,
+            url: `${API_URL_POST}/${propPostId}`,
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             },
             body: propIsAdmin
         })
-            .then((res) => {
-                console.log(res);
-                setPopUpConfirm(false);
+            .then(() => {
+                alert('Le post a bien été supprimé !');
                 window.location.reload();
             })
-            .catch((error) => {
-                console.log(error.response);
+            .catch(() => {
+                setErrorServer({ ...errorServer, message: 'Une erreur est survenue, merci de revenir plus tard.' })
             })
     };
 
@@ -50,6 +52,8 @@ const DeletePost = ({ propPostId, propIsAdmin }) => {
             icon={modalIcon} 
             title='Confirmer la suppression'
             message='Êtes-vous sûr de vouloir supprimer ce post ?'
+            error={errorServer}
+            errorServer={errorServer.message}
             onCancel={cancelConfirm}
             onConfirm={confirmDelete}
         />}

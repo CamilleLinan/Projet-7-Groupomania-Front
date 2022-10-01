@@ -550,9 +550,12 @@ nav {
 
 .nopost_container {
   width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nopost_container_text {
-  text-align: center;
+  margin: 10px 0 !important;
 }
 
 @font-face {
@@ -609,8 +612,7 @@ a {
 
 .success {
   color: rgb(0, 155, 0);
-  text-align: center;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .error {

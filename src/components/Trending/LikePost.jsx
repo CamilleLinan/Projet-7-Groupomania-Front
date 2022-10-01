@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useContext, useState, useEffect } from 'react';
-import AuthContext from '../../context/authContext';
+import AuthContext from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fullFaHeart } from '@fortawesome/free-solid-svg-icons';
@@ -22,14 +22,14 @@ const LikePost = ({ propPost }) => {
     }, [propPost.likes])
 
     // Utilisation de dotenv
-    const API_URI = process.env.REACT_APP_API_URL;
+    const API_URL_POST = process.env.REACT_APP_API_URL_POST;
 
     // Fonction d'ajout d'un like
     const addLike = async () => {
         
         await axios({
             method: 'POST',
-            url: `${API_URI}api/post/${postId}/like`,
+            url: `${API_URL_POST}/${postId}/like`,
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             },
@@ -53,7 +53,7 @@ const LikePost = ({ propPost }) => {
 
         await axios({
             method: 'POST',
-            url: `${API_URI}api/post/${postId}/like`,
+            url: `${API_URL_POST}/${postId}/like`,
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             },

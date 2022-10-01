@@ -5,27 +5,29 @@ import { useContext } from "react";
 import Navbar from "../components/Layout/Navbar";
 import CreatePost from "../components/Trending/CreatePost";
 import DisplayPost from "../components/Trending/DisplayPost";
-import AuthContext from "../context/authContext";
+import AuthContext from "../context/AuthContext";
 
 const Trending = () => {
+
     const [ userData, setUserData ] = useState('');
+    const [ errorServer, setErrorServer ] = useState('');
 
     const authCtx = useContext(AuthContext);
-    const API_URI = process.env.REACT_APP_API_URL;
+    const API_URL_USER = process.env.REACT_APP_API_URL_USER;
     
     const getUserData = useCallback(async () => {
         await axios ({
             method: 'GET',
-            url: `${API_URI}api/users/${authCtx.userId}`,
+            url: `${API_URL_USER}/${authCtx.userId}`,
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             }
         })
-            .then(res => {
-                setUserData(res.data);
-            })
-            .catch(err => console.log(err));
-    },[API_URI, authCtx.token, authCtx.userId]);
+            .then((res) => { setUserData(res.data) })
+            .catch(() => {
+                setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });
+            });
+    },[API_URL_USER, authCtx.token, authCtx.userId, errorServer]);
 
     useEffect(() => {
         getUserData();
@@ -34,15 +36,17 @@ const Trending = () => {
 
     return (
         <>
-        <div className="trending_background">
             <Navbar />
             <div className="trending_container">
-                <CreatePost propDataPicture={userData.userPicture} />
-                <ul className="posts_container">
-                    <DisplayPost propIsAdmin={userData.isAdmin} />
-                </ul>
+                {!errorServer ? <>
+                    <CreatePost propDataPicture={userData.userPicture} />
+                    <ul className="posts_container">
+                        <DisplayPost propIsAdmin={userData.isAdmin} />
+                    </ul>
+                </> : <>
+                    <p className="bg_section error error_center bold">{errorServer.message}</p>
+                </> }
             </div>
-        </div>
         </>
     );
 };

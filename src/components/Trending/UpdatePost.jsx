@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, useRef } from "react";
-import AuthContext from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation, faPen } from '@fortawesome/free-solid-svg-icons';
@@ -58,8 +58,8 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
     }
 
     // Utilisation de dotenv
-    const API_URI = process.env.REACT_APP_API_URL;
-    const url = `${API_URI}api/post/${propPostData._id}`;
+    const API_URL_POST = process.env.REACT_APP_API_URL_POST;
+    const url = `${API_URL_POST}/${propPostData._id}`;
 
     const confirmUpdate = async (e) => {
         e.preventDefault();
@@ -73,15 +73,12 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
                 Authorization: `Bearer ${authCtx.token}`,
             },
         })
-            .then((res) => {
-                console.log(res);
-                setPopUpConfirm(false);
-                setPostDataUpdate(formData);
+            .then(() => {
+                alert('Votre post a bien été mis à jour !');
                 window.location.reload();
                 // prop.updateDisplayPost(res.post)
             })
-            .catch((error) => {
-                console.log(error.response);
+            .catch(() => {
                 setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });
             })
     };
@@ -98,6 +95,9 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
             // Input image
             postPicture={dataPicture}
             onChangePicture={changeHandlerPicture}
+            // ErrorServer
+            error={errorServer}
+            errorServer={errorServer.message}
             // Buttons
             onCancel={cancelConfirm}
             onConfirm={confirmUpdate}
