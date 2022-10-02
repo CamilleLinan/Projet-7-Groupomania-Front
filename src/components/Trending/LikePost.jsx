@@ -16,6 +16,7 @@ const LikePost = ({ propPost }) => {
 
     const [ likeUpdate, setLikeUpdate ] = useState(propPost.likes)
     const [ isLiked, setIsLiked ] = useState(false);
+    const [ errorServer, setErrorServer ] = useState('');
 
     useEffect(() => {
         setLikeUpdate(propPost.likes);
@@ -38,13 +39,12 @@ const LikePost = ({ propPost }) => {
                 like: 1
             }
         })
-            .then((res) => {
-                console.log(res);
+            .then(() => {
                 setIsLiked(true);
                 setLikeUpdate(likeUpdate+1);
             })
-            .catch((err) => {
-                console.log(err.response);       
+            .catch(() => {
+                setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });       
             });
     };
 
@@ -62,29 +62,29 @@ const LikePost = ({ propPost }) => {
                 like: -1
             }
         })
-            .then((res) => {
-                console.log(res);
+            .then(() => {
                 setIsLiked(false);
                 setLikeUpdate(likeUpdate-1);
             })
-            .catch((err) => {
-                console.log(err.response);       
+            .catch(() => {
+                setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });       
             });
     };
     
     useEffect(() => {
-        for(let i=0; i<usersLiked.length; i++) {
-            if(userId === usersLiked[i]) {
-                setIsLiked(true);
-            }
+        const userFound = usersLiked.find(userLiked => userLiked === userId);
+        if(userFound) {
+            setIsLiked(true);
         }
     }, [userId, usersLiked])  
 
     return (
         <>
+            {errorServer && <p className='error error_center bold'>{errorServer.message}</p>}
             {!isLiked ?
-            <button onClick={addLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon} {likeUpdate}</button>
-            : <button onClick={removeLike} className='trending_container_post_btn trending_container_post_btn_like'>{removeLikeIcon} {likeUpdate}</button>}
+                <button onClick={addLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon} {likeUpdate}</button>
+                : <button onClick={removeLike} className='trending_container_post_btn trending_container_post_btn_like'>{removeLikeIcon} {likeUpdate}</button>
+            }
         </>
     )
 }
