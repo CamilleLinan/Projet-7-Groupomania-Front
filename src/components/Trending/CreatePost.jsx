@@ -57,7 +57,7 @@ const CreatePost = ({ propDataPicture }) => {
                                 type="text" 
                                 name="newpost" 
                                 id="newpost" 
-                                className="trending_container_newpost_form_input" 
+                                className="form_input trending_container_newpost_form_input" 
                                 placeholder="Quoi de neuf ?" 
                                 onChange={(e) => setUserMessage(e.target.value)}
                                 value={userMessage}

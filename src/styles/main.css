@@ -60,15 +60,23 @@ button.inactive:hover {
   background-color: #1e6e7d;
 }
 
+@media (max-width: 360px) {
+  .link_icon {
+    margin-right: 10px !important;
+  }
+}
 @media (max-width: 768px) {
   .nav_container_title_welcome {
     display: none;
   }
   .nav_container_link {
-    margin-right: 50px !important;
+    margin-right: 30px !important;
+  }
+  .nav_container img {
+    margin-left: 20px !important;
   }
   .link_icon {
-    margin-right: 40px;
+    margin-right: 20px;
   }
 }
 nav {
@@ -161,6 +169,9 @@ nav {
   .profil_container_update_infos {
     width: 95% !important;
     margin-top: 40px;
+  }
+  .profil_container_update_infos_inputs {
+    width: 100%;
   }
   .profil_container_footer {
     align-items: flex-end;
@@ -268,10 +279,6 @@ nav {
   margin-bottom: 5px;
   margin-top: -8px !important;
   font-size: 15px;
-}
-
-#file {
-  margin-bottom: -70px;
 }
 
 .btn_update_profil {
@@ -575,7 +582,7 @@ a {
   text-decoration: none;
 }
 
-input {
+.form_input {
   height: 1.8rem;
   margin-top: 5px;
   margin-bottom: 10px;
@@ -586,12 +593,16 @@ input {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(30px);
 }
-input:hover {
+.form_input:hover {
   filter: brightness(1.2);
 }
-input:focus {
+.form_input:focus {
   outline: solid #1e6e7d;
   border-color: #1e6e7d;
+}
+.form_input_error {
+  outline: solid rgb(140, 0, 0);
+  border-color: rgb(140, 0, 0);
 }
 
 .bold {

@@ -92,7 +92,7 @@ const SignUpForm = () => {
                         type="text"
                         name="firstname"
                         id="firstname"
-                        className="form_input"
+                        className={!errors.firstname ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('firstname')}
                     />
                     {errors.firstname && <p className="error bold">{errors.firstname.message}</p>}
@@ -102,7 +102,7 @@ const SignUpForm = () => {
                         type="text"
                         name="lastname"
                         id="lastname"
-                        className="form_input"
+                        className={!errors.lastname ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('lastname')}
                     />
                     {errors.lastname && <p className="error bold">{errors.lastname.message}</p>}
@@ -112,7 +112,7 @@ const SignUpForm = () => {
                         type="email"
                         name="email"
                         id="email"
-                        className="form_input"
+                        className={!errors.email ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('email')}
                     />
                     {errors.email && <p className="error bold">{errors.email.message}</p>}
@@ -124,7 +124,7 @@ const SignUpForm = () => {
                         type={!passwordIsVisible ? "password" : "text"}
                         name="password"
                         id="password"
-                        className="form_input"
+                        className={!errors.password ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('password')}
                     />
                         <div id="icon-password-signup" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
@@ -139,7 +139,7 @@ const SignUpForm = () => {
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
-                        className="form_input"
+                        className={!errors.confirmPassword ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('confirmPassword')}
                     />
                     {errors.confirmPassword && <p className="error bold">{errors.confirmPassword.message}</p>}

@@ -1,5 +1,11 @@
 @import 'variables';
 
+@media(max-width: 360px) {
+    .link_icon {
+        margin-right: 10px !important;
+    }
+}
+
 @media(max-width: 768px) {
     .nav_container {
         &_title_welcome {
@@ -7,12 +13,16 @@
         }
 
         &_link {
-            margin-right: 50px !important;
+            margin-right: 30px !important;
+        }
+
+        & img {
+            margin-left: 20px !important;
         }
     }
 
     .link_icon {
-        margin-right: 40px;
+        margin-right: 20px;
     }
 }
 

@@ -30,14 +30,14 @@ const UpdatePassword = () => {
     // YupResolver pour vérifier les champs du formulaire
     const formSchema = Yup.object().shape({
         password: Yup.string().trim()
-            .required('Veuillez renseigner un nouveau mot de passe')
+            .required('')
             .min(4, 'Doit contenir minimum 4 caractères')
             .max(30, 'Doit contenir maximum 30 caractères')
             .matches(/(?=.*\d){1}/i, 'Doit contenir au moins un chiffre')
             .matches(/(?=.*[A-Z]){1,}.*/, 'Doit contenir au moins une majuscule')
             .matches(/(?=.*[a-z]){1,}.*/, 'Doit contenir au moins une minuscule'),
         confirmPassword: Yup.string()
-            .required('Veuillez confirmer le nouveau mot de passe')
+            .required('')
             .oneOf([Yup.ref('password')], 'Les mots de passe ne sont pas identiques')
     })
 
@@ -83,7 +83,7 @@ const UpdatePassword = () => {
                             type={!passwordIsVisible ? "password" : "text"} 
                             name="password"
                             id="password"
-                            className="form_input update_infos_input"
+                            className={!errors.password ? "form_input update_infos_input" : "form_input update_infos_input form_input_error"}
                             {...register('password')}
                         />
                         <div id="icon-password-update" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
@@ -98,14 +98,16 @@ const UpdatePassword = () => {
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
-                        className="form_input update_infos_input"
+                        className={!errors.confirmPassword ? "form_input update_infos_input" : "form_input update_infos_input form_input_error"}
                         {...register('confirmPassword')}
                     />
                     <p className="error error_profil bold">{errors.confirmPassword?.message}</p>
                     
-                    {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
                 </> : <br/>}
+                
                 {successMessage && <p className="success error_center bold">{successMessage.message}</p>}
+                {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                
                 {!modify ? 
                 <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
                     Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>

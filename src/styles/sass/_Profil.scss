@@ -16,6 +16,10 @@
             &_infos {
                 width: 95% !important;
                 margin-top: 40px;
+                
+                &_inputs {
+                    width: 100%;
+                }
             }
         }
 
@@ -126,7 +130,7 @@
         }
     }
 
-.update-photo-form{
+.update-photo-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -142,10 +146,6 @@
     margin-bottom: 5px;
     margin-top: -8px !important;
     font-size: 15px;
-}
-
-#file {
-    margin-bottom: -70px;
 }
 
 .btn_update_profil {

@@ -72,27 +72,32 @@ const UpdatePhoto = ({ propDataPicture }) => {
             <form action="" onSubmit={modifyPicture} className="update-photo-form">
             <img src={dataPicture} alt="" className="profil_container_update_photobox_photo" />
             <br/>
+            
+            <div className="profil_container_update_infos_inputs">
+                {modify && <>
+                    <label htmlFor="file"></label>
+                    <input 
+                        type="file" 
+                        name="file" 
+                        id="file"
+                        accept=".jpg, .jpeg, .png"
+                        onChange={changeHandler}
+                    />
+                </>}
 
-            {modify && <>
-                <label htmlFor="file"></label>
-                <input 
-                    type="file" 
-                    name="file" 
-                    id="file"
-                    accept=".jpg, .jpeg, .png"
-                    onChange={changeHandler}
-                />
-            </>}
-
-            {successMessage && <p className="success error_center bold">{successMessage.message}</p>}
-            {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
-            {!modify ? 
-                <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
-                    Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>
-                </button> : 
-                <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
-                    Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
-                </button>}
+                {successMessage && <p className="success error_center bold">{successMessage.message}</p>}
+                {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                
+                {!modify ? 
+                    <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
+                        Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>
+                    </button> 
+                    : 
+                    <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
+                        Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
+                    </button>
+                }
+                </div>
             </form>
         </article>
     )

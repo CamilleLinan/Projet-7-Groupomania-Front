@@ -50,7 +50,7 @@ a {
     text-decoration: none;
 }
 
-input {
+.form_input {
     height: 1.8rem;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -66,6 +66,11 @@ input {
     &:focus {
         outline: solid $primary-clr;
         border-color: $primary-clr;
+    }
+
+    &_error {
+        outline: solid $error-clr;
+        border-color: $error-clr;
     }
 }
 

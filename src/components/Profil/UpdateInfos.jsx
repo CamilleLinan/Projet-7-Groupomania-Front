@@ -117,7 +117,7 @@ const UpdateInfos = ({ propData }) => {
                     type='text'
                     name="firstname"
                     id="firstname"
-                    className="form_input update_infos_input"
+                    className={!errors.firstname ? "form_input update_infos_input" : "form_input update_infos_input form_input_error"}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.firstname}
                     ref={firstnameInputRef}
@@ -134,7 +134,7 @@ const UpdateInfos = ({ propData }) => {
                     type='text'
                     name="lastname"
                     id="lastname"
-                    className="form_input update_infos_input"
+                    className={!errors.lastname ? "form_input update_infos_input" : "form_input update_infos_input form_input_error"}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.lastname}
                     ref={lastnameInputRef}
@@ -151,7 +151,7 @@ const UpdateInfos = ({ propData }) => {
                     type='email' 
                     name="email"
                     id="email"
-                    className="form_input update_infos_input"
+                    className={!errors.email ? "form_input update_infos_input" : "form_input update_infos_input form_input_error"}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.email}
                     ref={emailInputRef}
@@ -163,6 +163,7 @@ const UpdateInfos = ({ propData }) => {
 
                 {successMessage && <p className="success error_center bold">{successMessage.message}</p>}
                 {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                
                 {!modify ? 
                 <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
                     Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>

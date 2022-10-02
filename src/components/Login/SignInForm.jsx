@@ -72,7 +72,7 @@ const SignInForm = () => {
                     type="email" 
                     name="email" 
                     id="email" 
-                    className="form_input"
+                    className={!errorSignIn ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                     {...register('email')}
                 />
                 {errors.mail && <p className="error bold">{errors.email.message}</p>}
@@ -83,7 +83,7 @@ const SignInForm = () => {
                     type={!passwordIsVisible ? "password" : "text"} 
                     name="password" 
                     id="password"
-                    className="form_input" 
+                    className={!errorSignIn ? "form_input form_input_login" : "form_input form_input_login form_input_error"} 
                     {...register('password')}
                 />
                     <div id="icon-password-signin" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
