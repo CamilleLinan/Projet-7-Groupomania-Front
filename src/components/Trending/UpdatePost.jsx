@@ -3,7 +3,7 @@ import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation, faPen } from '@fortawesome/free-solid-svg-icons';
-import ConfirmPostModal from "../Layout/ConfirmPostModal";
+import ConfirmPostModal from "./ConfirmPostModal";
 
 const modalIcon = <FontAwesomeIcon icon={faCircleExclamation} />
 const penIcon = <FontAwesomeIcon icon={faPen} />

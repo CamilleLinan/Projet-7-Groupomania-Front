@@ -35,7 +35,6 @@ const DisplayPost = ({ propIsAdmin }) => {
     useEffect(() => {
         getPostData();
     }, [getPostData]);
-    console.log(postData);
 
     // Récupérer les Users
     const getUserData =  useCallback( async () => {
