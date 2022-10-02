@@ -9,7 +9,7 @@ const modalIcon = <FontAwesomeIcon icon={faCircleExclamation} />
 const penIcon = <FontAwesomeIcon icon={faPen} />
 
 // Modifier les informations de l'utilisateur
-const UpdatePost = ({ propPostData, propIsAdmin }) => {
+const UpdatePost = ({ propPostData, propIsAdmin, updatePostModifed }) => {
     const authCtx = useContext(AuthContext);
 
     const [ popUpConfirm, setPopUpConfirm ] = useState(false);
@@ -73,10 +73,9 @@ const UpdatePost = ({ propPostData, propIsAdmin }) => {
                 Authorization: `Bearer ${authCtx.token}`,
             },
         })
-            .then(() => {
-                alert('Votre post a bien été mis à jour !');
-                window.location.reload();
-                // prop.updateDisplayPost(res.post)
+            .then((res) => {
+                setPopUpConfirm(false) ;
+                updatePostModifed(res.data);
             })
             .catch(() => {
                 setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });

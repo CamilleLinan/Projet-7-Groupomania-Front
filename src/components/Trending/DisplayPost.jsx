@@ -56,7 +56,13 @@ const DisplayPost = ({ propIsAdmin }) => {
         getUserData();
     }, [getUserData])
 
-      
+    const handleUpdatePostModified = (postModified) => {
+        const index = postData.findIndex((post) => post._id === postModified._id);
+        let posts = [...postData];
+        posts[index] = postModified;
+        setPostData(posts);
+    }
+
     return ( 
         <> {!errorServer ? 
             <> {postData.length > 0 ?   
@@ -73,7 +79,7 @@ const DisplayPost = ({ propIsAdmin }) => {
                                             </div>
                                             {(authCtx.userId === post.posterId || propIsAdmin) &&
                                             <div className="trending_container_post_icons">
-                                                <UpdatePost propPostData={post} propIsAdmin={propIsAdmin} id='modify-post-icon' title='Éditer' />
+                                                <UpdatePost propPostData={post} propIsAdmin={propIsAdmin} updatePostModifed={handleUpdatePostModified} id='modify-post-icon' title='Éditer' />
                                                 <DeletePost propPostId={post._id} propIsAdmin={propIsAdmin} title='Supprimer' />
                                             </div>}
                                         </div>
