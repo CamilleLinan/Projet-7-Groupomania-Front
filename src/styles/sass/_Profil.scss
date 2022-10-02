@@ -36,9 +36,9 @@
 
     .separateBox {
         margin-top: 40px !important;
-        border-top: 1px solid rgba(65, 65, 65, 0.3);
         width: 100%;
         z-index: 3;
+        @include border-top;
     }
 
     #file_profil {
@@ -52,9 +52,7 @@
     width: 80%;
     min-width: 250px;
     max-width: 950px;
-    margin: auto;
-    margin-bottom: 40px !important;
-    margin-top: 120px !important;
+    margin: 120px auto 40px auto !important;
     z-index: 10;
 
         &_header {
@@ -74,11 +72,11 @@
         }
 
         &_update {
-            border-top: 1px solid rgba(65, 65, 65, 0.3);
             padding-top: 15px;
             width: 100%;
             display: flex;
             justify-content: space-around;
+            @include border-top;
 
             &_title {
                 text-align: center;

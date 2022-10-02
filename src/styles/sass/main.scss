@@ -44,14 +44,33 @@ button {
     }
 }
 
-.bold {
-    font-family: 'Lato-Bold';
-}
-
 a {
     display: block;
     color: $text-clr;
     text-decoration: none;
+}
+
+input {
+    height: 1.8rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(80, 79, 79);
+    border-radius: 0.5rem;
+    font-size: 16px;
+    color: $text-clr;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(30px);
+    &:hover {
+        filter: brightness(1.2);
+    }
+    &:focus {
+        outline: solid $primary-clr;
+        border-color: $primary-clr;
+    }
+}
+
+.bold {
+    font-family: 'Lato-Bold';
 }
 
 .bg_section {
@@ -59,7 +78,7 @@ a {
     backdrop-filter: blur(10px);
     border-radius: 0.9rem;
     margin: auto;
-    padding: 1.8rem;
+    padding: 1.5rem;
 }
 
 

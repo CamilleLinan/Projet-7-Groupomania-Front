@@ -4,9 +4,17 @@ $secondary-clr: #1b9cbabd;
 $text-clr:  #000000;
 $text-btn-clr: white;
 
-$bg-form-section: rgba(255, 255, 255, 0.4);
 $bg-section: rgba(255, 255, 255, 0.6);
+$border-clr: rgba(65, 65, 65, 0.3);
 
 $error-clr: rgb(140, 0, 0);
 $success-clr: rgb(0, 155, 0);
+
+@mixin border {
+    border: 1px solid $border-clr;
+}
+
+@mixin border-top {
+    border-top: 1px solid $border-clr;
+}
 

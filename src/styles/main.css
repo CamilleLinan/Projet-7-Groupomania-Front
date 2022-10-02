@@ -1,3 +1,11 @@
+@media (max-width: 768px) {
+  .log_container_header_logo {
+    width: 75% !important;
+  }
+  .log_container_section {
+    width: 75% !important;
+  }
+}
 .log_container_header {
   display: flex;
   flex-direction: column;
@@ -5,14 +13,14 @@
 .log_container_header_logo {
   min-width: 320px;
   width: 50%;
-  max-width: 600px;
+  max-width: 550px;
   margin: 50px auto;
 }
 .log_container_section {
-  background-color: rgba(255, 255, 255, 0.4) !important;
   width: 50%;
   min-width: 250px;
   max-width: 600px;
+  padding: 1.5rem;
 }
 .log_container_section_header {
   display: flex;
@@ -25,17 +33,6 @@
 }
 .form_input {
   width: 99%;
-  height: 1.8rem;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid rgb(80, 79, 79);
-  border-radius: 0.5rem;
-  font-size: 16px;
-  background: rgba(255, 255, 255, 0.7);
-}
-.form_input:focus {
-  outline: solid #1e6e7d;
-  border-color: #1e6e7d;
 }
 
 .btn_form {
@@ -87,7 +84,7 @@ nav {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(15px);
-  margin: 0 -7px;
+  margin: 0 -8px;
   margin-bottom: 0;
 }
 .nav_container_logo {
@@ -179,9 +176,9 @@ nav {
   }
   .separateBox {
     margin-top: 40px !important;
-    border-top: 1px solid rgba(65, 65, 65, 0.3);
     width: 100%;
     z-index: 3;
+    border-top: 1px solid rgba(65, 65, 65, 0.3);
   }
   #file_profil {
     margin: 10px auto 0px auto !important;
@@ -191,9 +188,7 @@ nav {
   width: 80%;
   min-width: 250px;
   max-width: 950px;
-  margin: auto;
-  margin-bottom: 40px !important;
-  margin-top: 120px !important;
+  margin: 120px auto 40px auto !important;
   z-index: 10;
 }
 .profil_container_header {
@@ -210,11 +205,11 @@ nav {
   font-size: 25px;
 }
 .profil_container_update {
-  border-top: 1px solid rgba(65, 65, 65, 0.3);
   padding-top: 15px;
   width: 100%;
   display: flex;
   justify-content: space-around;
+  border-top: 1px solid rgba(65, 65, 65, 0.3);
 }
 .profil_container_update_title {
   text-align: center;
@@ -397,8 +392,8 @@ nav {
   display: flex;
   flex-direction: column;
   padding: 1rem !important;
-  border: 1px solid rgba(65, 65, 65, 0.3);
   background-color: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(65, 65, 65, 0.3);
 }
 .trending_container_newpost_header {
   display: flex;
@@ -410,29 +405,15 @@ nav {
 .trending_container_newpost_photo {
   width: 75px;
   height: 75px;
-  border: 1px solid rgba(65, 65, 65, 0.3);
   border-radius: 3rem;
   object-fit: cover;
+  border: 1px solid rgba(65, 65, 65, 0.3);
 }
 .trending_container_newpost_form {
   width: 100%;
 }
 .trending_container_newpost_form_input {
-  height: 1.8rem;
   margin-bottom: 5px;
-  color: #000000;
-  border: 1px solid rgb(80, 79, 79);
-  border-radius: 0.3rem;
-  font-size: 16px;
-  background: rgba(255, 255, 255, 0);
-  backdrop-filter: blur(30px);
-}
-.trending_container_newpost_form_input:hover {
-  filter: brightness(1.2);
-}
-.trending_container_newpost_form_input:focus {
-  outline: solid #1e6e7d;
-  border-color: #1e6e7d;
 }
 .trending_container_post {
   position: relative;
@@ -441,7 +422,6 @@ nav {
   margin: 1.5rem 0 0 0 !important;
   padding: 0 !important;
   border: 1px solid rgba(65, 65, 65, 0.3);
-  background-color: rgba(255, 255, 255, 0.7) !important;
 }
 .trending_container_post_icons {
   position: absolute;
@@ -468,13 +448,10 @@ nav {
 .trending_container_post_poster_photo {
   width: 3rem;
   height: 3rem;
-  border: 1px solid rgba(65, 65, 65, 0.3);
   border-radius: 2rem;
   object-fit: cover;
   margin-right: 0.5rem;
-}
-.trending_container_post_poster_infos {
-  margin-left: 10px;
+  border: 1px solid rgba(65, 65, 65, 0.3);
 }
 .trending_container_post_poster_infos_name {
   margin-top: 0;
@@ -532,7 +509,7 @@ nav {
   margin-top: 0.8rem;
 }
 .btn_newpost_disabled {
-  opacity: 0.5;
+  opacity: 1;
 }
 .btn_newpost_disabled:hover {
   transform: none;
@@ -592,14 +569,33 @@ button:hover {
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.1803921569);
 }
 
-.bold {
-  font-family: "Lato-Bold";
-}
-
 a {
   display: block;
   color: #000000;
   text-decoration: none;
+}
+
+input {
+  height: 1.8rem;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 0.5rem;
+  font-size: 16px;
+  color: #000000;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(30px);
+}
+input:hover {
+  filter: brightness(1.2);
+}
+input:focus {
+  outline: solid #1e6e7d;
+  border-color: #1e6e7d;
+}
+
+.bold {
+  font-family: "Lato-Bold";
 }
 
 .bg_section {
@@ -607,7 +603,7 @@ a {
   backdrop-filter: blur(10px);
   border-radius: 0.9rem;
   margin: auto;
-  padding: 1.8rem;
+  padding: 1.5rem;
 }
 
 .success {
