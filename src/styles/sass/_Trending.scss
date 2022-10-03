@@ -195,12 +195,7 @@
     padding: 0 !important;
 }
 
-.nopost_container {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &_text {
-        margin: 10px 0 !important;
-    }
+.unknow_user {
+    margin-top: 5px;
+    font-style: italic;
 }

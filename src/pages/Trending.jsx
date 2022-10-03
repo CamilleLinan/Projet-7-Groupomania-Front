@@ -34,7 +34,7 @@ const Trending = () => {
 
     return (
         <>
-            <Navbar />
+            <Navbar message='Bienvenue' userFirstname={userData.firstname} ponctuation='!' />
             <div className="trending_container">
                 {!errorServer ? <>
                     <CreatePost propDataPicture={userData.userPicture} />

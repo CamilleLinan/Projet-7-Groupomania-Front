@@ -10,13 +10,11 @@ import LikePost from "./LikePost";
 const DisplayPost = ({ propIsAdmin }) => {
 
     const [ postData, setPostData ] = useState([]);
-    const [ userData, setUserData ] = useState([]);
     const [ errorServer, setErrorServer ] = useState('');
     
     // Utilisation du context et dotenv
     const authCtx = useContext(AuthContext);
     const API_URL_POST = process.env.REACT_APP_API_URL_POST;
-    const API_URL_USER = process.env.REACT_APP_API_URL_USER;
 
     // Récupérer les Posts
     const getPostData =  useCallback( async () => {
@@ -36,25 +34,6 @@ const DisplayPost = ({ propIsAdmin }) => {
         getPostData();
     }, [getPostData]);
 
-    // Récupérer les Users
-    const getUserData =  useCallback( async () => {
-        await axios ({
-            method: 'GET',
-            url: `${API_URL_USER}`,
-            headers: {
-                Authorization: `Bearer ${authCtx.token}`,
-            }
-        })
-            .then((res) => {
-                setUserData(res.data);
-            })
-            .catch(() => setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue, merci de revenir plus tard.' }));
-    }, [API_URL_USER, authCtx.token, errorServer]);
-    
-    useEffect(() => {
-        getUserData();
-    }, [getUserData])
-
     const handleUpdatePostModified = (postModified) => {
         const index = postData.findIndex((post) => post._id === postModified._id);
         let posts = [...postData];
@@ -62,25 +41,29 @@ const DisplayPost = ({ propIsAdmin }) => {
         setPostData(posts);
     }
 
+
     return ( 
         <> {!errorServer ? 
             <> {postData.length > 0 ?   
-                <> {postData.map((post, i) => (       
+                <> {postData.map((post, i) => (
                         <li key={post._id} className='trending_container_post bg_section'>
-                            {userData.map((poster, i) => {
-                                if (poster._id === post.posterId) {
-                                    return (
-                                        <div key={poster._id} className="trending_container_post_poster">
-                                            <img className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
-                                            <div>
-                                                <p className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
-                                                <p className="trending_container_post_poster_infos_date"><SimpleDateTime dateFormat="DMY" dateSeparator="/"  showTime="0">{post.createdAt}</SimpleDateTime></p>
-                                            </div>
+                            {post.User.length === 0 && 
+                                <div className="trending_container_post_poster">
+                                    <p className="trending_container_post_poster_infos_name unknow_user bold">Utilisateur supprimé</p>
+                                </div>
+                            }
+                            <> {post.User?.map((poster, i) => (
+                                <div key={poster._id} className="trending_container_post_poster">
+                                    <> {poster._id === post.posterId && <>
+                                        <img className="trending_container_post_poster_photo" src={poster.userPicture} alt='' />
+                                        <div>
+                                            <p className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
+                                            <p className="trending_container_post_poster_infos_date"><SimpleDateTime dateFormat="DMY" dateSeparator="/"  showTime="0">{post.createdAt}</SimpleDateTime></p>
                                         </div>
-                                    )   
-                                } return null 
-                            })}
-                            
+                                    </> } </>
+                                </div>                                 
+                            ))} </> 
+                                       
                             {(authCtx.userId === post.posterId || propIsAdmin) &&
                                 <div className="trending_container_post_icons">
                                     <UpdatePost propPostData={post} propIsAdmin={propIsAdmin} updatePostModifed={handleUpdatePostModified} id='modify-post-icon' title='Éditer' />
