@@ -57,21 +57,19 @@ const SignUpForm = () => {
     });
 
     // Utilisation de dotenv
-    const API_URI = process.env.REACT_APP_API_URL;
+    const API_URL_USER = process.env.REACT_APP_API_URL_USER;
 
     // Fonction de soumission du formulaire
     const onSubmit = async (data) => {
         await axios({
             method: "post",
-            url: `${API_URI}api/users/signup`,
+            url: `${API_URL_USER}/signup`,
             data
         })
-            .then((res) => {
-                console.log(res);
+            .then(() => {
                 setFormSubmit(true);
             })
             .catch((error) => {
-                console.log(error.response.data);
                 if (error.response.data.errors.email) {
                     setErrorEmail(error.response.data.errors.email);
                 } else {
@@ -84,7 +82,7 @@ const SignUpForm = () => {
     <>
         {formSubmit ? (
             <>
-                <h4 className="success bold">Inscription réussie ! Veuillez vous connecter.</h4>
+                <h4 className="success text_center bold">Inscription réussie ! Veuillez vous connecter.</h4>
             </>
         ) : (
             <>
@@ -94,7 +92,7 @@ const SignUpForm = () => {
                         type="text"
                         name="firstname"
                         id="firstname"
-                        className="form_input"
+                        className={!errors.firstname ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('firstname')}
                     />
                     {errors.firstname && <p className="error bold">{errors.firstname.message}</p>}
@@ -104,7 +102,7 @@ const SignUpForm = () => {
                         type="text"
                         name="lastname"
                         id="lastname"
-                        className="form_input"
+                        className={!errors.lastname ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('lastname')}
                     />
                     {errors.lastname && <p className="error bold">{errors.lastname.message}</p>}
@@ -114,7 +112,7 @@ const SignUpForm = () => {
                         type="email"
                         name="email"
                         id="email"
-                        className="form_input"
+                        className={!errors.email ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('email')}
                     />
                     {errors.email && <p className="error bold">{errors.email.message}</p>}
@@ -126,7 +124,7 @@ const SignUpForm = () => {
                         type={!passwordIsVisible ? "password" : "text"}
                         name="password"
                         id="password"
-                        className="form_input"
+                        className={!errors.password ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('password')}
                     />
                         <div id="icon-password-signup" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
@@ -141,12 +139,12 @@ const SignUpForm = () => {
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
-                        className="form_input"
+                        className={!errors.confirmPassword ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                         {...register('confirmPassword')}
                     />
                     {errors.confirmPassword && <p className="error bold">{errors.confirmPassword.message}</p>}
                     
-                    {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                    {errorServer && <p className="error text_center bold">{errorServer.message}</p>}
 
                     <button type="submit" className="btn_form bold">Créer un compte</button>
                 </form>

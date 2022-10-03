@@ -12,6 +12,7 @@
 /build
 /.env
 /src/components/Profil/Test.jsx
+/src/components/Trending/PostCard.jsx
 
 # misc
 .DS_Store

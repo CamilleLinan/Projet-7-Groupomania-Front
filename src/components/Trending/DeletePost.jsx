@@ -1,24 +1,18 @@
 import axios from "axios";
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCircleExclamation, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ConfirmModal from "../Layout/ConfirmModal";
 
 const modalIcon = <FontAwesomeIcon icon={faCircleExclamation} />
+const trashIcon = <FontAwesomeIcon icon={faTrash} />
 
 // Supprimer le profil
-const DeleteProfil = () => {
-
+const DeletePost = ({ propPostId, propIsAdmin }) => {
+    
     const [ popUpConfirm, setPopUpConfirm ] = useState(false);
     const [ errorServer, setErrorServer ] = useState('');
-
-    const navigate = useNavigate();
-
-    // Utilisation du context et dotenv
-    const authCtx = useContext(AuthContext);
-    const API_URL_USER = process.env.REACT_APP_API_URL_USER;
     
     const cancelConfirm = () => {
         setPopUpConfirm(false)
@@ -28,22 +22,28 @@ const DeleteProfil = () => {
         setPopUpConfirm(true)
     }
 
-    const confirmDelete = async () => {
+    // Utilisation du context et dotenv
+    const authCtx = useContext(AuthContext);
+    const API_URL_POST = process.env.REACT_APP_API_URL_POST;
+
+    const confirmDelete = async (e) => {
+        e.preventDefault();
+
         await axios({
             method:'DELETE',
-            url: `${API_URL_USER}/${authCtx.userId}`,
+            url: `${API_URL_POST}/${propPostId}`,
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             },
+            body: propIsAdmin
         })
-        .then(() => {
-            alert('Le profil a bien été supprimé !');
-            navigate('/login');
-            localStorage.clear();
-        })
-        .catch(() => {
-            setErrorServer(...errorServer, {message: 'Une erreur est survenue, merci de revenir plus tard.'})
-        })
+            .then(() => {
+                alert('Le post a bien été supprimé !');
+                window.location.reload();
+            })
+            .catch(() => {
+                setErrorServer({ ...errorServer, message: 'Une erreur est survenue, merci de revenir plus tard.' })
+            })
     };
 
     return (
@@ -51,17 +51,15 @@ const DeleteProfil = () => {
         {popUpConfirm && <ConfirmModal
             icon={modalIcon} 
             title='Confirmer la suppression'
-            message='Êtes-vous sûr de vouloir supprimer ce profil ?'
+            message='Êtes-vous sûr de vouloir supprimer ce post ?'
             error={errorServer}
             errorServer={errorServer.message}
             onCancel={cancelConfirm}
             onConfirm={confirmDelete}
         />}
-        <div className="profil_container_footer">
-            <button onClick={deleteHandler} className="profil_container_footer_btn">Supprimer le profil</button>
-        </div>
+            <i onClick={deleteHandler} title='Supprimer' className='trending_container_post_icons_icon trending_container_post_icons_icon_delete'>{trashIcon}</i>
         </>
     )
 }
 
-export default DeleteProfil;
+export default DeletePost;

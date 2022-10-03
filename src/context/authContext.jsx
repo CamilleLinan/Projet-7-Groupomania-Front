@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { createContext } from "react";
+import { useState, createContext } from "react";
 
 
-// Context pour stoker ensuite les données de l'utilisateur
+// Context pour stoker les données de l'utilisateur
 const defaultValue = {
     userId: null,
-    token: "",
+    token: null,
     userIsLoggedIn: false,
     signin: ()=>{},
     logout: ()=>{},
@@ -39,8 +38,6 @@ export const AuthContextProvider = (props) => {
 
     // Convertion du token en booléan
     const userIsLoggedIn = !!token;
-    console.log('userIsLoggedIn =')
-    console.log(userIsLoggedIn);
 
     // Valeurs du context
     const contextValue = {

@@ -1,5 +1,5 @@
 import { useContext, useState, useRef, useEffect } from "react";
-import AuthContext from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,6 +18,7 @@ const UpdateInfos = ({ propData }) => {
 
     const [ dataUpdate, setDataUpdate ] = useState(propData);
     const [ modify, setModify ] = useState(false);
+    const [ successMessage, setSuccessMessage ] = useState('');
     const [ errorEmail, setErrorEmail ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
 
@@ -76,26 +77,26 @@ const UpdateInfos = ({ propData }) => {
     });
 
     // Utilisation de dotenv
-    const API_URI = process.env.REACT_APP_API_URL;
+    const API_URL_USER = process.env.REACT_APP_API_URL_USER;
 
     const onSubmit = async (data) => {
         if (!modify) {
             await axios({
                 method: "PUT",
-                url: `${API_URI}api/users/${authCtx.userId}`,
+                url: `${API_URL_USER}/${authCtx.userId}`,
                 headers: {
                     Authorization: `Bearer ${authCtx.token}`,
                 },
                 data
             })
-                .then((res) => {
-                    console.log(res);
+                .then(() => {
                     setDataUpdate(data);
+                    setErrorEmail('');
+                    setSuccessMessage({ ...successMessage, message: 'Vos informations ont bien été mises à jour !' });
                 })
                 .catch((error) => {
-                    console.log(error.response);
                     if (error.response.data.err.code === 11000) {
-                        setErrorEmail( ...errorEmail, {message: 'Cette adresse email est déjà utilisée'});
+                        setErrorEmail({ ...errorEmail, message: 'Cette adresse email est déjà utilisée'});
                     } else {
                         setErrorServer({ ...errorServer, message: 'Une erreur interne est survenue. Merci de revenir plus tard.' });
                     }  
@@ -103,20 +104,8 @@ const UpdateInfos = ({ propData }) => {
         }
     };
 
-    const registerHandler = () => {
-        if (!errors.firstname & !errors.lastname & !errorEmail & !errorServer.message) {
-            console.log('ok')
-            setErrorEmail('');
-            handleSubmit(onSubmit());
-            setModify(!modify);
-        } else {
-            console.log('not ok')
-            console.log(errorEmail)
-        }
-    }
-
     return (
-        <div className="profil_container_update_infos">
+        <article className="profil_container_update_infos">
             <h3 className="profil_container_update_title updateprofil_title bold">Vos informations</h3>
             <form action="" onSubmit={handleSubmit(onSubmit)} id="update-infos-form">
                 
@@ -128,7 +117,7 @@ const UpdateInfos = ({ propData }) => {
                     type='text'
                     name="firstname"
                     id="firstname"
-                    className="form_input update_infos_input"
+                    className={!errors.firstname ? "form_input update_infos_input" : "form_input update_infos_input form_input_error"}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.firstname}
                     ref={firstnameInputRef}
@@ -145,7 +134,7 @@ const UpdateInfos = ({ propData }) => {
                     type='text'
                     name="lastname"
                     id="lastname"
-                    className="form_input update_infos_input"
+                    className={!errors.lastname ? "form_input update_infos_input" : "form_input update_infos_input form_input_error"}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.lastname}
                     ref={lastnameInputRef}
@@ -162,7 +151,7 @@ const UpdateInfos = ({ propData }) => {
                     type='email' 
                     name="email"
                     id="email"
-                    className="form_input update_infos_input"
+                    className={!errors.email ? "form_input update_infos_input" : "form_input update_infos_input form_input_error"}
                     onChange={changeHandler}
                     defaultValue={dataUpdate.email}
                     ref={emailInputRef}
@@ -172,17 +161,19 @@ const UpdateInfos = ({ propData }) => {
                 {errorEmail && <p className="error error_profil bold">{errorEmail.message}</p>}
                 </>}
 
-                {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                {successMessage && <p className="success text_center bold">{successMessage.message}</p>}
+                {errorServer && <p className="error text_center bold">{errorServer.message}</p>}
+                
                 {!modify ? 
                 <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
                     Modifier <i className="profil_container_update_infos_input_icon">{penIcon}</i>
                 </button> : 
-                <button onClick={registerHandler} className="btn_form btn_update_profil bold">
+                <button onClick={modifyHandler} className="btn_form btn_update_profil bold">
                     Enregistrer <i className="profil_container_update_infos_input_icon">{checkIcon}</i>
                 </button>}
             </form>
             <UpdatePassword />
-        </div>
+        </article>
     )
 }
 

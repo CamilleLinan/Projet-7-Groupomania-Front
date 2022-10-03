@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
-import AuthContext from '../../context/authContext';
+import AuthContext from '../../context/AuthContext';
 import logo from '../../styles/img/groupomania-logo-navbar.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCircleUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';

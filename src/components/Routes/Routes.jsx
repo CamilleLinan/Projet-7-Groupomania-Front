@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useContext } from 'react';
-import AuthContext from '../../context/authContext';
+import AuthContext from '../../context/AuthContext';
 import Login from "../../pages/Login";
 import Trending from "../../pages/Trending";
 import ErrorAuth from "../../pages/ErrorAuth";
@@ -16,10 +15,13 @@ const IndexRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login/>} />
+                <Route path="/login" element={<Login />} />
+                {!isLoggedIn && <Route path="/" element={<Login/>} />}
+                {!isLoggedIn && <Route path="*" element={<Login/>} />}
+                {isLoggedIn && <Route path="/" element={<Trending/>} />}
+                {isLoggedIn && <Route path="*" element={<Trending/>} />}
                 {isLoggedIn ? <Route path="/trending" element={<Trending/>} /> : <Route path="/trending" element={<ErrorAuth />} />}
                 {isLoggedIn ? <Route path="/profil" element={<Profil/>} /> : <Route path="/profil" element={<ErrorAuth />} />}
-                <Route path="*" element={<Login/>} />
             </Routes>
         </BrowserRouter>
     );

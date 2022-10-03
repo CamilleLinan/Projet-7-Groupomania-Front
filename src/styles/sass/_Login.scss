@@ -1,5 +1,16 @@
 @import '../../styles/sass/variables';
 
+@media(max-width: 768px) {
+    .log_container {
+        &_header_logo {
+            width: 75% !important;
+        }
+        
+        &_section {
+        width: 75% !important;
+    }}
+}
+
 .log_container {
     &_header {
         display: flex;
@@ -8,16 +19,16 @@
         &_logo {
             min-width: 320px;
             width: 50%;
-            max-width: 600px;
+            max-width: 550px;
             margin: 50px auto;
         }
     }
     
     &_section {
-        background-color: $bg-form-section !important;
         width: 50%;
         min-width: 250px;
         max-width: 600px;
+        padding: 1.5rem;
     
         &_header {
             display: flex;
@@ -32,17 +43,6 @@
     margin-top: 10px;
     &_input {
         width: 99%;
-        height: 1.8rem;
-        margin-top: 5px;
-        margin-bottom: 10px;
-        border: 1px solid rgb(80, 79, 79);
-        border-radius: 0.5rem;
-        font-size: 16px;
-        background: rgba(255, 255, 255, 0.7);
-        &:focus {
-            outline: solid $primary-clr;
-            border-color: $primary-clr;
-        }
     }
 }
 

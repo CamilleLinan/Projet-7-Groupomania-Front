@@ -1,9 +1,9 @@
-import { useForm } from "react-hook-form";
 import { useState, useContext } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import AuthContext from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +20,7 @@ const SignInForm = () => {
 
     // Utilisation du context
     const authCtx = useContext(AuthContext);
-    const API_URI = process.env.REACT_APP_API_URL;
+    const API_URL_USER = process.env.REACT_APP_API_URL_USER;
 
     // Utilisation de useNavigate
     const navigate = useNavigate();
@@ -45,18 +45,16 @@ const SignInForm = () => {
 
         await axios ({
             method: "post",
-            url: `${API_URI}api/users/signin`,
+            url: `${API_URL_USER}/signin`,
             data
         })
 
         .then((res) => {
-            console.log(res);
-            authCtx.signin(res.data.token, res.data.userId);
+            authCtx.signin(res.data.token, res.data.userId, res.data.isAdmin);
             navigate('/trending');
 
         })
         .catch((error) => {
-            console.log(error.response);
             if (error.response.status === 401) {
                 setErrorSignIn({ ...errorSignIn, message: 'La paire identifiant/mot de passe est incorrecte.' })
             } else {
@@ -74,7 +72,7 @@ const SignInForm = () => {
                     type="email" 
                     name="email" 
                     id="email" 
-                    className="form_input"
+                    className={!errorSignIn ? "form_input form_input_login" : "form_input form_input_login form_input_error"}
                     {...register('email')}
                 />
                 {errors.mail && <p className="error bold">{errors.email.message}</p>}
@@ -85,7 +83,7 @@ const SignInForm = () => {
                     type={!passwordIsVisible ? "password" : "text"} 
                     name="password" 
                     id="password"
-                    className="form_input" 
+                    className={!errorSignIn ? "form_input form_input_login" : "form_input form_input_login form_input_error"} 
                     {...register('password')}
                 />
                     <div id="icon-password-signin" className="icon_password" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
@@ -95,12 +93,11 @@ const SignInForm = () => {
                  </div>
                 {errors.password && <p className="error bold">{errors.password.message}</p>}
 
-                {errorSignIn && <p className="error error_center bold">{errorSignIn.message}</p>}
-                {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                {errorSignIn && <p className="error text_center bold">{errorSignIn.message}</p>}
+                {errorServer && <p className="error text_center bold">{errorServer.message}</p>}
 
                 <button type="submit" className="btn_form bold">Se connecter</button>
             </form>
-
         </>
     );
 };
