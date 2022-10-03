@@ -67,14 +67,15 @@ const UpdatePost = ({ propPostData, propIsAdmin, updatePostModifed }) => {
         formData.append('isAdmin', propIsAdmin);
         formData.append('message', postDataUpdate.message);
         formData.append('image', newDataPicture);
-            
+ 
         await axios.put(url, formData, {
             headers: {
                 Authorization: `Bearer ${authCtx.token}`,
             },
         })
             .then((res) => {
-                setPopUpConfirm(false) ;
+                setPopUpConfirm(false);
+                alert('Modification(s) enregistrée(s) !');
                 updatePostModifed(res.data);
             })
             .catch(() => {

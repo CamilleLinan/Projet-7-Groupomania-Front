@@ -42,7 +42,7 @@ const Trending = () => {
                         <DisplayPost propIsAdmin={userData.isAdmin} />
                     </ul>
                 </> : <>
-                    <p className="bg_section error error_center bold">{errorServer.message}</p>
+                    <p className="bg_section error text_center bold">{errorServer.message}</p>
                 </> }
             </div>
         </>

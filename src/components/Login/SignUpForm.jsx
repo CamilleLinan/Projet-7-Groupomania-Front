@@ -82,7 +82,7 @@ const SignUpForm = () => {
     <>
         {formSubmit ? (
             <>
-                <h4 className="success bold">Inscription réussie ! Veuillez vous connecter.</h4>
+                <h4 className="success text_center bold">Inscription réussie ! Veuillez vous connecter.</h4>
             </>
         ) : (
             <>
@@ -144,7 +144,7 @@ const SignUpForm = () => {
                     />
                     {errors.confirmPassword && <p className="error bold">{errors.confirmPassword.message}</p>}
                     
-                    {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                    {errorServer && <p className="error text_center bold">{errorServer.message}</p>}
 
                     <button type="submit" className="btn_form bold">Créer un compte</button>
                 </form>

@@ -55,7 +55,7 @@ const IndexProfil = () => {
                             <UpdateInfos propData={data} />
                         </section> 
                     </> : <>
-                        <p className="error error_center bold">{errorServer.message}</p>
+                        <p className="error text_center bold">{errorServer.message}</p>
                     </> }
                 </div>
                 {!errorServer && <DeleteProfil />}

@@ -76,16 +76,17 @@ const DisplayPost = ({ propIsAdmin }) => {
                                                 <p className="trending_container_post_poster_infos_name bold">{poster.firstname} {poster.lastname}</p>
                                                 <p className="trending_container_post_poster_infos_date"><SimpleDateTime dateFormat="DMY" dateSeparator="/"  showTime="0">{post.createdAt}</SimpleDateTime></p>
                                             </div>
-                                            {(authCtx.userId === post.posterId || propIsAdmin) &&
-                                            <div className="trending_container_post_icons">
-                                                <UpdatePost propPostData={post} propIsAdmin={propIsAdmin} updatePostModifed={handleUpdatePostModified} id='modify-post-icon' title='Éditer' />
-                                                <DeletePost propPostId={post._id} propIsAdmin={propIsAdmin} title='Supprimer' />
-                                            </div>}
                                         </div>
                                     )   
                                 } return null 
                             })}
-
+                            
+                            {(authCtx.userId === post.posterId || propIsAdmin) &&
+                                <div className="trending_container_post_icons">
+                                    <UpdatePost propPostData={post} propIsAdmin={propIsAdmin} updatePostModifed={handleUpdatePostModified} id='modify-post-icon' title='Éditer' />
+                                    <DeletePost propPostId={post._id} propIsAdmin={propIsAdmin} title='Supprimer' />
+                                </div>
+                            }
                             <article className="trending_container_post_content">
                                 <p className="trending_container_post_content_message">{post.message}</p>
                                 {post.postPicture && <img className="trending_container_post_content_image" src={post.postPicture} alt='' />}

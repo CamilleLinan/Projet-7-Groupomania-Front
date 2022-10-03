@@ -313,7 +313,7 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: 9000;
 }
 .modal_container {
@@ -322,7 +322,7 @@ nav {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 900;
+  z-index: 9000;
   width: 45%;
   min-width: 330px;
   max-width: 400px;
@@ -374,7 +374,7 @@ nav {
 .modal_container_post {
   position: absolute;
   width: 500px !important;
-  top: 30%;
+  top: 100%;
   margin-bottom: 0 !important;
 }
 
@@ -394,6 +394,7 @@ nav {
   max-width: 600px;
   margin: auto;
   margin-top: 100px;
+  z-index: 1;
 }
 .trending_container_newpost {
   display: flex;
@@ -432,6 +433,7 @@ nav {
 }
 .trending_container_post_icons {
   position: absolute;
+  top: 1.4rem;
   right: 1rem;
 }
 .trending_container_post_icons_icon {
@@ -617,6 +619,11 @@ a {
   padding: 1.5rem;
 }
 
+.text_center {
+  text-align: center;
+  margin-top: 5px;
+}
+
 .success {
   color: rgb(0, 155, 0);
   font-size: 18px;
@@ -626,10 +633,6 @@ a {
   color: rgb(140, 0, 0);
   margin-top: -5px;
   margin-bottom: 10px;
-}
-.error_center {
-  text-align: center;
-  margin-top: 5px;
 }
 
 .container_password_input {

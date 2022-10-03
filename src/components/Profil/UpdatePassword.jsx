@@ -105,8 +105,8 @@ const UpdatePassword = () => {
                     
                 </> : <br/>}
                 
-                {successMessage && <p className="success error_center bold">{successMessage.message}</p>}
-                {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                {successMessage && <p className="success text_center bold">{successMessage.message}</p>}
+                {errorServer && <p className="error text_center bold">{errorServer.message}</p>}
                 
                 {!modify ? 
                 <button onClick={modifyHandler} className="btn_form btn_update_profil bold">

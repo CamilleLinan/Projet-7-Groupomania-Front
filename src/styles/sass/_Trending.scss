@@ -17,6 +17,7 @@
     max-width: 600px;
     margin: auto;
     margin-top: 100px;
+    z-index: 1;
     
     // CREATE POST
     &_newpost {
@@ -62,6 +63,7 @@
 
         &_icons {
             position: absolute;
+            top: 1.4rem;
             right: 1rem;
             
             &_icon {

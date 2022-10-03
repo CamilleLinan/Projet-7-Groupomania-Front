@@ -80,7 +80,7 @@ const LikePost = ({ propPost }) => {
 
     return (
         <>
-            {errorServer && <p className='error error_center bold'>{errorServer.message}</p>}
+            {errorServer && <p className='error text_center bold'>{errorServer.message}</p>}
             {!isLiked ?
                 <button onClick={addLike} className='trending_container_post_btn trending_container_post_btn_like'>{likeIcon} {likeUpdate}</button>
                 : <button onClick={removeLike} className='trending_container_post_btn trending_container_post_btn_like'>{removeLikeIcon} {likeUpdate}</button>

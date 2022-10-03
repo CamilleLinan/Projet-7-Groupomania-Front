@@ -93,8 +93,8 @@ const SignInForm = () => {
                  </div>
                 {errors.password && <p className="error bold">{errors.password.message}</p>}
 
-                {errorSignIn && <p className="error error_center bold">{errorSignIn.message}</p>}
-                {errorServer && <p className="error error_center bold">{errorServer.message}</p>}
+                {errorSignIn && <p className="error text_center bold">{errorSignIn.message}</p>}
+                {errorServer && <p className="error text_center bold">{errorServer.message}</p>}
 
                 <button type="submit" className="btn_form bold">Se connecter</button>
             </form>
