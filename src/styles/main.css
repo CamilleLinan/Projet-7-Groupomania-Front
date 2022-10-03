@@ -373,9 +373,13 @@ nav {
 
 .modal_container_post {
   position: absolute;
-  width: 500px !important;
-  top: 100%;
+  width: 400px !important;
+  top: 100% !important;
   margin-bottom: 0 !important;
+}
+.modal_container_post_image {
+  margin: 10px auto;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -422,6 +426,12 @@ nav {
 }
 .trending_container_newpost_form_input {
   margin-bottom: 5px;
+}
+.trending_container_newpost_form img {
+  width: 100%;
+  margin: 10px auto;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(65, 65, 65, 0.3);
 }
 .trending_container_post {
   position: relative;
@@ -488,6 +498,8 @@ nav {
   max-height: 400px;
   object-fit: cover;
   margin: 0px auto 20px auto !important;
+  border: 1px solid rgba(65, 65, 65, 0.3);
+  border-radius: 0.4rem;
 }
 .trending_container_post_btn {
   background-color: transparent;
@@ -518,7 +530,8 @@ nav {
   margin-top: 0.8rem;
 }
 .btn_newpost_disabled {
-  opacity: 1;
+  opacity: 0.5;
+  margin: 0;
 }
 .btn_newpost_disabled:hover {
   transform: none;

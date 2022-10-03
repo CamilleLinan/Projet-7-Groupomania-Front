@@ -26,7 +26,7 @@ const UpdatePhoto = ({ propDataPicture }) => {
         setDataPicture(propDataPicture);
     }, [propDataPicture])
 
-    // change
+    // Avoir un apperçu de l'image
     const changeHandler = (e) => {
         let newPicture;
 

@@ -50,6 +50,13 @@
             &_input {
                 margin-bottom: 5px; 
             }
+
+            & img {
+                width: 100%;
+                margin: 10px auto;
+                border-radius: 0.4rem;
+                @include border;
+            }
         }
     }
     // READ POST
@@ -132,6 +139,8 @@
                 max-height: 400px;
                 object-fit: cover;
                 margin: 0px auto 20px auto !important;
+                @include border;
+                border-radius: 0.4rem;
             }
         }
 
@@ -168,7 +177,8 @@
     margin-top: 0.8rem;
 
     &_disabled {
-        opacity: 1;
+        opacity: 0.5;
+        margin: 0;
         &:hover {
             transform: none;
             box-shadow: none;

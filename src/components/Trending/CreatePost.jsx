@@ -7,12 +7,24 @@ const CreatePost = ({ propDataPicture }) => {
     
     const [ dataPicture, setDataPicture ] = useState(propDataPicture);
     const [ userMessage, setUserMessage ] = useState('');
+    const [ previewPicture, setPreviewPicture ] = useState('');
     const [ postPicture, setPostPicture ] = useState('');
     const [ errorServer, setErrorServer ] = useState('');
     
     useEffect(() => {
         setDataPicture(propDataPicture);
     }, [propDataPicture])
+
+    // Avoir un apperçu de l'image
+    const changeHandler = (e) => {
+        let newPicture;
+
+        if (e.target.files) {
+            newPicture = URL.createObjectURL(e.target.files[0])
+            setPreviewPicture(newPicture)
+        }
+        setPostPicture(e.target.files[0]) 
+    }
 
     // Utilisation de dotenv
     const API_URL_POST = process.env.REACT_APP_API_URL_POST;
@@ -65,6 +77,7 @@ const CreatePost = ({ propDataPicture }) => {
                             />
                             
                             {userMessage && <>
+                            {previewPicture && <img src={previewPicture} alt='' />}
                             <label htmlFor="file" className="trending_container_newpost_file_label"></label>
                             <input 
                                 type="file" 
@@ -72,13 +85,13 @@ const CreatePost = ({ propDataPicture }) => {
                                 id="file_newpost"
                                 accept=".jpg, .jpeg, .png, .gif" 
                                 className="trending_container_newpost_file_btn"
-                                onChange={(e) => setPostPicture(e.target.files[0])}
+                                onChange={changeHandler}
                             />
                             </>}
                             {postPicture && <img src={postPicture} alt='' />}
 
                             {errorServer && <p className="error bold">{errorServer.message}</p>}
-                            <button type="submit" disabled={!userMessage} className="btn_newpost btn_newpost_disabled">Publier</button>
+                            <button type="submit" disabled={!userMessage} className={!userMessage ? "btn_newpost btn_newpost_disabled" : "btn_newpost btn_newpost_active"}>Publier</button>
                         </form>
                     </article>
                 </div>     

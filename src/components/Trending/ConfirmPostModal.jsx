@@ -25,8 +25,7 @@ const ConfirmPostModal = (props) => {
 
                         <label htmlFor="file" className="form_label bold">Modifier l'image :</label>
                         <br/>
-                        <img src={props.postPicture} alt='' className="trending_container_post_content_image" />
-                        <br/>
+                        <img src={props.postPicture} alt='' className="modal_container_post_image" />
                         <input 
                             type="file" 
                             name="file" 
