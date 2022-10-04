@@ -37,6 +37,7 @@ const DisplayPost = ({ propIsAdmin }) => {
     const handleUpdatePostModified = (postModified) => {
         const index = postData.findIndex((post) => post._id === postModified._id);
         let posts = [...postData];
+        postModified.User = posts[index].User;
         posts[index] = postModified;
         setPostData(posts);
     }
