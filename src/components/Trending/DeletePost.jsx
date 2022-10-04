@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+import AuthContext from "../../context/authContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ConfirmModal from "../Layout/ConfirmModal";

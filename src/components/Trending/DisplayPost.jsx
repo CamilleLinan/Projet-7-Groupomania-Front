@@ -1,7 +1,7 @@
 import SimpleDateTime from 'react-simple-timestamp-to-date';
 import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
-import AuthContext from "../../context/AuthContext";
+import AuthContext from "../../context/authContext";
 import DeletePost from "./DeletePost";
 import UpdatePost from "./UpdatePost";
 import LikePost from "./LikePost";

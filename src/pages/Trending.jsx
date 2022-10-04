@@ -3,7 +3,7 @@ import { useCallback, useState, useEffect, useContext } from "react";
 import Navbar from "../components/Layout/Navbar";
 import CreatePost from "../components/Trending/CreatePost";
 import DisplayPost from "../components/Trending/DisplayPost";
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../context/authContext";
 
 const Trending = () => {
 

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, useRef } from "react";
-import AuthContext from "../../context/AuthContext";
+import AuthContext from "../../context/authContext";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation, faPen } from '@fortawesome/free-solid-svg-icons';

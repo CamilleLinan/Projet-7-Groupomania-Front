@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useContext, useState, useEffect } from 'react';
-import AuthContext from '../../context/AuthContext';
+import AuthContext from '../../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fullFaHeart } from '@fortawesome/free-solid-svg-icons';

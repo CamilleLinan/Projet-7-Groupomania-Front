@@ -1,6 +1,6 @@
 import Navbar from "../components/Layout/Navbar"
 import { useContext, useState, useEffect, useCallback } from "react";
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../context/authContext";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAddressCard } from '@fortawesome/free-regular-svg-icons';
