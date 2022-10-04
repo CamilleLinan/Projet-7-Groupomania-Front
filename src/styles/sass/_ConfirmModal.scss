@@ -75,10 +75,11 @@
 }
 
 .modal_container_post {
-    position: absolute;
+    position: fixed;
     width: 400px !important;
-    top: 100% !important;
+    top: 17rem !important;
     margin-bottom: 0 !important;
+    
     &_image {
         margin: 10px auto;
         width: 100%;
