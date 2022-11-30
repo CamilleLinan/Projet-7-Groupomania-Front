@@ -17,6 +17,6 @@ Groupomania est une entreprise ayant un ralentissement de sa productivité attri
 Créer une partie front-end avec un framework JavaScript, ici React. Et une API sécurisée permettant aux utilisateurs de se créer un compte, se connecter et se déconnecter. Ainsi que créer un post, modifier ou supprimer leur post, et liker tous les posts. J'ai également ajouté une page où les utilisateurs peuvent modifier leurs informations.
 
 + Langages utilisés :
-HTML5 / CSS3 / SASS / JavaScript / Node.js / MongoDB
+HTML5 / CSS3 / SASS / JavaScript / Node.js / MongoDB / React
 
 Plus d'informations sur mon portfolio : https://camillelinan.com/project/Groupomania
