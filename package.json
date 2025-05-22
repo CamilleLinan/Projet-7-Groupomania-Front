@@ -18,8 +18,9 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "vite",
-    "build": "vite build",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "eslintConfig": {
